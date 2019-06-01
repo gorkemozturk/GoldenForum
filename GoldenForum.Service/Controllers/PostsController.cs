@@ -25,10 +25,18 @@ namespace GoldenForum.Service.Controllers
 
         // GET: api/Posts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<PostListViewModel>>> GetPosts()
         {
-            return await _context.Posts.ToListAsync();
-        }
+            return await _context.Posts.Select(p => new PostListViewModel
+            {
+                Id = p.Id,
+                Title = p.Title,
+                AuthorId = p.User.Id,
+                AuthorUserName = p.User.UserName,
+                AuthorRating = p.User.Rating,
+                RepliesCount = p.Replies.Count()
+            }).ToListAsync();
+    }
 
         // GET: api/Posts/5
         [HttpGet("{id}")]
