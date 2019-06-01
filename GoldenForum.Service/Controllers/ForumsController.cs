@@ -23,6 +23,7 @@ namespace GoldenForum.Service.Controllers
             _context = context;
         }
 
+        // GET: api/Forums
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ForumListViewModel>>> GetForums()
         {
@@ -35,47 +36,94 @@ namespace GoldenForum.Service.Controllers
             }).ToListAsync();
         }
 
+        // GET: api/Forums/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ForumDetailViewModel>> GetForum(int id)
         {
-            var forum = await _context.Forums.FindAsync(id);
+            var forum = await _context.Forums.Include(f => f.Posts).Select(f => new ForumDetailViewModel
+            {
+                Id = f.Id,
+                Title = f.Title,
+                Description = f.Description,
+                ImageUrl = f.ImageUrl,
+                Posts = f.Posts.Select(p => new PostListViewModel
+                {
+                    Id = p.Id,
+                    Title = p.Title,
+                    AuthorId = p.User.Id,
+                    AuthorUserName = p.User.UserName,
+                    AuthorRating = p.User.Rating,
+                    RepliesCount = p.Replies.Count()
+                })
+            }).FirstOrDefaultAsync(f => f.Id == id);
 
             if (forum == null)
             {
                 return NotFound();
             }
 
-            return await ForumView(forum);
+            return forum;
         }
 
-        private async Task<ForumDetailViewModel> ForumView(Forum forum)
+        // PUT: api/Forums/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutForum(int id, Forum forum)
         {
-            var forum_ = await _context.Forums.Include(f => f.Posts).Select(f => new ForumListViewModel
+            if (id != forum.Id)
             {
-                Id = f.Id,
-                Title = f.Title,
-                Description = f.Description,
-                ImageUrl = f.ImageUrl
+                return BadRequest();
+            }
 
-            }).FirstOrDefaultAsync(f => f.Id == forum.Id);
+            _context.Entry(forum).State = EntityState.Modified;
 
-            var posts = await _context.Posts.Where(p => p.Forum == forum).Include(p => p.User).Include(p => p.Replies).Select(p => new PostListViewModel
+            try
             {
-                Id = p.Id,
-                Title = p.Title,
-                AuthorId = p.User.Id,
-                AuthorUserName = p.User.UserName,
-                AuthorRating = p.User.Rating,
-                RepliesCount = p.Replies.Count()
-            }).ToListAsync();
-
-            ForumDetailViewModel forumDetailViewModel = new ForumDetailViewModel()
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
             {
-                Forum = forum_,
-                Posts = posts
-            };
+                if (!ForumExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-            return forumDetailViewModel;
+            return NoContent();
+        }
+
+        // POST: api/Forums
+        [HttpPost]
+        public async Task<ActionResult<Forum>> PostForum(Forum forum)
+        {
+            _context.Forums.Add(forum);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetForum", new { id = forum.Id }, forum);
+        }
+
+        // DELETE: api/Forums/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Forum>> DeleteForum(int id)
+        {
+            var forum = await _context.Forums.FindAsync(id);
+            if (forum == null)
+            {
+                return NotFound();
+            }
+
+            _context.Forums.Remove(forum);
+            await _context.SaveChangesAsync();
+
+            return forum;
+        }
+
+        private bool ForumExists(int id)
+        {
+            return _context.Forums.Any(e => e.Id == id);
         }
     }
 }
