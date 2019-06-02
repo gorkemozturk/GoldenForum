@@ -1,0 +1,23 @@
+<div class="bg-white text-secondary rounded shadow-lg">
+  <div class="p-3">
+    Son Forum Gönderileri
+  </div>
+  <ul class="list-group list-group-flush">
+    <li *ngFor="let post of latestPosts; let i = index" class="list-group-item rounded border-0 p-3" [class.bg-light]="(i+1) % 2 !== 0">
+      <div class="media">
+        <img src="https://www.iosicongallery.com/icons/bitmoji-2015-01-21/512.png" style="width: 50px" class="mr-3 rounded" alt="...">
+        
+        <div class="media-body">
+          <a class="d-block mb-1" href="">{{ post.title }}</a>
+          
+          <div class="d-flex justify-content-between">
+            <small>
+              <a href="" class="text-secondary">{{ post.authorUserName }}</a>
+            </small>
+            <small>{{ post.postedAt | date:'dd.MM.yyyy, HH:mm:ss' }}</small>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

@@ -1,4 +1,7 @@
-﻿namespace GoldenForum.Service.Models.ViewModels.Forum
+﻿using GoldenForum.Service.Models.ViewModels.Post;
+using System.Collections.Generic;
+
+namespace GoldenForum.Service.Models.ViewModels.Forum
 {
     public class ForumListViewModel
     {
@@ -6,6 +9,9 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
+
+        public int PostsCount { get; set; }
+        public IEnumerable<PostHomeViewModel> LatestPosts { get; set; }
 
     }
 }

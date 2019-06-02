@@ -36,7 +36,7 @@ namespace GoldenForum.Service.Controllers
                 AuthorRating = p.User.Rating,
                 RepliesCount = p.Replies.Count()
             }).ToListAsync();
-    }
+        }
 
         // GET: api/Posts/5
         [HttpGet("{id}")]
