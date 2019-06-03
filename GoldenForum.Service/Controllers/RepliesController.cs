@@ -76,6 +76,8 @@ namespace GoldenForum.Service.Controllers
         [HttpPost]
         public async Task<ActionResult<Reply>> PostReply(Reply reply)
         {
+            reply.RepliedAt = DateTime.Now;
+
             _context.Replies.Add(reply);
             await _context.SaveChangesAsync();
 

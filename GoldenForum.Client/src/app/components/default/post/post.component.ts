@@ -3,6 +3,7 @@ import { PostService } from 'src/app/services/post.service';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { NgForm } from '@angular/forms';
+import { ReplyService } from 'src/app/services/reply.service';
 
 @Component({
   selector: 'app-post',
@@ -12,7 +13,7 @@ import { NgForm } from '@angular/forms';
 export class PostComponent implements OnInit {
   post: Post = new Post();
 
-  constructor(private postService: PostService, private route: ActivatedRoute) { }
+  constructor(private postService: PostService, private route: ActivatedRoute, private resplyService: ReplyService) { }
 
   ngOnInit() {
     this.getPost();
@@ -24,7 +25,9 @@ export class PostComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    console.log(form.value)
+    this.resplyService.postResource(form.value).subscribe(reponse => {
+      console.log(true);
+    });
   }
 
 }

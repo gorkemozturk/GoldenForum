@@ -18,6 +18,8 @@ import { PostOverviewComponent } from './widgets/post-overview/post-overview.com
 import { ForumComponent } from './components/default/forum/forum.component';
 import { ForumOverviewComponent } from './widgets/forum-overview/forum-overview.component';
 import { ReplyFormComponent } from './widgets/reply-form/reply-form.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { ReplyEntryComponent } from './widgets/reply-entry/reply-entry.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ReplyFormComponent } from './widgets/reply-form/reply-form.component';
     PostOverviewComponent,
     ForumComponent,
     ForumOverviewComponent,
-    ReplyFormComponent
+    ReplyFormComponent,
+    LoginComponent,
+    ReplyEntryComponent
   ],
   imports: [
     BrowserModule,

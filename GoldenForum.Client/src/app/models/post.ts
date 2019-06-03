@@ -1,3 +1,5 @@
+import { Reply } from './reply';
+
 export class Post {
     id: number;
     title: string;
@@ -5,4 +7,6 @@ export class Post {
     authorUserName: string;
     authorRating: number;
     repliesCount: number;
+
+    replies: Reply[] = [];
 }
