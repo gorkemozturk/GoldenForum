@@ -50,6 +50,8 @@ namespace GoldenForum.Service.Controllers
                 AuthorUserName = p.User.UserName,
                 AuthorImageUrl = p.User.ImageUrl,
                 AuthorRating = p.User.Rating,
+                AuthorRegisteredAt = p.User.RegisteredAt,
+                AuthorPostsCount = p.User.Posts.Count(),
                 Body = p.Body,
                 PostedAt = p.PostedAt,
                 Replies = p.Replies.Select(r => new ReplyListViewModel

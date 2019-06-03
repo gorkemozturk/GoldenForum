@@ -13,6 +13,11 @@ import { ApplicationRoutes } from './app.route';
 import { LatestPostComponent } from './widgets/latest-post/latest-post.component';
 import { ForumListComponent } from './widgets/forum-list/forum-list.component';
 import { SummaryPipe } from './pipes/summary.pipe';
+import { PostComponent } from './components/default/post/post.component';
+import { PostOverviewComponent } from './widgets/post-overview/post-overview.component';
+import { ForumComponent } from './components/default/forum/forum.component';
+import { ForumOverviewComponent } from './widgets/forum-overview/forum-overview.component';
+import { ReplyFormComponent } from './widgets/reply-form/reply-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { SummaryPipe } from './pipes/summary.pipe';
     HomeComponent,
     LatestPostComponent,
     ForumListComponent,
-    SummaryPipe
+    SummaryPipe,
+    PostComponent,
+    PostOverviewComponent,
+    ForumComponent,
+    ForumOverviewComponent,
+    ReplyFormComponent
   ],
   imports: [
     BrowserModule,

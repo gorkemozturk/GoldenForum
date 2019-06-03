@@ -13,6 +13,7 @@ namespace GoldenForum.Service.Models.ViewModels.Post
 
         public string AuthorId { get; set; }
         public string AuthorUserName { get; set; }
+        public string AuthorImageUrl { get; set; }
 
     }
 }

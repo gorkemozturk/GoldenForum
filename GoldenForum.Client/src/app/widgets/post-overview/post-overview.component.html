@@ -1,0 +1,14 @@
+<div class="media">
+  <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+  
+  <div class="media-body">
+    <a class="d-block" [routerLink]="['/post/' + post.id]">{{ limit ? (post.title | summary:limit) : post.title }}</a>
+    
+    <div class="d-flex justify-content-between">
+      <small>
+        <a href="" class="text-secondary">{{ post.authorUserName }}</a>
+      </small>
+      <small>{{ post.postedAt | date:'dd.MM.yyyy, HH:mm:ss' }}</small>
+    </div>
+  </div>
+</div>

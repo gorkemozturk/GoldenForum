@@ -40,8 +40,9 @@ namespace GoldenForum.Service.Controllers
                     Title = p.Title,
                     PostedAt = p.PostedAt,
                     AuthorId = p.User.Id,
-                    AuthorUserName = p.User.UserName
-                }).Take(1).OrderByDescending(p => p.PostedAt)
+                    AuthorUserName = p.User.UserName,
+                    AuthorImageUrl = p.User.ImageUrl
+                }).TakeLast(1)
             }).ToListAsync();
 
             var posts = await _context.Posts.Select(p => new PostHomeViewModel
@@ -51,6 +52,7 @@ namespace GoldenForum.Service.Controllers
                 PostedAt = p.PostedAt,
                 AuthorId = p.User.Id,
                 AuthorUserName = p.User.UserName,
+                AuthorImageUrl = p.User.ImageUrl
             }).ToListAsync();
 
             var model = new HomeViewModel()

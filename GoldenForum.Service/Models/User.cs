@@ -11,5 +11,7 @@ namespace GoldenForum.Service.Models
         public double Rating { get; set; }
         public string ImageUrl { get; set; }
         public DateTime RegisteredAt { get; set; }
+
+        public virtual ICollection<Post> Posts { get; set; }
     }
 }

@@ -15,6 +15,8 @@ namespace GoldenForum.Service.Models.ViewModels.Post
         public string AuthorUserName { get; set; }
         public string AuthorImageUrl { get; set; }
         public double AuthorRating { get; set; }
+        public int AuthorPostsCount { get; set; }
+        public DateTime AuthorRegisteredAt { get; set; }
 
         public string Body { get; set; }
         public DateTime PostedAt { get; set; }

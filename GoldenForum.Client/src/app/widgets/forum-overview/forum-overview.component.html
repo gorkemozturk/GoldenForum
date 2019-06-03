@@ -1,0 +1,10 @@
+<div class="media">
+  <img src="{{ forum.imageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+  
+  <div class="media-body">
+    <a class="d-block" [routerLink]="['/forum/' + forum.id]">{{ forum.title }}</a>
+    <small>
+      {{ forum.description }}
+    </small>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="mt-5 rounded shadow-lg">
+  <div class="bg-light rounded p-3">
+    {{ title }}
+  </div>
+  <div class="bg-white rounded p-3">
+    <form class="text-right" [formGroup]="form" autocomplete="off">
+      <div class="form-group">
+        <textarea class="form-control" rows="3" formControlName="body" [ngClass]="{ 'is-invalid': submitted && field.body.errors }"></textarea>
+        <div *ngIf="submitted && field.body.errors" class="invalid-feedback">
+          <div *ngIf="field.body.errors.required">Bu alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" (click)="onSubmit(form)"><i class="far fa-save"></i> Yorumu Gönder</button>
+    </form>
+  </div>
+</div>

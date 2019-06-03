@@ -53,6 +53,7 @@ namespace GoldenForum.Service.Controllers
                     AuthorId = p.User.Id,
                     AuthorUserName = p.User.UserName,
                     AuthorRating = p.User.Rating,
+                    AuthorImageUrl = p.User.ImageUrl,
                     RepliesCount = p.Replies.Count()
                 })
             }).FirstOrDefaultAsync(f => f.Id == id);
