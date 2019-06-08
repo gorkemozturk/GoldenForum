@@ -1,0 +1,46 @@
+<div style="height: 100vh" class="d-flex align-items-center">
+  <div class="bg-white rounded shadow-lg text-center w-25 mx-auto">
+    <div class="bg-light rounded p-3">
+      {{ title }}
+    </div>
+    <form [formGroup]="form" class="p-3" autocomplete="off">
+      <div class="form-group">
+        <input type="text" class="form-control text-center" placeholder="Kullanıcı Adı"
+        formControlName="userName" [ngClass]="{ 'is-invalid': submitted && field.userName.errors }">
+        <div *ngIf="submitted && field.userName.errors" class="invalid-feedback">
+          <div *ngIf="field.userName.errors.required">Kullanıcı adı alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control text-center" placeholder="Email"
+        formControlName="email" [ngClass]="{ 'is-invalid': submitted && field.email.errors }">
+        <div *ngIf="submitted && field.email.errors" class="invalid-feedback">
+          <div *ngIf="field.email.errors.required">Email alanının doldurulması zorunludur.</div>
+          <div *ngIf="field.email.errors.email">Email alanı mail formatında olmalıdır.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control text-center" placeholder="Şifre"
+        formControlName="password" [ngClass]="{ 'is-invalid': submitted && field.password.errors }">
+        <div *ngIf="submitted && field.password.errors" class="invalid-feedback">
+          <div *ngIf="field.password.errors.required">Şifre alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control text-center" placeholder="Şifre Onayı"
+        formControlName="confirmPassword" [ngClass]="{ 'is-invalid': submitted && field.confirmPassword.errors }">
+        <div *ngIf="submitted && field.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="field.confirmPassword.errors.required">Şifre alanının doldurulması zorunludur.</div>
+          <div *ngIf="field.confirmPassword.errors.mustMatch">Her iki şifre alanının eşleşmesi gerekmektedir.</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="onSubmit(form)">Kayıt Ol</button>
+    </form>
+    <div class="bg-light rounded p-3">
+      <small>
+        <a href="" class="d-block text-secondary">Hesabınız var mı? Giriş Yapın.</a>
+      </small>
+    </div>
+  </div>
+</div>

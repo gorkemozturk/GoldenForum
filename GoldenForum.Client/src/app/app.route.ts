@@ -5,6 +5,7 @@ import { PostComponent } from './components/default/post/post.component';
 import { ForumComponent } from './components/default/forum/forum.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { LoginComponent } from './components/auth/login/login.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 
 const routes: Routes = [
     // Default Routes
@@ -17,6 +18,7 @@ const routes: Routes = [
     // Auth Routes
     { path: '', component: AuthComponent, children: [ 
         { path: 'login', component: LoginComponent },
+        { path: 'register', component: RegisterComponent },
     ]},
 ];
 

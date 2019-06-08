@@ -8,10 +8,11 @@ namespace GoldenForum.Service.Models
 {
     public class User : IdentityUser
     {
-        public double Rating { get; set; }
+        public int Rating { get; set; }
         public string ImageUrl { get; set; }
         public DateTime RegisteredAt { get; set; }
 
         public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Reply> Replies { get; set; }
     }
 }

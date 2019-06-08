@@ -4,11 +4,13 @@
   <div class="media-body">
     <a class="d-block" [routerLink]="['/post/' + post.id]">{{ limit ? (post.title | summary:limit) : post.title }}</a>
     
-    <div class="d-flex justify-content-between">
+    <div class="text-secondary d-flex justify-content-between">
       <small>
         <a href="" class="text-secondary">{{ post.authorUserName }}</a>
       </small>
-      <small>{{ post.postedAt | date:'dd.MM.yyyy, HH:mm:ss' }}</small>
+      <small>
+        {{ post.postedAt | date:'dd.MM.yyyy, hh:mm:SS' }}
+      </small>
     </div>
   </div>
 </div>

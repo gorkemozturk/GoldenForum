@@ -49,7 +49,7 @@ namespace GoldenForum.Service.Controllers
                 return BadRequest(login);
             }
 
-            var result = await signInManager.PasswordSignInAsync(login.Email, login.Password, false, false);
+            var result = await signInManager.PasswordSignInAsync(login.UserName, login.Password, false, false);
 
             if (!result.Succeeded)
             {
@@ -58,7 +58,7 @@ namespace GoldenForum.Service.Controllers
 
             try
             {
-                var user = await context.ApplicationUsers.FirstOrDefaultAsync(u => u.Email == login.Email);
+                var user = await context.ApplicationUsers.FirstOrDefaultAsync(u => u.UserName == login.UserName);
                 return await TokenHandler(user);
             }
             catch (Exception e)
@@ -75,7 +75,7 @@ namespace GoldenForum.Service.Controllers
                 return BadRequest(registration);
             }
 
-            var user = new User { UserName = registration.Email, Email = registration.Email };
+            var user = new User { UserName = registration.UserName, Email = registration.Email, ImageUrl = "/assets/images/user/avatars/avatar.png" };
             var result = await userManager.CreateAsync(user, registration.Password);
 
             if (!result.Succeeded)
@@ -85,7 +85,10 @@ namespace GoldenForum.Service.Controllers
 
             try
             {
-                await roleManager.CreateAsync(new IdentityRole("User"));
+                if (await roleManager.RoleExistsAsync("User") == false)
+                {
+                    await roleManager.CreateAsync(new IdentityRole("User"));
+                }
                 await userManager.AddToRoleAsync(user, "User");
             }
             catch (Exception e)
@@ -103,7 +106,9 @@ namespace GoldenForum.Service.Controllers
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+                new Claim("image_url", user.ImageUrl),
+                new Claim("rating", user.Rating.ToString()),
             };
 
             foreach (var role in roles)

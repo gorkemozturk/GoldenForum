@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/models/post';
 import { NgForm } from '@angular/forms';
 import { ReplyService } from 'src/app/services/reply.service';
+import { Reply } from 'src/app/models/reply';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-post',
@@ -13,7 +15,7 @@ import { ReplyService } from 'src/app/services/reply.service';
 export class PostComponent implements OnInit {
   post: Post = new Post();
 
-  constructor(private postService: PostService, private route: ActivatedRoute, private resplyService: ReplyService) { }
+  constructor(private postService: PostService, private route: ActivatedRoute, private resplyService: ReplyService, private authService: AuthService) { }
 
   ngOnInit() {
     this.getPost();
@@ -25,8 +27,20 @@ export class PostComponent implements OnInit {
   }
 
   onSubmit(form: NgForm): void {
-    this.resplyService.postResource(form.value).subscribe(reponse => {
-      console.log(true);
+    this.resplyService.postResource(form.value).subscribe(response => {
+      form.reset();
+
+      const reply: Reply = { 
+        id: response.id, 
+        repliedAt: response.repliedAt, 
+        body: response.body, 
+        authorUserName: this.authService.currentUser.unique_name, 
+        authorImageUrl: this.authService.currentUser.image_url, 
+        authorRating: this.authService.currentUser.rating, 
+        authorId: response.userId 
+      }
+
+      this.post.replies.push(reply);
     });
   }
 

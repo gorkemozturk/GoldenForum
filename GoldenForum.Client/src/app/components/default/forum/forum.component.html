@@ -1,31 +1,40 @@
-<div class="container-fluid">
-  <div class="text-secondary shadow rounded">
-    <div class="p-3">
-      <app-forum-overview [forum]="forum"></app-forum-overview>
-    </div>
+<div class="shadow-lg rounded overflow-hidden">
+  <div class="bg-light p-3">
+    <div class="row d-flex align-items-center">
+      <div class="col">
+        <app-forum-overview [forum]="forum"></app-forum-overview>
+      </div>
 
-    <ul class="list-group list-group-flush">
-      <li *ngFor="let post of forum.posts; let i = index" class="list-group-item rounded border-0 p-3" [class.bg-light]="(i+1) % 2 === 0">
-        <div class="row d-flex align-items-center">
-          <div class="col-md-6">
-            <a [routerLink]="['/post/' + post.id]">{{ post.title }}</a>
-          </div>
-          <div class="col-md-3">
-            <div class="media">
-              <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
-              
-              <div class="media-body">
-                <a class="d-block" href="">{{ post.authorUserName }}</a>
-                <small>Karizma: {{ post.authorRating }}</small>
-              </div>
+      <div class="col text-right">
+        <a href="" class="btn btn-primary">Yeni Gönderi Paylaş</a>
+      </div>
+    </div>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <li *ngFor="let post of forum.posts; let i = index" class="list-group-item border-0 p-3" [class.bg-light]="(i+1) % 2 === 0">
+      <div class="row d-flex align-items-center">
+        <div class="col-md-6">
+          <a [routerLink]="['/post/' + post.id]">{{ post.title }}</a>
+        </div>
+        <div class="col-md-3">
+          <div class="media">
+            <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+            
+            <div class="media-body">
+              <a class="d-block" href="">{{ post.authorUserName }}</a>
+              <small>
+                Karizma: 
+                <app-rating [rating]="post.authorRating"></app-rating>
+              </small>
             </div>
           </div>
-          <div class="col-md-3 text-right">
-            <div>Gönderi Cevapları: {{ post.repliesCount }}</div>
-            <div>Görüntülenme: {{ post.repliesCount }}</div>
-          </div>
         </div>
-      </li>
-    </ul>
-  </div>
+        <div class="col-md-3 text-right">
+          <small class="d-block">Gönderi Cevapları: {{ post.repliesCount }}</small>
+          <small class="d-block">Görüntülenme: {{ post.repliesCount }}</small>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

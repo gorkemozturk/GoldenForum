@@ -10,16 +10,18 @@ import { HeaderComponent } from './components/default/header/header.component';
 import { FooterComponent } from './components/default/footer/footer.component';
 import { HomeComponent } from './components/default/home/home.component';
 import { ApplicationRoutes } from './app.route';
-import { LatestPostComponent } from './widgets/latest-post/latest-post.component';
-import { ForumListComponent } from './widgets/forum-list/forum-list.component';
+import { LatestPostComponent } from './widgets/post/latest-post/latest-post.component';
+import { ForumListComponent } from './widgets/form/forum-list/forum-list.component';
 import { SummaryPipe } from './pipes/summary.pipe';
 import { PostComponent } from './components/default/post/post.component';
-import { PostOverviewComponent } from './widgets/post-overview/post-overview.component';
+import { PostOverviewComponent } from './includes/post/post-overview/post-overview.component';
 import { ForumComponent } from './components/default/forum/forum.component';
-import { ForumOverviewComponent } from './widgets/forum-overview/forum-overview.component';
-import { ReplyFormComponent } from './widgets/reply-form/reply-form.component';
+import { ForumOverviewComponent } from './includes/forum/forum-overview/forum-overview.component';
+import { ReplyFormComponent } from './includes/reply/reply-form/reply-form.component';
 import { LoginComponent } from './components/auth/login/login.component';
-import { ReplyEntryComponent } from './widgets/reply-entry/reply-entry.component';
+import { ReplyEntryComponent } from './includes/reply/reply-entry/reply-entry.component';
+import { RegisterComponent } from './components/auth/register/register.component';
+import { RatingComponent } from './includes/user/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ReplyEntryComponent } from './widgets/reply-entry/reply-entry.component
     ForumOverviewComponent,
     ReplyFormComponent,
     LoginComponent,
-    ReplyEntryComponent
+    ReplyEntryComponent,
+    RegisterComponent,
+    RatingComponent
   ],
   imports: [
     BrowserModule,

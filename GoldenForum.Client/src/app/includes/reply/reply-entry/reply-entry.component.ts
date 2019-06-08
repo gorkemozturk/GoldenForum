@@ -8,7 +8,8 @@ import { Reply } from 'src/app/models/reply';
 })
 export class ReplyEntryComponent implements OnInit {
   @Input() reply: Reply = new Reply();
-
+  @Input() i: number = null;
+  
   constructor() { }
 
   ngOnInit() {

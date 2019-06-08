@@ -1,0 +1,38 @@
+<div class="bg-light p-3">
+  <div class="row d-flex align-items-center">
+    <div class="col">
+      #{{ i+1 }}
+    </div>
+    <div class="col text-right">
+      <small>
+        Yayınlanma Tarihi: {{ reply.repliedAt | date:'dd.MM.yyyy, HH:mm:ss' }}
+      </small>
+    </div>
+  </div>
+</div>
+
+<div class="bg-light border-top border-white p-3">
+  <div class="row">
+    <div class="col-md">
+      <div class="media">
+        <img src="{{ reply.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+        
+        <div class="media-body">
+          <strong>{{ reply.authorUserName }}</strong>
+        </div>
+      </div>
+    </div>
+    <div class="col-md text-right">
+      <small class="d-block">Üyelik Tarihi: {{ reply.authorRegisteredAt | date:'dd.MM.yyyy' }}</small>
+      <small class="d-block">Toplam Gönderi: {{ reply.authorPostsCount }}</small>
+      <small class="d-block">
+        Karizma: 
+        <app-rating [rating]="reply.authorRating"></app-rating>
+      </small>
+    </div>
+  </div>
+</div>
+
+<div class="bg-white p-3">
+  {{ reply.body }}
+</div>

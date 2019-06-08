@@ -1,15 +1,14 @@
 <div style="height: 100vh" class="d-flex align-items-center">
-  <div class="bg-white rounded shadow w-25 mx-auto">
-    <div class="bg-light text-secondary text-center rounded p-3">
+  <div class="bg-white rounded shadow-lg w-25 mx-auto">
+    <div class="bg-light text-center rounded p-3">
       {{ title }}
     </div>
     <form [formGroup]="form" class="p-3" autocomplete="off">
       <div class="form-group">
-        <input type="email" class="form-control text-center" placeholder="Email"
-        formControlName="email" [ngClass]="{ 'is-invalid': submitted && field.email.errors }">
-        <div *ngIf="submitted && field.email.errors" class="invalid-feedback">
-          <div *ngIf="field.email.errors.required">Email alanının doldurulması zorunludur.</div>
-          <div *ngIf="field.email.errors.email">Email alanı mail formatında olmalıdır.</div>
+        <input type="text" class="form-control text-center" placeholder="Kullanıcı Adı"
+        formControlName="userName" [ngClass]="{ 'is-invalid': submitted && field.userName.errors }">
+        <div *ngIf="submitted && field.userName.errors" class="invalid-feedback">
+          <div *ngIf="field.userName.errors.required">Kullanıcı adı alanının doldurulması zorunludur.</div>
         </div>
       </div>
       <div class="form-group">
@@ -26,8 +25,8 @@
     </form>
     <div class="bg-light text-center rounded p-3">
       <small>
-        <a href="" class="d-block">Henüz bir hesabın yok mu? Kayıt Ol</a>
-        <a href="" class="d-block">Kullanıcı şifremi unuttum.</a>
+        <a href="" class="d-block text-secondary">Henüz bir hesabın yok mu? Kayıt Ol.</a>
+        <a href="" class="d-block text-secondary">Kullanıcı şifremi unuttum.</a>
       </small>
     </div>
   </div>
