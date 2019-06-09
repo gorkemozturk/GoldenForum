@@ -1,0 +1,34 @@
+<ul class="list-group list-group-flush">
+  <li class="bg-light list-group-item border-top border-white p-3">
+    <div class="row">
+      <div class="col-md-6">Gönderi Başlığı</div>
+      <div class="col-md-3">Gönderi Sahibi</div>
+      <div class="col-md-3 text-right">İstatistikler</div>
+    </div>
+  </li>
+  <li *ngFor="let post of forum.posts; let i = index" class="list-group-item border-0 p-3" [class.bg-light]="(i+1) % 2 === 0">
+    <div class="row d-flex align-items-center">
+      <div class="col-md-6">
+        <i class="text-warning fas fa-folder mr-3"></i>
+        <a [routerLink]="['/forum/' + forum.id + '/post/' + post.id]">{{ post.title }}</a>
+      </div>
+      <div class="col-md-3">
+        <div class="media">
+          <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+          
+          <div class="media-body">
+            <a class="d-block" href="">{{ post.authorUserName }}</a>
+            <small>
+              Karizma: 
+              <app-rating [rating]="post.authorRating"></app-rating>
+            </small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 text-right">
+        <small class="d-block">Gönderi Cevapları: {{ post.repliesCount }}</small>
+        <small class="d-block">Görüntülenme: {{ post.repliesCount }}</small>
+      </div>
+    </div>
+  </li>
+</ul>

@@ -6,13 +6,16 @@ import { ForumComponent } from './components/default/forum/forum.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { PostFormComponent } from './components/default/post-form/post-form.component';
 
 const routes: Routes = [
     // Default Routes
     { path: '', component: DefaultComponent, children: [ 
         { path: '', component: HomeComponent },
         { path: 'forum/:id', component: ForumComponent },
-        { path: 'post/:id', component: PostComponent }
+        { path: 'forum/:forumId/post/new', component: PostFormComponent },
+        { path: 'forum/:forumId/post/:postId/edit', component: PostFormComponent },
+        { path: 'post/:id/detail', component: PostComponent },
     ]},
 
     // Auth Routes

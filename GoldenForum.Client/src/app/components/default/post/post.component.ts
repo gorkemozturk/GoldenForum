@@ -28,8 +28,6 @@ export class PostComponent implements OnInit {
 
   onSubmit(form: NgForm): void {
     this.resplyService.postResource(form.value).subscribe(response => {
-      form.reset();
-
       const reply: Reply = { 
         id: response.id, 
         repliedAt: response.repliedAt, 

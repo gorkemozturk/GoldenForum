@@ -45,6 +45,7 @@ namespace GoldenForum.Service.Controllers
             var post = await _context.Posts.Include(p => p.User).Include(r => r.Replies).ThenInclude(r => r.User).Select(p => new PostDetailViewModel
             {
                 Id = p.Id,
+                ForumId = p.ForumId,
                 Title = p.Title,
                 AuthorId = p.User.Id,
                 AuthorUserName = p.User.UserName,
@@ -110,6 +111,8 @@ namespace GoldenForum.Service.Controllers
         [HttpPost]
         public async Task<ActionResult<Post>> PostPost(Post post)
         {
+            post.PostedAt = DateTime.Now;
+
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
 

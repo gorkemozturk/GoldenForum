@@ -9,6 +9,7 @@ namespace GoldenForum.Service.Models.ViewModels.Post
     public class PostDetailViewModel
     {
         public int Id { get; set; }
+        public int ForumId { get; set; }
         public string Title { get; set; }
 
         public string AuthorId { get; set; }

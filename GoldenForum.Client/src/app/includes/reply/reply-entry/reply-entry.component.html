@@ -11,6 +11,22 @@
   </div>
 </div>
 
+<div class="bg-light border-top border-white d-flex align-items-center justify-content-between p-3">
+  <div>
+    <a href="" class="btn btn-primary btn-sm" [hidden]="authService.currentUser.sub !== reply.authorId">
+      <i class="far fa-edit"></i> Düzenle
+    </a>
+
+    <a href="" class="btn btn-secondary btn-sm" [hidden]="authService.currentUser.sub === reply.authorId">
+      <i class="fas fa-comment"></i> Özel Mesaj Gönder
+    </a>
+  </div>
+  <div>
+    <small style="cursor: pointer"><i class="fas fa-clone"></i> Gönderi Bağlantısını Kopyala</small>
+    <small class="ml-3" style="cursor: pointer"><i class="text-danger fas fa-flag"></i> Gönderiyi Şikayet Et</small>
+  </div>
+</div>
+
 <div class="bg-light border-top border-white p-3">
   <div class="row">
     <div class="col-md">

@@ -3,14 +3,21 @@
     Forumlar
   </div>
   <ul class="list-group list-group-flush">
+    <li class="bg-light list-group-item border-top border-white p-3">
+      <div class="row">
+        <div class="col-md-5">Forum Başlığı</div>
+        <div class="col-md-5">Son Forum Gönderisi</div>
+        <div class="col-md-2 text-right">İstatistikler</div>
+      </div>
+    </li>
     <li *ngFor="let forum of forums; let i = index" class="list-group-item border-0 p-3" [class.bg-light]="(i+1) % 2 === 0">
-      <div class="row no-gutters d-flex align-items-center">
+      <div class="row d-flex align-items-center">
         <div class="col-md-5">
           <app-forum-overview [forum]="forum"></app-forum-overview>
         </div>
         <div class="col-md-5">
           <div *ngFor="let post of forum.latestPosts">
-            <app-post-overview [post]="post" [limit]="50"></app-post-overview>
+            <app-post-overview [post]="post" [limit]="48"></app-post-overview>
           </div>
         </div>
         <div class="col-md-2 text-right">

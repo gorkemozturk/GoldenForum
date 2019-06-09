@@ -19,10 +19,10 @@ export class ReplyFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.postForm();
+    this.replyForm();
   }
 
-  postForm(): void {
+  replyForm(): void {
     const id = this.route.snapshot.paramMap.get('id');
 
     this.form = this.formBuilder.group({
@@ -37,8 +37,10 @@ export class ReplyFormComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.submitted = true;
     if (this.form.invalid) { return; }
-
+    
+    this.submitted = false;
     this.submission.emit(form);
+    this.form.reset();
   }
 
 }

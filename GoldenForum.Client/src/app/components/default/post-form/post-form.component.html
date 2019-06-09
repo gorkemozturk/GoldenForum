@@ -1,0 +1,29 @@
+<div class="shadow-lg rounded overflow-hidden">
+  <div class="bg-light p-3">
+    <app-forum-overview [forum]="forum"></app-forum-overview>
+  </div>
+  <div class="bg-light border-top border-white p-3">
+    {{ title }}
+  </div>
+
+  <div class="bg-white p-3">
+    <form [formGroup]="form" autocomplete="off">
+      <div class="form-group">
+        <input type="text" class="form-control" rows="3" formControlName="title" [ngClass]="{ 'is-invalid': submitted && field.title.errors }"/>
+        <div *ngIf="submitted && field.title.errors" class="invalid-feedback">
+          <div *ngIf="field.title.errors.required">Başlık alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <quill-editor formControlName="body"></quill-editor>
+        <div *ngIf="submitted && field.body.errors" class="invalid-feedback">
+          <div *ngIf="field.body.errors.required">İçerik alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+      
+      <div class="text-right">
+        <button class="btn btn-primary" (click)="onSubmit(form)" [disabled]="!form.valid"><i class="fas fa-save"></i> Gönderiyi Kaydet</button>
+      </div>
+    </form>
+  </div>
+</div>

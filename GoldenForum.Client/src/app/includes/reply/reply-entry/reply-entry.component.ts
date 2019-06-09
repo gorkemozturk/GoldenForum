@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Reply } from 'src/app/models/reply';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-reply-entry',
@@ -10,7 +11,7 @@ export class ReplyEntryComponent implements OnInit {
   @Input() reply: Reply = new Reply();
   @Input() i: number = null;
   
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }

@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext');
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.bubble.css';
+@import '~quill/dist/quill.snow.css';
 
 * {
     font-family: 'Roboto', sans-serif;
@@ -6,4 +9,18 @@
 
 body {
     background: #EEEEEE;
+}
+
+.btn {
+    border: none
+}
+
+.ql-toolbar {
+    border-radius: 4px 4px 0 0;
+}
+.ql-container {
+    border-radius: 0 0 4px 4px;
+}
+.ql-editor {
+    height: 250px;
 }

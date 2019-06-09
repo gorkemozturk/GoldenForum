@@ -45,7 +45,7 @@ namespace GoldenForum.Service.Controllers
                 }).TakeLast(1)
             }).ToListAsync();
 
-            var posts = await _context.Posts.Select(p => new PostHomeViewModel
+            var latestPosts = await _context.Posts.Include(p => p.Forum).Select(p => new PostHomeViewModel
             {
                 Id = p.Id,
                 Title = p.Title,
@@ -58,7 +58,7 @@ namespace GoldenForum.Service.Controllers
             var model = new HomeViewModel()
             {
                 Forums = forums,
-                LatestPosts = posts
+                LatestPosts = latestPosts
             };
 
             return model;

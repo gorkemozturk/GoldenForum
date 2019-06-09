@@ -12,6 +12,26 @@
     </div>
   </div>
 
+  <div class="bg-light border-top border-white d-flex align-items-center justify-content-between p-3">
+    <div>
+      <a [routerLink]="['/forum/' + post.forumId + '/post/' + post.id + '/edit']" class="btn btn-primary btn-sm" [hidden]="authService.currentUser.sub !== post.authorId">
+        <i class="far fa-edit"></i> Düzenle
+      </a>
+
+      <button class="btn btn-success btn-sm mr-1" [hidden]="authService.currentUser.sub === post.authorId">
+        <i class="far fa-thumbs-up"></i>
+      </button>
+      <button class="btn btn-danger btn-sm mr-3" [hidden]="authService.currentUser.sub === post.authorId">
+        <i class="far fa-thumbs-down"></i>
+      </button>
+    </div>
+
+    <div>
+      <small style="cursor: pointer"><i class="fas fa-clone"></i> Gönderi Bağlantısını Kopyala</small>
+      <small class="ml-3" style="cursor: pointer"><i class="text-danger fas fa-flag"></i> Gönderiyi Şikayet Et</small>
+    </div>
+  </div>
+
   <div class="bg-light border-top border-white p-3">
     <div class="row">
       <div class="col-md">
@@ -34,9 +54,7 @@
     </div>
   </div>
 
-  <div class="bg-white p-3">
-    {{ post.body }}
-  </div>
+  <div class="bg-white p-3" [innerHTML]="post.body"></div>
 </div>
 
 <div class="rounded shadow-lg rounded overflow-hidden mt-5">

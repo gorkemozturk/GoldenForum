@@ -6,35 +6,16 @@
       </div>
 
       <div class="col text-right">
-        <a href="" class="btn btn-primary">Yeni Gönderi Paylaş</a>
+        <a [routerLink]="['/forum/' + forum.id + '/post/new']" class="btn btn-primary"><i class="fas fa-plus-square"></i> Yeni Gönderi Oluştur</a>
       </div>
     </div>
   </div>
 
-  <ul class="list-group list-group-flush">
-    <li *ngFor="let post of forum.posts; let i = index" class="list-group-item border-0 p-3" [class.bg-light]="(i+1) % 2 === 0">
-      <div class="row d-flex align-items-center">
-        <div class="col-md-6">
-          <a [routerLink]="['/post/' + post.id]">{{ post.title }}</a>
-        </div>
-        <div class="col-md-3">
-          <div class="media">
-            <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
-            
-            <div class="media-body">
-              <a class="d-block" href="">{{ post.authorUserName }}</a>
-              <small>
-                Karizma: 
-                <app-rating [rating]="post.authorRating"></app-rating>
-              </small>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-3 text-right">
-          <small class="d-block">Gönderi Cevapları: {{ post.repliesCount }}</small>
-          <small class="d-block">Görüntülenme: {{ post.repliesCount }}</small>
-        </div>
-      </div>
-    </li>
-  </ul>
+  <div [hidden]="forum.posts.length" class="bg-light p-3">
+    <div class="alert alert-primary m-0" role="alert">
+      <i class="fas fa-info-circle"></i> Bu foruma ait hiç bir gönderi bulunmuyor. Yeni gönderi oluşturarak ilk gönderiyi paylaşan siz olun :)
+    </div>
+  </div>
+
+  <app-post-list [hidden]="!forum.posts.length" [forum]="forum"></app-post-list>
 </div>
