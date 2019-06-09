@@ -53,7 +53,7 @@ namespace GoldenForum.Service.Controllers
                 AuthorId = p.User.Id,
                 AuthorUserName = p.User.UserName,
                 AuthorImageUrl = p.User.ImageUrl
-            }).ToListAsync();
+            }).Take(5).OrderByDescending(p => p.Id).ToListAsync();
 
             var model = new HomeViewModel()
             {

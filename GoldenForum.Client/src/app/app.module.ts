@@ -12,8 +12,8 @@ import { HeaderComponent } from './components/default/header/header.component';
 import { FooterComponent } from './components/default/footer/footer.component';
 import { HomeComponent } from './components/default/home/home.component';
 import { ApplicationRoutes } from './app.route';
-import { LatestPostComponent } from './widgets/post/latest-post/latest-post.component';
-import { ForumListComponent } from './widgets/forum/forum-list/forum-list.component';
+import { LatestPostComponent } from './includes/post/latest-post/latest-post.component';
+import { ForumListComponent } from './includes/forum/forum-list/forum-list.component';
 import { SummaryPipe } from './pipes/summary.pipe';
 import { PostComponent } from './components/default/post/post.component';
 import { PostOverviewComponent } from './includes/post/post-overview/post-overview.component';
@@ -24,7 +24,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { ReplyEntryComponent } from './includes/reply/reply-entry/reply-entry.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RatingComponent } from './includes/user/rating/rating.component';
-import { PostListComponent } from './widgets/post/post-list/post-list.component';
+import { PostListComponent } from './includes/post/post-list/post-list.component';
 import { PostFormComponent } from './components/default/post-form/post-form.component';
 
 @NgModule({

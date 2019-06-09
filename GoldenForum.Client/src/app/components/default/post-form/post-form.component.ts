@@ -35,6 +35,7 @@ export class PostFormComponent implements OnInit {
     this.postForm();
 
     this.postId = this.route.snapshot.paramMap.get('postId');
+    
     if (this.postId) {
       this.postService.getResource(this.postId).subscribe(response => {
         this.postUpdatingForm(response);
@@ -81,9 +82,9 @@ export class PostFormComponent implements OnInit {
     const forumId = this.route.snapshot.paramMap.get('forumId');
     
     if (!this.postId)
-      this.postService.postResource(form.value).subscribe(response => this.router.navigate(['/forum/' + forumId + '/post/' + this.postId]));
+      this.postService.postResource(form.value).subscribe(response => this.router.navigate(['/post/' + response.id + '/detail']));
     else
-      this.postService.putResource(this.postId, form.value).subscribe(response => this.router.navigate(['/forum/' + forumId + '/post/' + this.postId]));
+      this.postService.putResource(this.postId, form.value).subscribe(response => this.router.navigate(['/post/' + this.postId + '/detail']));
   }
 
 }

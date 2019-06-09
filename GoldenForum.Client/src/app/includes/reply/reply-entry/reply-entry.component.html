@@ -13,9 +13,13 @@
 
 <div class="bg-light border-top border-white d-flex align-items-center justify-content-between p-3">
   <div>
-    <a href="" class="btn btn-primary btn-sm" [hidden]="authService.currentUser.sub !== reply.authorId">
+    <button (click)="onToggle(reply)" class="btn btn-primary btn-sm" [hidden]="authService.currentUser.sub !== reply.authorId || collapsed">
       <i class="far fa-edit"></i> Düzenle
-    </a>
+    </button>
+
+    <button (click)="onToggle()" class="btn btn-secondary btn-sm" [hidden]="!collapsed">
+      <i class="fas fa-times"></i> Vazgeç
+    </button>
 
     <a href="" class="btn btn-secondary btn-sm" [hidden]="authService.currentUser.sub === reply.authorId">
       <i class="fas fa-comment"></i> Özel Mesaj Gönder
@@ -50,5 +54,14 @@
 </div>
 
 <div class="bg-white p-3">
-  {{ reply.body }}
+  {{ !collapsed ? reply.body : '' }}
+  
+  <div [hidden]="!collapsed">
+    <div class="form-group">
+      <input class="form-control" [(ngModel)]="reply.body"/>
+    </div>
+    <div class="text-right">
+      <button class="btn btn-primary" (click)="onUpdate()"><i class="fas fa-save"> </i> Kaydet</button>
+    </div>
+  </div>
 </div>
