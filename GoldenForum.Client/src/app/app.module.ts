@@ -56,7 +56,7 @@ import { PostFormComponent } from './components/default/post-form/post-form.comp
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    QuillModule
+    QuillModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,8 @@ import { Reply } from 'src/app/models/reply';
 import { AuthService } from 'src/app/services/auth.service';
 import { ReplyService } from 'src/app/services/reply.service';
 import { ActivatedRoute } from '@angular/router';
+import 'quill-emoji/dist/quill-emoji.js'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-reply-entry',
@@ -15,8 +17,12 @@ export class ReplyEntryComponent implements OnInit {
 
   selectedReply: Reply = new Reply();
   collapsed: boolean = false;
+
+  modules: any = null;
   
-  constructor(private authService: AuthService, private replyService: ReplyService, private route: ActivatedRoute) { }
+  constructor(private authService: AuthService, private replyService: ReplyService, private route: ActivatedRoute) { 
+    this.modules = environment.modules;
+  }
 
   ngOnInit() {
   }

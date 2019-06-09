@@ -4,7 +4,7 @@
   </div>
   <ul class="list-group list-group-flush">
     <li *ngFor="let post of latestPosts; let i = index" class="list-group-item border-0 p-3" [class.bg-light]="(i+1) % 2 === 0">
-      <app-post-overview [post]="post" [limit]="57"></app-post-overview>
+      <app-post-overview [post]="post"></app-post-overview>
     </li>
   </ul>
 </div>

@@ -62,4 +62,5 @@
 <div class="rounded shadow-lg rounded overflow-hidden mt-5">
   <app-reply-entry *ngFor="let reply of post.replies; let i = index" [reply]="reply" [i]=i></app-reply-entry>
 </div>
+
 <app-reply-form (submission)="onSubmit($event)"></app-reply-form>

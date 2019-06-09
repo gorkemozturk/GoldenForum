@@ -14,15 +14,15 @@
 <div class="bg-light border-top border-white d-flex align-items-center justify-content-between p-3">
   <div>
     <button (click)="onToggle(reply)" class="btn btn-primary btn-sm" [hidden]="authService.currentUser.sub !== reply.authorId || collapsed">
-      <i class="far fa-edit"></i> Düzenle
+      Düzenle
     </button>
 
     <button (click)="onToggle()" class="btn btn-secondary btn-sm" [hidden]="!collapsed">
-      <i class="fas fa-times"></i> Vazgeç
+      Vazgeç
     </button>
 
     <a href="" class="btn btn-secondary btn-sm" [hidden]="authService.currentUser.sub === reply.authorId">
-      <i class="fas fa-comment"></i> Özel Mesaj Gönder
+      Özel Mesaj Gönder
     </a>
   </div>
   <div>
@@ -54,14 +54,14 @@
 </div>
 
 <div class="bg-white p-3">
-  {{ !collapsed ? reply.body : '' }}
+  <div [hidden]="collapsed" [innerHTML]="reply.body"></div>
   
   <div [hidden]="!collapsed">
     <div class="form-group">
-      <input class="form-control" [(ngModel)]="reply.body"/>
+      <quill-editor [(ngModel)]="reply.body" [styles]="{height: '250px'}" [modules]="modules"></quill-editor>
     </div>
     <div class="text-right">
-      <button class="btn btn-primary" (click)="onUpdate()"><i class="fas fa-save"> </i> Kaydet</button>
+      <button class="btn btn-primary" (click)="onUpdate()">Kaydet</button>
     </div>
   </div>
 </div>

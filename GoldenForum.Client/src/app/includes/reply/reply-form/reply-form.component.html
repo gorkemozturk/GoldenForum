@@ -1,16 +1,18 @@
-<div class="rounded shadow-lg overflow-hidden mt-5" [hidden]="!authService.isAuthanticated">
-  <div class="bg-light p-3">
+<div class="shadow-lg mt-5" [hidden]="!authService.isAuthanticated">
+  <div class="rounded bg-light p-3">
     {{ title }}
   </div>
-  <div class="bg-white p-3">
-    <form class="text-right" [formGroup]="form" autocomplete="off">
+  <div class="rounded bg-white p-3">
+    <form [formGroup]="form" autocomplete="off">
       <div class="form-group">
-        <textarea class="form-control" rows="3" formControlName="body" [ngClass]="{ 'is-invalid': submitted && field.body.errors }"></textarea>
+        <quill-editor formControlName="body" [styles]="{height: '100px'}" [modules]="modules"></quill-editor>
         <div *ngIf="submitted && field.body.errors" class="invalid-feedback">
           <div *ngIf="field.body.errors.required">Bu alanının doldurulması zorunludur.</div>
         </div>
       </div>
-      <button class="btn btn-primary" (click)="onSubmit(form)"><i class="fas fa-reply"></i> Yorumu Gönder</button>
+      <div class="text-right">
+        <button class="btn btn-primary" (click)="onSubmit(form)" [disabled]="form.invalid">Hızlı Cevapla</button>
+      </div>
     </form>
   </div>
 </div>

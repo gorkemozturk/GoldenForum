@@ -6,6 +6,8 @@ import { FormGroup, FormBuilder, Validators, NgForm, FormControl } from '@angula
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { Post } from 'src/app/models/post';
+import 'quill-emoji/dist/quill-emoji.js'
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-post-form',
@@ -22,13 +24,17 @@ export class PostFormComponent implements OnInit {
 
   postId: any = null;
 
+  modules: any = null;
+
   constructor(
     private forumService: ForumService, 
     private postService: PostService, 
     private route: ActivatedRoute, 
     private router: Router, 
     private formBuilder: FormBuilder, 
-    private authService: AuthService) { }
+    private authService: AuthService) { 
+      this.modules = environment.modules;
+    }
 
   ngOnInit() {
     this.getForum();
