@@ -40,7 +40,7 @@ namespace GoldenForum.Service.Controllers
 
         // GET: api/Posts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PostDetailViewModel>> GetPost(int id)
+        public async Task<ActionResult<PostViewModel>> GetPost(int id)
         {
             var post = await _context.Posts.Include(p => p.User).Include(r => r.Replies).ThenInclude(r => r.User).Select(p => new PostDetailViewModel
             {
@@ -74,7 +74,23 @@ namespace GoldenForum.Service.Controllers
                 return NotFound();
             }
 
-            return post;
+            var latestPosts = await _context.Posts.Include(p => p.Forum).Select(p => new PostHomeViewModel
+            {
+                Id = p.Id,
+                Title = p.Title,
+                PostedAt = p.PostedAt,
+                AuthorId = p.User.Id,
+                AuthorUserName = p.User.UserName,
+                AuthorImageUrl = p.User.ImageUrl
+            }).Take(5).OrderByDescending(p => p.Id).ToListAsync();
+
+            var model = new PostViewModel()
+            {
+                Post = post,
+                LatestPosts = latestPosts
+            };
+
+            return model;
         }
 
         // PUT: api/Posts/5

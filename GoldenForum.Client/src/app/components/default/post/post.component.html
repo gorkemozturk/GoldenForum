@@ -1,66 +1,15 @@
-<div class="rounded shadow-lg overflow-hidden">
-  <div class="bg-light p-3">
-    <div class="row d-flex align-items-center">
-      <div class="col">
-        <strong>Gönderi Konusu:</strong> {{ post.title }}
+<div class="row">
+  <div class="col-md-8">
+      <app-post-entry [post]="post"></app-post-entry>
+
+      <div class="rounded shadow-lg rounded overflow-hidden mt-5">
+        <app-reply-entry *ngFor="let reply of post.replies; let i = index" [reply]="reply" [i]=i [size]="post.replies.length"></app-reply-entry>
       </div>
-      <div class="col text-right">
-        <small>
-          Yayınlanma Tarihi: {{ post.postedAt | date:'dd.MM.yyyy, HH:mm:ss' }}
-        </small>
-      </div>
-    </div>
+      
+      <app-reply-form (submission)="onSubmit($event)"></app-reply-form>
   </div>
 
-  <div class="bg-light border-top border-white d-flex align-items-center justify-content-between p-3">
-    <div>
-      <a [routerLink]="['/forum/' + post.forumId + '/post/' + post.id + '/edit']" class="btn btn-primary btn-sm" [hidden]="authService.currentUser.sub !== post.authorId">
-        <i class="far fa-edit"></i> Düzenle
-      </a>
-
-      <button class="btn btn-success btn-sm mr-1" [hidden]="authService.currentUser.sub === post.authorId">
-        <i class="far fa-thumbs-up"></i>
-      </button>
-      <button class="btn btn-danger btn-sm mr-3" [hidden]="authService.currentUser.sub === post.authorId">
-        <i class="far fa-thumbs-down"></i>
-      </button>
-    </div>
-
-    <div>
-      <small style="cursor: pointer"><i class="fas fa-clone"></i> Gönderi Bağlantısını Kopyala</small>
-      <small class="ml-3" style="cursor: pointer"><i class="text-danger fas fa-flag"></i> Gönderiyi Şikayet Et</small>
-    </div>
-  </div>
-
-  <div class="bg-light border-top border-white p-3">
-    <div class="row">
-      <div class="col-md">
-        <div class="media">
-          <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
-          
-          <div class="media-body">
-            <strong>{{ post.authorUserName }}</strong>
-          </div>
-        </div>
-      </div>
-      <div class="col-md text-right">
-        <small class="d-block">Üyelik Tarihi: {{ post.authorRegisteredAt | date:'dd.MM.yyyy' }}</small>
-        <small class="d-block">Toplam Gönderi: {{ post.authorPostsCount }}</small>
-        <small class="d-block">
-          Karizma: 
-          <app-rating [rating]="post.authorRating"></app-rating>
-        </small>
-      </div>
-    </div>
-  </div>
-
-  <div class="bg-white p-3">
-    <div [innerHTML]="post.body"></div>
+  <div class="col-md-4">
+    <app-latest-post [latestPosts]="latestPosts"></app-latest-post>
   </div>
 </div>
-
-<div class="rounded shadow-lg rounded overflow-hidden mt-5">
-  <app-reply-entry *ngFor="let reply of post.replies; let i = index" [reply]="reply" [i]=i></app-reply-entry>
-</div>
-
-<app-reply-form (submission)="onSubmit($event)"></app-reply-form>

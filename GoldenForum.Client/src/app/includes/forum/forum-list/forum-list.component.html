@@ -12,12 +12,12 @@
     </li>
     <li *ngFor="let forum of forums; let i = index" class="list-group-item border-0 p-3" [class.bg-light]="(i+1) % 2 === 0">
       <div class="row d-flex align-items-center">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <app-forum-overview [forum]="forum"></app-forum-overview>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
           <div *ngFor="let post of forum.latestPosts">
-            <app-post-overview [post]="post" [limit]="100"></app-post-overview>
+            <app-post-overview [post]="post" [limit]="35"></app-post-overview>
           </div>
         </div>
         <div class="col-md-2 text-right">

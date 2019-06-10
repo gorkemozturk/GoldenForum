@@ -26,6 +26,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { RatingComponent } from './includes/user/rating/rating.component';
 import { PostListComponent } from './includes/post/post-list/post-list.component';
 import { PostFormComponent } from './components/default/post-form/post-form.component';
+import { PostEntryComponent } from './includes/post/post-entry/post-entry.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { PostFormComponent } from './components/default/post-form/post-form.comp
     RegisterComponent,
     RatingComponent,
     PostListComponent,
-    PostFormComponent
+    PostFormComponent,
+    PostEntryComponent
   ],
   imports: [
     BrowserModule,

@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 export class ReplyEntryComponent implements OnInit {
   @Input() reply: Reply = new Reply();
   @Input() i: number = null;
+  @Input() size: number = null;
 
   selectedReply: Reply = new Reply();
   collapsed: boolean = false;

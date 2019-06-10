@@ -1,27 +1,30 @@
-<div class="rounded shadow-lg overflow-hidden" [class.mb-1]="(i+1) !== size">
+<div class="rounded shadow-lg overflow-hidden">
+  <div class="bg-light border-bottom border-white p-3">
+    {{ post.title }}
+  </div>
   <div class="row no-gutters d-flex align-items-stretch">
     <!-- Profile section started -->
     <div class="col-3">
       <div class="bg-light h-100 p-3">
         <!-- Author's image started -->
         <section>
-          <img src="{{ reply.authorImageUrl }}" class="rounded img-fluid" alt="...">
+          <img src="{{ post.authorImageUrl }}" class="rounded img-fluid" alt="...">
         </section>
         <!-- Author's image ended -->
 
         <section class="text-center font-weight-bold py-3">
-          {{ reply.authorUserName }}
+          {{ post.authorUserName }}
         </section>
 
         <!-- Author's details started -->
         <section class="d-flex justify-content-between">
           <small class="text-secondary">Üyelik Tarihi</small>
-          <small>{{ reply.authorRegisteredAt | date:'dd.MM.yyyy' }}</small>
+          <small>{{ post.authorRegisteredAt | date:'dd.MM.yyyy' }}</small>
         </section>
         
         <section class="d-flex justify-content-between">
           <small class="text-secondary">Toplam Gönderi</small>
-          <small>{{ reply.authorPostsCount }}</small>
+          <small>{{ post.authorPostsCount }}</small>
         </section>
 
         <section class="d-flex justify-content-between">
@@ -33,12 +36,12 @@
     </div>
     <!-- Profile section ended -->
 
-    <!-- Reply content started -->
+    <!-- Post content started -->
     <div class="col-9">
       <div class="bg-white h-100 p-3 ">
         <div class="d-flex justify-content-between align-items-center text-secondary border-bottom pb-3">
           <small>
-            {{ reply.repliedAt | date:'dd.MM.yyyy, HH:mm:ss' }}
+            {{ post.postedAt | date:'dd.MM.yyyy, HH:mm:ss' }}
           </small>
           <div>
             <div class="dropdown d-inline-block">
@@ -48,27 +51,23 @@
               <div class="dropdown-menu dropdown-menu-right shadow-sm bg-light" aria-labelledby="dropdown">
                 <a class="dropdown-item" href="#"><i class="fas fa-clone"></i> Gönderi Bağlantısını Kopyala</a>
                 <a class="dropdown-item text-danger" href="#"><i class="fas fa-flag"></i> Gönderiyi Şikayet Et</a>
-                <div class="dropdown-divider" [hidden]="authService.currentUser.sub !== reply.authorId"></div>
-                <a class="dropdown-item" href="javascript:;" [hidden]="authService.currentUser.sub !== reply.authorId" (click)="onToggle(reply)"><i class="fas fa-edit"></i> Gönderiyi Düzenle</a>
+                <div class="dropdown-divider" [hidden]="authService.currentUser.sub !== post.authorId"></div>
+                <a class="dropdown-item" [hidden]="authService.currentUser.sub !== post.authorId" [routerLink]="['/forum/' + post.forumId + '/post/' + post.id + '/edit']"><i class="fas fa-edit"></i> Gönderiyi Düzenle</a>
               </div>
             </div>
-            <small class="ml-3">#{{ i+2 }}</small>
+            <small class="ml-3">#1</small>
           </div>
         </div>
 
-        <div class="mt-3" [hidden]="collapsed" [innerHTML]="reply.body"></div>
-  
-        <div class="mt-3" [hidden]="!collapsed">
-          <div class="form-group">
-            <quill-editor [(ngModel)]="reply.body" [styles]="{height: '250px'}" [modules]="modules"></quill-editor>
-          </div>
-          <div class="text-right">
-            <button class="btn btn-secondary btn-sm" (click)="onToggle()">Vazgeç</button>
-            <button class="btn btn-primary btn-sm ml-1" (click)="onUpdate()">Hızlı Kaydet</button>
-          </div>
+        <div [innerHTML]="post.body" class="py-3"></div>
+
+        <div class="text-right text-secondary">
+          <button class="btn btn-outline-success btn-sm" [hidden]="authService.currentUser.sub === post.authorId">
+            <i class="far fa-thumbs-up"></i>
+          </button>
         </div>
       </div>
     </div>
-    <!-- Reply content ended -->
+    <!-- Post content ended -->
   </div>
 </div>

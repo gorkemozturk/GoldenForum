@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class PostComponent implements OnInit {
   post: Post = new Post();
+  latestPosts: Post[] = [];
 
   constructor(private postService: PostService, private route: ActivatedRoute, private resplyService: ReplyService, private authService: AuthService) { }
 
@@ -23,7 +24,10 @@ export class PostComponent implements OnInit {
 
   getPost(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.postService.getResource(id).subscribe(response => this.post = response);
+    this.postService.getResource(id).subscribe(response => {
+      this.post = response.post;
+      this.latestPosts = response.latestPosts;
+    });
   }
 
   onSubmit(form: NgForm): void {
