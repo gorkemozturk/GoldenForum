@@ -4,19 +4,19 @@
   </div>
   <div class="row no-gutters d-flex align-items-stretch">
     <!-- Profile section started -->
-    <div class="col-3">
+    <div class="col-md-3">
       <div class="bg-light h-100 p-3">
         <!-- Author's image started -->
         <section>
-          <img src="{{ post.authorImageUrl }}" class="rounded img-fluid" alt="...">
+          <img src="{{ post.authorImageUrl }}" class="rounded-circle w-75 mx-auto d-block" alt="...">
         </section>
         <!-- Author's image ended -->
 
+        <!-- Author's details started -->
         <section class="text-center font-weight-bold py-3">
           {{ post.authorUserName }}
         </section>
 
-        <!-- Author's details started -->
         <section class="d-flex justify-content-between">
           <small class="text-secondary">Üyelik Tarihi</small>
           <small>{{ post.authorRegisteredAt | date:'dd.MM.yyyy' }}</small>
@@ -29,7 +29,7 @@
 
         <section class="d-flex justify-content-between">
           <small class="text-secondary">Beğeniler</small>
-          <small>15.589</small>
+          <small>{{ post.authorRating }}</small>
         </section>
         <!-- Author's details ended -->
       </div>
@@ -37,7 +37,7 @@
     <!-- Profile section ended -->
 
     <!-- Post content started -->
-    <div class="col-9">
+    <div class="col-md-9">
       <div class="bg-white h-100 p-3 ">
         <div class="d-flex justify-content-between align-items-center text-secondary border-bottom pb-3">
           <small>

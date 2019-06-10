@@ -12,7 +12,7 @@ import { HeaderComponent } from './components/default/header/header.component';
 import { FooterComponent } from './components/default/footer/footer.component';
 import { HomeComponent } from './components/default/home/home.component';
 import { ApplicationRoutes } from './app.route';
-import { LatestPostComponent } from './includes/post/latest-post/latest-post.component';
+import { PostShortlistComponent } from './includes/post/post-shortlist/post-shortlist.component';
 import { ForumListComponent } from './includes/forum/forum-list/forum-list.component';
 import { SummaryPipe } from './pipes/summary.pipe';
 import { PostComponent } from './components/default/post/post.component';
@@ -27,6 +27,7 @@ import { RatingComponent } from './includes/user/rating/rating.component';
 import { PostListComponent } from './includes/post/post-list/post-list.component';
 import { PostFormComponent } from './components/default/post-form/post-form.component';
 import { PostEntryComponent } from './includes/post/post-entry/post-entry.component';
+import { UserProfileComponent } from './components/default/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { PostEntryComponent } from './includes/post/post-entry/post-entry.compon
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    LatestPostComponent,
+    PostShortlistComponent,
     ForumListComponent,
     SummaryPipe,
     PostComponent,
@@ -50,7 +51,8 @@ import { PostEntryComponent } from './includes/post/post-entry/post-entry.compon
     RatingComponent,
     PostListComponent,
     PostFormComponent,
-    PostEntryComponent
+    PostEntryComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,40 @@
+<div class="row">
+  <!-- User profile started -->
+  <div class="col-md-3">
+    <div class="bg-white rounded shadow-lg p-3">
+      <!-- Image url started -->
+      <section>
+        <img src="{{ user.imageUrl }}" class="rounded-circle w-75 mx-auto d-block" alt="...">
+      </section>
+      <!-- Image url ended -->
+
+        <!-- Author's details started -->
+        <section class="text-center font-weight-bold py-3">
+          {{ user.userName }}
+        </section>
+
+        <section class="d-flex justify-content-between">
+          <small class="text-secondary">Üyelik Tarihi</small>
+          <small>{{ user.registeredAt | date:'dd.MM.yyyy' }}</small>
+        </section>
+        
+        <section class="d-flex justify-content-between">
+          <small class="text-secondary">Toplam Gönderi</small>
+          <small>{{ user.postsCount }}</small>
+        </section>
+
+        <section class="d-flex justify-content-between">
+          <small class="text-secondary">Beğeniler</small>
+          <small>{{ user.rating }}</small>
+        </section>
+        <!-- Author's details ended -->
+    </div>
+  </div>
+  <!-- User profile ended -->
+
+  <!-- User posts started -->
+  <div class="col-md-9">
+    <app-post-shortlist [posts]="user.userPosts" [title]="ds"></app-post-shortlist>
+  </div>
+  <!-- User posts ended -->
+</div>

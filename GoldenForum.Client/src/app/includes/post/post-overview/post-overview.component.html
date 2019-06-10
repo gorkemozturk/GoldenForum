@@ -2,11 +2,11 @@
   <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
   
   <div class="media-body">
-    <a class="d-block" [routerLink]="['/post/' + post.id + '/detail']">{{ limit ? (post.title | summary:limit) : post.title }}</a>
+    <a class="d-block" [routerLink]="['/post/' + post.id]">{{ limit ? (post.title | summary:limit) : post.title }}</a>
     
     <div class="text-secondary d-flex justify-content-between">
       <small>
-        <a href="" class="text-secondary">{{ post.authorUserName }}</a>
+        <a [routerLink]="['/user/' + post.authorId]" class="text-secondary">{{ post.authorUserName }}</a>
       </small>
       <small>
         {{ post.postedAt | date:'dd.MM.yyyy, hh:mm:ss' }}

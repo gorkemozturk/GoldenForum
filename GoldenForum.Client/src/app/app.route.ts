@@ -7,6 +7,7 @@ import { AuthComponent } from './layouts/auth/auth.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { PostFormComponent } from './components/default/post-form/post-form.component';
+import { UserProfileComponent } from './components/default/user-profile/user-profile.component';
 
 const routes: Routes = [
     // Default Routes
@@ -15,7 +16,8 @@ const routes: Routes = [
         { path: 'forum/:id', component: ForumComponent },
         { path: 'forum/:forumId/post/new', component: PostFormComponent },
         { path: 'forum/:forumId/post/:postId/edit', component: PostFormComponent },
-        { path: 'post/:id/detail', component: PostComponent },
+        { path: 'post/:id', component: PostComponent },
+        { path: 'user/:id', component: UserProfileComponent },
     ]},
 
     // Auth Routes
