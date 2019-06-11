@@ -15,7 +15,6 @@ import { ApplicationRoutes } from './app.route';
 import { PostShortlistComponent } from './includes/post/post-shortlist/post-shortlist.component';
 import { ForumListComponent } from './includes/forum/forum-list/forum-list.component';
 import { SummaryPipe } from './pipes/summary.pipe';
-import { PostComponent } from './components/default/post/post.component';
 import { PostOverviewComponent } from './includes/post/post-overview/post-overview.component';
 import { ForumComponent } from './components/default/forum/forum.component';
 import { ForumOverviewComponent } from './includes/forum/forum-overview/forum-overview.component';
@@ -25,9 +24,12 @@ import { ReplyEntryComponent } from './includes/reply/reply-entry/reply-entry.co
 import { RegisterComponent } from './components/auth/register/register.component';
 import { RatingComponent } from './includes/user/rating/rating.component';
 import { PostListComponent } from './includes/post/post-list/post-list.component';
-import { PostFormComponent } from './components/default/post-form/post-form.component';
 import { PostEntryComponent } from './includes/post/post-entry/post-entry.component';
 import { UserProfileComponent } from './components/default/user-profile/user-profile.component';
+import { PostComponent } from './components/default/post/post.component';
+import { PostFormComponent } from './components/default/post-form/post-form.component';
+import { ReplyShortlistComponent } from './includes/reply/reply-shortlist/reply-shortlist.component';
+import { ReplyOverviewComponent } from './includes/reply/reply-overview/reply-overview.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,6 @@ import { UserProfileComponent } from './components/default/user-profile/user-pro
     PostShortlistComponent,
     ForumListComponent,
     SummaryPipe,
-    PostComponent,
     PostOverviewComponent,
     ForumComponent,
     ForumOverviewComponent,
@@ -50,9 +51,12 @@ import { UserProfileComponent } from './components/default/user-profile/user-pro
     RegisterComponent,
     RatingComponent,
     PostListComponent,
-    PostFormComponent,
     PostEntryComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    PostComponent,
+    PostFormComponent,
+    ReplyShortlistComponent,
+    ReplyOverviewComponent
   ],
   imports: [
     BrowserModule,

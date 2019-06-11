@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HomeService } from 'src/app/services/home.service';
 import { Forum } from 'src/app/models/forum';
 import { Post } from 'src/app/models/post';
+import { Reply } from 'src/app/models/reply';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import { Post } from 'src/app/models/post';
 export class HomeComponent implements OnInit {
   forums: Forum[] = [];
   latestPosts: Post[] = [];
+  latestReplies: Reply[] = [];
 
   constructor(private homeService: HomeService) { }
 
@@ -22,6 +24,7 @@ export class HomeComponent implements OnInit {
     this.homeService.getResources().subscribe(response => {
       this.forums = response.forums;
       this.latestPosts = response.latestPosts;
+      this.latestReplies = response.latestReplies;
     });
   }
 

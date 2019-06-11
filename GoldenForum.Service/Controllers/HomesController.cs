@@ -6,6 +6,7 @@ using GoldenForum.Service.Data;
 using GoldenForum.Service.Models.ViewModels.Forum;
 using GoldenForum.Service.Models.ViewModels.Home;
 using GoldenForum.Service.Models.ViewModels.Post;
+using GoldenForum.Service.Models.ViewModels.Reply;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -55,10 +56,22 @@ namespace GoldenForum.Service.Controllers
                 AuthorImageUrl = p.User.ImageUrl
             }).Take(5).OrderByDescending(p => p.Id).ToListAsync();
 
+            var latestReplies = await _context.Replies.Include(p => p.Post).Select(p => new ReplyHomeViewModel
+            {
+                Id = p.Id,
+                PostId = p.Post.Id,
+                Title = p.Post.Title,
+                RepliedAt = p.RepliedAt,
+                AuthorId = p.User.Id,
+                AuthorUserName = p.User.UserName,
+                AuthorImageUrl = p.User.ImageUrl
+            }).Take(5).OrderByDescending(p => p.Id).ToListAsync();
+
             var model = new HomeViewModel()
             {
                 Forums = forums,
-                LatestPosts = latestPosts
+                LatestPosts = latestPosts,
+                LatestReplies = latestReplies
             };
 
             return model;

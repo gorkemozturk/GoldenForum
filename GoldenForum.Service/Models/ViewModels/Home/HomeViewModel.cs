@@ -1,5 +1,6 @@
 ﻿using GoldenForum.Service.Models.ViewModels.Forum;
 using GoldenForum.Service.Models.ViewModels.Post;
+using GoldenForum.Service.Models.ViewModels.Reply;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace GoldenForum.Service.Models.ViewModels.Home
     {
         public IEnumerable<ForumListViewModel> Forums { get; set; }
         public IEnumerable<PostHomeViewModel> LatestPosts { get; set; }
+        public IEnumerable<ReplyHomeViewModel> LatestReplies { get; set; }
     }
 }

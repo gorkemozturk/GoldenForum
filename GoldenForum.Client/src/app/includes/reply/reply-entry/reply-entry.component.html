@@ -10,7 +10,7 @@
         <!-- Author's image ended -->
 
         <section class="text-center font-weight-bold py-3">
-          {{ reply.authorUserName }}
+          <a [routerLink]="['/user/' + reply.authorId]">{{ reply.authorUserName }}</a>
         </section>
 
         <!-- Author's details started -->

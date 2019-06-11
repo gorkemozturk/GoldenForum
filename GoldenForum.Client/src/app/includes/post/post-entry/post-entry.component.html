@@ -14,7 +14,7 @@
 
         <!-- Author's details started -->
         <section class="text-center font-weight-bold py-3">
-          {{ post.authorUserName }}
+          <a [routerLink]="['/user/' + post.authorId]">{{ post.authorUserName }}</a>
         </section>
 
         <section class="d-flex justify-content-between">

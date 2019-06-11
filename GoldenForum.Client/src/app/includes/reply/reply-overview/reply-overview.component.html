@@ -1,0 +1,16 @@
+<div class="media">
+  <img src="{{ reply.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+  
+  <div class="media-body">
+    <a class="d-block" [routerLink]="['/post/' + reply.postId]">{{ limit ? (reply.title | summary:limit) : reply.title }}</a>
+    
+    <div class="text-secondary d-flex justify-content-between">
+      <small>
+        <a [routerLink]="['/user/' + reply.authorId]" class="text-secondary">{{ reply.authorUserName }}</a>
+      </small>
+      <small>
+        {{ reply.repliedAt | date:'dd.MM.yyyy, hh:mm:ss' }}
+      </small>
+    </div>
+  </div>
+</div>

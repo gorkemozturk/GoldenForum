@@ -44,8 +44,8 @@ export class PostFormComponent implements OnInit {
     
     if (this.postId) {
       this.postService.getResource(this.postId).subscribe(response => {
-        this.postUpdatingForm(response);
-        this.title = 'Gönderiyi Düzenle: ' + response.title;
+        this.postUpdatingForm(response.post);
+        this.title = 'Gönderiyi Düzenle: ' + response.post.title;
       });
     }
     else {
@@ -84,13 +84,11 @@ export class PostFormComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.submitted = true;
     if (this.form.invalid) { return; }
-
-    const forumId = this.route.snapshot.paramMap.get('forumId');
     
     if (!this.postId)
-      this.postService.postResource(form.value).subscribe(response => this.router.navigate(['/post/' + response.id + '/detail']));
+      this.postService.postResource(form.value).subscribe(response => this.router.navigate(['/post/' + this.postId]));
     else
-      this.postService.putResource(this.postId, form.value).subscribe(response => this.router.navigate(['/post/' + this.postId + '/detail']));
+      this.postService.putResource(this.postId, form.value).subscribe(response => this.router.navigate(['/post/' + this.postId]));
   }
 
 }
