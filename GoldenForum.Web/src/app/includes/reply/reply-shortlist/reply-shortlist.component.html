@@ -1,0 +1,24 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item border-0 p-3" *ngFor="let reply of replies; let i = index" [class.bg-light]="(i+1) % 2 === 0">
+    <div class="media">
+      <!-- User Image (+) -->
+      <img src="{{ reply.authorImageUrl }}" style="width: 50px" class="rounded mr-3" alt="{{ reply.title }}">
+      <!-- User Image (-) -->
+      
+      <!-- reply Details (+) -->
+      <div class="media-body">
+        <a class="d-block" [routerLink]="['/post/' + reply.postId]">{{ reply.title | summary:60 }}</a>
+        
+        <div class="text-secondary d-flex justify-content-between">
+          <small>
+            <a [routerLink]="['/user/' + reply.authorId]" class="text-secondary">{{ reply.authorUserName }}</a>
+          </small>
+          <small>
+            {{ reply.repliedAt | date:'dd.MM.yyyy, hh:mm:ss' }}
+          </small>
+        </div>
+      </div>
+      <!-- reply Details (-) -->
+    </div>
+  </li>
+</ul>

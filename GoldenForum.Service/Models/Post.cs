@@ -12,6 +12,7 @@ namespace GoldenForum.Service.Models
         public string UserId { get; set; }
         public int ForumId { get; set; }
         public string Title { get; set; }
+        public string Slug { get; set; }
         public string Body { get; set; }
         public DateTime PostedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }

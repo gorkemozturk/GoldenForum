@@ -13,6 +13,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { ApplicationRoutes } from './app.route';
 import { SummaryPipe } from './pipes/summary.pipe';
+import { PostShortlistComponent } from './includes/post/post-shortlist/post-shortlist.component';
+import { ReplyShortlistComponent } from './includes/reply/reply-shortlist/reply-shortlist.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { SummaryPipe } from './pipes/summary.pipe';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    SummaryPipe
+    SummaryPipe,
+    PostShortlistComponent,
+    ReplyShortlistComponent
   ],
   imports: [
     BrowserModule,

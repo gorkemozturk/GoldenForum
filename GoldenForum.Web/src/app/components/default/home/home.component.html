@@ -1,94 +1,46 @@
 <div class="row">
   <!-- Latest Replies (+) -->
   <div class="col-md">
-    <div class="rounded border overflow-hidden bg-light">
+    <div class="rounded shadow-lg overflow-hidden bg-light">
       <div class="bg-light p-3">
-        Son Forum Cevapları
+        <i class="fas fa-comments"></i> Son Forum Cevapları
       </div>
-
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item p-3" *ngFor="let post of latestPosts">
-          <div class="media">
-            <!-- User Image (+) -->
-            <img src="{{ post.authorImageUrl }}" style="width: 50px" class="rounded mr-3" alt="{{ post.title }}">
-            <!-- User Image (-) -->
-            
-            <!-- Post Details (+) -->
-            <div class="media-body">
-              <a class="d-block" [routerLink]="['/post/' + post.id]">{{ post.title | summary:60 }}</a>
-              
-              <div class="text-secondary d-flex justify-content-between">
-                <small>
-                  <a [routerLink]="['/user/' + post.authorId]" class="text-secondary">{{ post.authorUserName }}</a>
-                </small>
-                <small>
-                  {{ post.postedAt | date:'dd.MM.yyyy, hh:mm:ss' }}
-                </small>
-              </div>
-            </div>
-            <!-- Post Details (-) -->
-          </div>
-        </li>
-      </ul>
+      <app-reply-shortlist [replies]="latestReplies"></app-reply-shortlist>
     </div>
   </div>
   <!-- Latest Replies (-) -->
   
   <!-- Latest Posts (+) -->
   <div class="col-md">
-    <div class="rounded border overflow-hidden bg-light">
+    <div class="rounded shadow-lg overflow-hidden bg-light">
       <div class="bg-light p-3">
-        Son Forum Gönderileri
+        <i class="fas fa-fire"></i> Son Forum Gönderileri
       </div>
-
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item p-3" *ngFor="let post of latestPosts">
-          <div class="media">
-            <!-- User Image (+) -->
-            <img src="{{ post.authorImageUrl }}" style="width: 50px" class="rounded mr-3" alt="{{ post.title }}">
-            <!-- User Image (-) -->
-            
-            <!-- Post Details (+) -->
-            <div class="media-body">
-              <a class="d-block" [routerLink]="['/post/' + post.id]">{{ post.title | summary:60 }}</a>
-              
-              <div class="text-secondary d-flex justify-content-between">
-                <small>
-                  <a [routerLink]="['/user/' + post.authorId]" class="text-secondary">{{ post.authorUserName }}</a>
-                </small>
-                <small>
-                  {{ post.postedAt | date:'dd.MM.yyyy, hh:mm:ss' }}
-                </small>
-              </div>
-            </div>
-            <!-- Post Details (-) -->
-          </div>
-        </li>
-      </ul>
+      <app-post-shortlist [posts]="latestPosts"></app-post-shortlist>
     </div>
   </div>
   <!-- Latest Posts (-) -->
 
 </div>
 
-<div class="my-5 w-100"></div>
+<div class="py-3 w-100"></div>
 
 <!-- Forums (+) -->
-<div class="rounded border overflow-hidden bg-light" *ngFor="let category of categories; let i = index" [class.mb-5]="(i+1) !== categories.length">
+<div class="rounded shadow-lg overflow-hidden bg-light" *ngFor="let category of categories; let i = index" [class.mb-5]="(i+1) !== categories.length">
   <!-- Category Name (+) -->
-  <div class="bg-light p-3" [class.border-bottom]="!category.forums.length">
+  <div class="bg-light p-3">
     <i class="far fa-folder-open"></i> {{ category.categoryName }}
   </div>
   <!-- Category Name (-) -->
 
-  <div *ngIf="!category.forums.length" class="alert alert-secondary m-3" role="alert">
-    <i class="fas fa-info-circle"></i> Bu foruma ait hernagi bir gönderi bulunmuyor. İlk gönderiyi paylaşan siz olabilirsiniz.
+  <div *ngIf="!category.forums.length" class="alert alert-secondary text-center m-3" role="alert">
+    <i class="fas fa-info fa-2x d-block"></i> Bu foruma ait harhangi bir gönderi bulunmuyor. İlk gönderiyi paylaşan siz olabilirsiniz.
   </div>
 
   <ul *ngIf="category.forums.length" class="list-group list-group-flush">
     
     <!-- Forum Attributes (-) -->
-    <li class="bg-light list-group-item p-3">
+    <li class="bg-light list-group-item border-white p-3">
       <div class="row">
         <div class="col-md-6"><small class="text-secondary">Gönderi Başlığı</small></div>
         <div class="col-md-4"><small class="text-secondary">Son Forum Gönderisi</small></div>
@@ -98,7 +50,7 @@
     <!-- Forum Attributes (-) -->
 
     <!-- Forum Entiries (+) -->
-    <li class="list-group-item p-3" *ngFor="let forum of category.forums">
+    <li class="list-group-item border-0 p-3" *ngFor="let forum of category.forums; let i = index" [class.bg-light]="(i+1) % 2 === 0">
       <div class="row d-flex align-items-center">
         <!-- Forum Details (+) -->
         <div class="col-md-6">

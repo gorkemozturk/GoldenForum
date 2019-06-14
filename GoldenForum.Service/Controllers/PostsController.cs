@@ -9,6 +9,7 @@ using GoldenForum.Service.Data;
 using GoldenForum.Service.Models;
 using GoldenForum.Service.Models.ViewModels.Post;
 using GoldenForum.Service.Models.ViewModels.Reply;
+using GoldenForum.Service.Helpers;
 
 namespace GoldenForum.Service.Controllers
 {
@@ -104,6 +105,9 @@ namespace GoldenForum.Service.Controllers
         [HttpPost]
         public async Task<ActionResult<Post>> PostPost(Post post)
         {
+            var slugHelper = new SlugHelper();
+
+            post.Slug = slugHelper.GenerateSlug(post.Title);
             post.PostedAt = DateTime.Now;
 
             _context.Posts.Add(post);
