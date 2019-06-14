@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using GoldenForum.Service.Data;
 using GoldenForum.Service.Models.ViewModels.Post;
+using GoldenForum.Service.Models.ViewModels.Reply;
 using GoldenForum.Service.Models.ViewModels.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace GoldenForum.Service.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDetailViewModel>> GetUser(string id)
         {
-            return await _context.ApplicationUsers.Include(u => u.Posts).Include(u => u.Replies).Select(u => new UserDetailViewModel
+            var user = await _context.ApplicationUsers.Include(u => u.Posts).Include(u => u.Replies).Select(u => new UserDetailViewModel
             {
                 Id = u.Id,
                 UserName = u.UserName,
@@ -33,7 +34,7 @@ namespace GoldenForum.Service.Controllers
                 PostsCount = u.Posts.Count() + u.Replies.Count(),
                 ImageUrl = u.ImageUrl,
                 RegisteredAt = u.RegisteredAt,
-                UserPosts = u.Posts.Select(p => new PostHomeViewModel
+                Posts = u.Posts.Select(p => new PostSummaryViewModel
                 {
                     Id = p.Id,
                     Title = p.Title,
@@ -41,8 +42,25 @@ namespace GoldenForum.Service.Controllers
                     AuthorId = p.User.Id,
                     AuthorUserName = p.User.UserName,
                     AuthorImageUrl = p.User.ImageUrl
+                }),
+                Replies = u.Replies.Select(p => new ReplySummaryViewModel
+                {
+                    Id = p.Id,
+                    PostId = p.Post.Id,
+                    Title = p.Post.Title,
+                    RepliedAt = p.RepliedAt,
+                    AuthorId = p.User.Id,
+                    AuthorUserName = p.User.UserName,
+                    AuthorImageUrl = p.User.ImageUrl
                 })
             }).FirstOrDefaultAsync(u => u.Id == id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
         }
     }
 }

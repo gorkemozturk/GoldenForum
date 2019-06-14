@@ -9,9 +9,8 @@ namespace GoldenForum.Service.Models.ViewModels.Forum
         public string Title { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
-
         public int PostsCount { get; set; }
-        public IEnumerable<PostHomeViewModel> LatestPosts { get; set; }
 
+        public PostSummaryViewModel LatestPost { get; set; }
     }
 }

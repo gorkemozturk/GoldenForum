@@ -25,22 +25,14 @@ namespace GoldenForum.Service.Controllers
 
         // GET: api/Posts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PostListViewModel>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
-            return await _context.Posts.Select(p => new PostListViewModel
-            {
-                Id = p.Id,
-                Title = p.Title,
-                AuthorId = p.User.Id,
-                AuthorUserName = p.User.UserName,
-                AuthorRating = p.User.Rating,
-                RepliesCount = p.Replies.Count()
-            }).ToListAsync();
+            return await _context.Posts.ToListAsync();
         }
 
         // GET: api/Posts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PostViewModel>> GetPost(int id)
+        public async Task<ActionResult<PostDetailViewModel>> GetPost(int id)
         {
             var post = await _context.Posts.Include(p => p.User).Include(r => r.Replies).ThenInclude(r => r.User).Select(p => new PostDetailViewModel
             {
@@ -52,7 +44,7 @@ namespace GoldenForum.Service.Controllers
                 AuthorImageUrl = p.User.ImageUrl,
                 AuthorRating = p.User.Rating,
                 AuthorRegisteredAt = p.User.RegisteredAt,
-                AuthorPostsCount = p.User.Posts.Count() + p.User.Replies.Count(),
+                AuthorPostsAndRepliesCount = p.User.Posts.Count() + p.User.Replies.Count(),
                 Body = p.Body,
                 PostedAt = p.PostedAt,
                 Replies = p.Replies.Select(r => new ReplyListViewModel
@@ -62,7 +54,7 @@ namespace GoldenForum.Service.Controllers
                     AuthorUserName = r.User.UserName,
                     AuthorImageUrl = r.User.ImageUrl,
                     AuthorRating = r.User.Rating,
-                    AuthorPostsCount = r.User.Posts.Count() + r.User.Replies.Count(),
+                    AuthorPostsAndRepliesCount = r.User.Posts.Count() + r.User.Replies.Count(),
                     AuthorRegisteredAt = r.User.RegisteredAt,
                     Body = r.Body,
                     RepliedAt = r.RepliedAt,
@@ -74,23 +66,7 @@ namespace GoldenForum.Service.Controllers
                 return NotFound();
             }
 
-            var latestPosts = await _context.Posts.Include(p => p.Forum).Select(p => new PostHomeViewModel
-            {
-                Id = p.Id,
-                Title = p.Title,
-                PostedAt = p.PostedAt,
-                AuthorId = p.User.Id,
-                AuthorUserName = p.User.UserName,
-                AuthorImageUrl = p.User.ImageUrl
-            }).Take(5).OrderByDescending(p => p.Id).ToListAsync();
-
-            var model = new PostViewModel()
-            {
-                Post = post,
-                LatestPosts = latestPosts
-            };
-
-            return model;
+            return post;
         }
 
         // PUT: api/Posts/5
@@ -102,6 +78,7 @@ namespace GoldenForum.Service.Controllers
                 return BadRequest();
             }
 
+            post.ModifiedAt = DateTime.Now;
             _context.Entry(post).State = EntityState.Modified;
 
             try

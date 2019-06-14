@@ -11,16 +11,15 @@ namespace GoldenForum.Service.Models.ViewModels.Post
         public int Id { get; set; }
         public int ForumId { get; set; }
         public string Title { get; set; }
+        public string Body { get; set; }
+        public DateTime PostedAt { get; set; }
 
         public string AuthorId { get; set; }
         public string AuthorUserName { get; set; }
         public string AuthorImageUrl { get; set; }
         public int AuthorRating { get; set; }
-        public int AuthorPostsCount { get; set; }
+        public int AuthorPostsAndRepliesCount { get; set; }
         public DateTime AuthorRegisteredAt { get; set; }
-
-        public string Body { get; set; }
-        public DateTime PostedAt { get; set; }
 
         public IEnumerable<ReplyListViewModel> Replies { get; set; }
     }

@@ -15,6 +15,7 @@ namespace GoldenForum.Service.Data
         public DbSet<Forum> Forums { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Reply> Replies { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 
 }

@@ -1,0 +1,157 @@
+<div class="row">
+  <!-- Latest Replies (+) -->
+  <div class="col-md">
+    <div class="rounded border overflow-hidden bg-light">
+      <div class="bg-light p-3">
+        Son Forum Cevapları
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item p-3" *ngFor="let post of latestPosts">
+          <div class="media">
+            <!-- User Image (+) -->
+            <img src="{{ post.authorImageUrl }}" style="width: 50px" class="rounded mr-3" alt="{{ post.title }}">
+            <!-- User Image (-) -->
+            
+            <!-- Post Details (+) -->
+            <div class="media-body">
+              <a class="d-block" [routerLink]="['/post/' + post.id]">{{ post.title | summary:60 }}</a>
+              
+              <div class="text-secondary d-flex justify-content-between">
+                <small>
+                  <a [routerLink]="['/user/' + post.authorId]" class="text-secondary">{{ post.authorUserName }}</a>
+                </small>
+                <small>
+                  {{ post.postedAt | date:'dd.MM.yyyy, hh:mm:ss' }}
+                </small>
+              </div>
+            </div>
+            <!-- Post Details (-) -->
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Latest Replies (-) -->
+  
+  <!-- Latest Posts (+) -->
+  <div class="col-md">
+    <div class="rounded border overflow-hidden bg-light">
+      <div class="bg-light p-3">
+        Son Forum Gönderileri
+      </div>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item p-3" *ngFor="let post of latestPosts">
+          <div class="media">
+            <!-- User Image (+) -->
+            <img src="{{ post.authorImageUrl }}" style="width: 50px" class="rounded mr-3" alt="{{ post.title }}">
+            <!-- User Image (-) -->
+            
+            <!-- Post Details (+) -->
+            <div class="media-body">
+              <a class="d-block" [routerLink]="['/post/' + post.id]">{{ post.title | summary:60 }}</a>
+              
+              <div class="text-secondary d-flex justify-content-between">
+                <small>
+                  <a [routerLink]="['/user/' + post.authorId]" class="text-secondary">{{ post.authorUserName }}</a>
+                </small>
+                <small>
+                  {{ post.postedAt | date:'dd.MM.yyyy, hh:mm:ss' }}
+                </small>
+              </div>
+            </div>
+            <!-- Post Details (-) -->
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- Latest Posts (-) -->
+
+</div>
+
+<div class="my-5 w-100"></div>
+
+<!-- Forums (+) -->
+<div class="rounded border overflow-hidden bg-light" *ngFor="let category of categories; let i = index" [class.mb-5]="(i+1) !== categories.length">
+  <!-- Category Name (+) -->
+  <div class="bg-light p-3" [class.border-bottom]="!category.forums.length">
+    <i class="far fa-folder-open"></i> {{ category.categoryName }}
+  </div>
+  <!-- Category Name (-) -->
+
+  <div *ngIf="!category.forums.length" class="alert alert-secondary m-3" role="alert">
+    <i class="fas fa-info-circle"></i> Bu foruma ait hernagi bir gönderi bulunmuyor. İlk gönderiyi paylaşan siz olabilirsiniz.
+  </div>
+
+  <ul *ngIf="category.forums.length" class="list-group list-group-flush">
+    
+    <!-- Forum Attributes (-) -->
+    <li class="bg-light list-group-item p-3">
+      <div class="row">
+        <div class="col-md-6"><small class="text-secondary">Gönderi Başlığı</small></div>
+        <div class="col-md-4"><small class="text-secondary">Son Forum Gönderisi</small></div>
+        <div class="col-md-2 text-right"><small class="text-secondary">İstatistikler</small></div>
+      </div>
+    </li>
+    <!-- Forum Attributes (-) -->
+
+    <!-- Forum Entiries (+) -->
+    <li class="list-group-item p-3" *ngFor="let forum of category.forums">
+      <div class="row d-flex align-items-center">
+        <!-- Forum Details (+) -->
+        <div class="col-md-6">
+          <div class="media">
+            <!-- Forum Image (+) -->
+            <img src="{{ forum.imageUrl }}" style="width: 50px" class="rounded mr-3" alt="{{ forum.title }}">
+            <!-- Forum Image (-) -->
+            
+            <!-- Forum Description (+) -->
+            <div class="media-body">
+              <a class="d-block" [routerLink]="['/forum/' + forum.id]">{{ forum.title }}</a>
+              <small class="text-secondary">
+                {{ forum.description }}
+              </small>
+            </div>
+            <!-- Forum Description (-) -->
+          </div>
+        </div>
+        <!-- Forum Details (-) -->
+
+        <!-- Latest Post (+) -->
+        <div class="col-md-4">
+          <div class="media" *ngIf="forum.latestPost">
+            <img src="{{ forum.latestPost.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+            
+            <div class="media-body">
+              <a class="d-block" [routerLink]="['/post/' + forum.latestPost.id]">{{ forum.latestPost.title | summary:35 }}</a>
+              
+              <div class="text-secondary d-flex justify-content-between">
+                <small>
+                  <a [routerLink]="['/user/' + forum.latestPost.authorId]" class="text-secondary">{{ forum.latestPost.authorUserName }}</a>
+                </small>
+                <small>
+                  {{ forum.latestPost.postedAt | date:'dd.MM.yyyy, hh:mm:ss' }}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Latest Post (-) -->
+
+        <!-- Statistics (+) -->
+        <div class="col-md-2 text-right">
+          <small class="text-secondary">
+            Gönderiler: {{ forum.postsCount }}
+          </small>
+        </div>
+        <!-- Statistics (-) -->
+
+      </div>
+    </li>
+    <!-- Forum Entiries (-) -->
+
+  </ul>
+</div>
+<!-- Forums (-) -->

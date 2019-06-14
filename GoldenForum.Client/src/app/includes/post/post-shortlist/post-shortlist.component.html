@@ -1,10 +1,5 @@
-<div class="rounded shadow-lg overflow-hidden">
-  <div class="bg-light p-3">
-    {{ title }}
-  </div>
-  <ul class="list-group list-group-flush">
-    <li *ngFor="let post of posts; let i = index" class="list-group-item border-0 p-3" [class.bg-light]="(i+1) % 2 === 0">
-      <app-post-overview [post]="post" [limit]=60></app-post-overview>
-    </li>
-  </ul>
-</div>
+<ul class="list-group list-group-flush">
+  <li *ngFor="let post of posts; let i = index" class="list-group-item border-0 p-3" [class.bg-light]="(i+1) % 2 === 0">
+    <app-post-overview [post]="post" [limit]=60></app-post-overview>
+  </li>
+</ul>

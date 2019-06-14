@@ -19,13 +19,26 @@ namespace GoldenForum.Service.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("GoldenForum.Service.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CategoryName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("GoldenForum.Service.Models.Forum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedAt");
+                    b.Property<int>("CategoryId");
 
                     b.Property<string>("Description");
 
@@ -34,6 +47,8 @@ namespace GoldenForum.Service.Migrations
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Forums");
                 });
@@ -47,6 +62,8 @@ namespace GoldenForum.Service.Migrations
                     b.Property<string>("Body");
 
                     b.Property<int>("ForumId");
+
+                    b.Property<DateTime?>("ModifiedAt");
 
                     b.Property<DateTime>("PostedAt");
 
@@ -263,6 +280,14 @@ namespace GoldenForum.Service.Migrations
                     b.Property<DateTime>("RegisteredAt");
 
                     b.HasDiscriminator().HasValue("User");
+                });
+
+            modelBuilder.Entity("GoldenForum.Service.Models.Forum", b =>
+                {
+                    b.HasOne("GoldenForum.Service.Models.Category", "Category")
+                        .WithMany("Forums")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("GoldenForum.Service.Models.Post", b =>

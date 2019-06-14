@@ -43,8 +43,7 @@ namespace GoldenForum.Service
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(configuration =>
+            }).AddJwtBearer(configuration =>
             {
                 configuration.RequireHttpsMetadata = false;
                 configuration.SaveToken = true;

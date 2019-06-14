@@ -21,11 +21,11 @@ namespace GoldenForum.Service.Controllers
     [Produces("application/json")]
     public class AccountsController : ControllerBase
     {
-        private readonly ApplicationDbContext context;
-        private readonly SignInManager<IdentityUser> signInManager;
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly Configuration configuration;
+        private readonly ApplicationDbContext _context;
+        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly Configuration _configuration;
 
         public AccountsController(
             UserManager<IdentityUser> userManager,
@@ -34,11 +34,11 @@ namespace GoldenForum.Service.Controllers
             ApplicationDbContext context,
             Configuration configuration)
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
-            this.roleManager = roleManager;
-            this.context = context;
-            this.configuration = configuration;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager;
+            _context = context;
+            _configuration = configuration;
         }
 
         [HttpPost("login")]
@@ -49,7 +49,7 @@ namespace GoldenForum.Service.Controllers
                 return BadRequest(login);
             }
 
-            var result = await signInManager.PasswordSignInAsync(login.UserName, login.Password, false, false);
+            var result = await _signInManager.PasswordSignInAsync(login.UserName, login.Password, false, false);
 
             if (!result.Succeeded)
             {
@@ -58,7 +58,7 @@ namespace GoldenForum.Service.Controllers
 
             try
             {
-                var user = await context.ApplicationUsers.FirstOrDefaultAsync(u => u.UserName == login.UserName);
+                var user = await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.UserName == login.UserName);
                 return await TokenHandler(user);
             }
             catch (Exception e)
@@ -75,8 +75,8 @@ namespace GoldenForum.Service.Controllers
                 return BadRequest(registration);
             }
 
-            var user = new User { UserName = registration.UserName, Email = registration.Email, ImageUrl = "/assets/images/user/avatars/avatar.png" };
-            var result = await userManager.CreateAsync(user, registration.Password);
+            var user = new User { UserName = registration.UserName, Email = registration.Email, ImageUrl = "/assets/images/user/avatars/avatar.png", RegisteredAt = DateTime.Now };
+            var result = await _userManager.CreateAsync(user, registration.Password);
 
             if (!result.Succeeded)
             {
@@ -85,11 +85,8 @@ namespace GoldenForum.Service.Controllers
 
             try
             {
-                if (await roleManager.RoleExistsAsync("User") == false)
-                {
-                    await roleManager.CreateAsync(new IdentityRole("User"));
-                }
-                await userManager.AddToRoleAsync(user, "User");
+                if (await _roleManager.RoleExistsAsync("User") == false) { await _roleManager.CreateAsync(new IdentityRole("User")); }
+                await _userManager.AddToRoleAsync(user, "User");
             }
             catch (Exception e)
             {
@@ -101,7 +98,7 @@ namespace GoldenForum.Service.Controllers
 
         private async Task<string> TokenHandler(User user)
         {
-            var roles = await userManager.GetRolesAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
 
             var claims = new List<Claim>
             {
@@ -116,9 +113,9 @@ namespace GoldenForum.Service.Controllers
                 claims.Add(new Claim(JwtRegisteredClaimNames.Typ, role));
             }
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.Key));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.Key));
             var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(signingCredentials: signingCredentials, issuer: configuration.Copyright, claims: claims, expires: DateTime.UtcNow.AddDays(1));
+            var token = new JwtSecurityToken(signingCredentials: signingCredentials, issuer: _configuration.Copyright, claims: claims, expires: DateTime.UtcNow.AddDays(1));
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

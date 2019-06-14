@@ -1,4 +1,5 @@
 ﻿using GoldenForum.Service.Models.ViewModels.Post;
+using GoldenForum.Service.Models.ViewModels.Reply;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace GoldenForum.Service.Models.ViewModels.User
         public string ImageUrl { get; set; }
         public DateTime RegisteredAt { get; set; }
 
-        public IEnumerable<PostHomeViewModel> UserPosts { get; set; }
+        public IEnumerable<PostSummaryViewModel> Posts { get; set; }
+        public IEnumerable<ReplySummaryViewModel> Replies { get; set; }
     }
 }

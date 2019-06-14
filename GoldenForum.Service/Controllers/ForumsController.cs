@@ -25,15 +25,9 @@ namespace GoldenForum.Service.Controllers
 
         // GET: api/Forums
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ForumListViewModel>>> GetForums()
+        public async Task<ActionResult<IEnumerable<Forum>>> GetForums()
         {
-            return await _context.Forums.Select(f => new ForumListViewModel
-            {
-                Id = f.Id,
-                Title = f.Title,
-                Description = f.Description,
-                ImageUrl = f.ImageUrl
-            }).ToListAsync();
+            return await _context.Forums.ToListAsync();
         }
 
         // GET: api/Forums/5
@@ -50,10 +44,11 @@ namespace GoldenForum.Service.Controllers
                 {
                     Id = p.Id,
                     Title = p.Title,
+                    PostedAt = p.PostedAt,
                     AuthorId = p.User.Id,
                     AuthorUserName = p.User.UserName,
-                    AuthorRating = p.User.Rating,
                     AuthorImageUrl = p.User.ImageUrl,
+                    AuthorRating = p.User.Rating,
                     RepliesCount = p.Replies.Count()
                 })
             }).FirstOrDefaultAsync(f => f.Id == id);

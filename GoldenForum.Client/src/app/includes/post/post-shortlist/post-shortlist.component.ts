@@ -8,7 +8,6 @@ import { Post } from 'src/app/models/post';
 })
 export class PostShortlistComponent implements OnInit {
   @Input() posts: Post[] = [];
-  @Input() title: string = null;
   
   constructor() { }
 

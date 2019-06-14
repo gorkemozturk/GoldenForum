@@ -9,10 +9,8 @@ namespace GoldenForum.Service.Models
     public class Reply
     {
         public int Id { get; set; }
-
         public string UserId { get; set; }
         public int PostId { get; set; }
-
         public string Body { get; set; }
         public DateTime RepliedAt { get; set; }
 
