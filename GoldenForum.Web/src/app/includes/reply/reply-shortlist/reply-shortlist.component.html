@@ -5,7 +5,7 @@
       <img src="{{ reply.authorImageUrl }}" style="width: 50px" class="rounded mr-3" alt="{{ reply.title }}">
       <!-- User Image (-) -->
       
-      <!-- reply Details (+) -->
+      <!-- Reply Details (+) -->
       <div class="media-body">
         <a class="d-block" [routerLink]="['/post/' + reply.postId]">{{ reply.title | summary:60 }}</a>
         
@@ -18,7 +18,7 @@
           </small>
         </div>
       </div>
-      <!-- reply Details (-) -->
+      <!-- Reply Details (-) -->
     </div>
   </li>
 </ul>

@@ -37,6 +37,7 @@ namespace GoldenForum.Service.Controllers
                 Posts = u.Posts.Select(p => new PostSummaryViewModel
                 {
                     Id = p.Id,
+                    Slug = p.Slug,
                     Title = p.Title,
                     PostedAt = p.PostedAt,
                     AuthorId = p.User.Id,

@@ -3,7 +3,7 @@
   <div class="col-md">
     <div class="rounded shadow-lg overflow-hidden bg-light">
       <div class="bg-light p-3">
-        <i class="fas fa-comments"></i> Son Forum Cevapları
+        <i class="fas fa-comments"></i> Son Gönderi Cevapları
       </div>
       <app-reply-shortlist [replies]="latestReplies"></app-reply-shortlist>
     </div>
@@ -33,7 +33,7 @@
   </div>
   <!-- Category Name (-) -->
 
-  <div *ngIf="!category.forums.length" class="alert alert-secondary text-center m-3" role="alert">
+  <div *ngIf="!category.forums.length" class="text-secondary text-center m-3" role="alert">
     <i class="fas fa-info fa-2x d-block"></i> Bu foruma ait harhangi bir gönderi bulunmuyor. İlk gönderiyi paylaşan siz olabilirsiniz.
   </div>
 
@@ -73,22 +73,7 @@
 
         <!-- Latest Post (+) -->
         <div class="col-md-4">
-          <div class="media" *ngIf="forum.latestPost">
-            <img src="{{ forum.latestPost.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
-            
-            <div class="media-body">
-              <a class="d-block" [routerLink]="['/post/' + forum.latestPost.id]">{{ forum.latestPost.title | summary:35 }}</a>
-              
-              <div class="text-secondary d-flex justify-content-between">
-                <small>
-                  <a [routerLink]="['/user/' + forum.latestPost.authorId]" class="text-secondary">{{ forum.latestPost.authorUserName }}</a>
-                </small>
-                <small>
-                  {{ forum.latestPost.postedAt | date:'dd.MM.yyyy, hh:mm:ss' }}
-                </small>
-              </div>
-            </div>
-          </div>
+          <app-post-overview [post]="forum.latestPost" [limit]=35 *ngIf="forum.latestPost"></app-post-overview>
         </div>
         <!-- Latest Post (-) -->
 

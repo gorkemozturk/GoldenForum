@@ -40,6 +40,7 @@ namespace GoldenForum.Service.Controllers
                     LatestPost = f.Posts.Select(p => new PostSummaryViewModel
                     {
                         Id = p.Id,
+                        Slug = p.Slug,
                         Title = p.Title,
                         PostedAt = p.PostedAt,
                         AuthorId = p.User.Id,
@@ -52,6 +53,7 @@ namespace GoldenForum.Service.Controllers
             var latestPosts = await _context.Posts.Include(p => p.Forum).Select(p => new PostSummaryViewModel
             {
                 Id = p.Id,
+                Slug = p.Slug,
                 Title = p.Title,
                 PostedAt = p.PostedAt,
                 AuthorId = p.User.Id,

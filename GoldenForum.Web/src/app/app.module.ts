@@ -15,6 +15,8 @@ import { ApplicationRoutes } from './app.route';
 import { SummaryPipe } from './pipes/summary.pipe';
 import { PostShortlistComponent } from './includes/post/post-shortlist/post-shortlist.component';
 import { ReplyShortlistComponent } from './includes/reply/reply-shortlist/reply-shortlist.component';
+import { PostOverviewComponent } from './includes/post/post-overview/post-overview.component';
+import { PostDetailComponent } from './components/default/post/post-detail/post-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ReplyShortlistComponent } from './includes/reply/reply-shortlist/reply-
     RegisterComponent,
     SummaryPipe,
     PostShortlistComponent,
-    ReplyShortlistComponent
+    ReplyShortlistComponent,
+    PostOverviewComponent,
+    PostDetailComponent
   ],
   imports: [
     BrowserModule,
