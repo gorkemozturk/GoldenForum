@@ -17,6 +17,7 @@ import { PostShortlistComponent } from './includes/post/post-shortlist/post-shor
 import { ReplyShortlistComponent } from './includes/reply/reply-shortlist/reply-shortlist.component';
 import { PostOverviewComponent } from './includes/post/post-overview/post-overview.component';
 import { PostDetailComponent } from './components/default/post/post-detail/post-detail.component';
+import { PostReplyEntryComponent } from './includes/global/post-reply-entry/post-reply-entry.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PostDetailComponent } from './components/default/post/post-detail/post-
     PostShortlistComponent,
     ReplyShortlistComponent,
     PostOverviewComponent,
-    PostDetailComponent
+    PostDetailComponent,
+    PostReplyEntryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,82 @@
+<div class="row no-gutters d-flex align-items-stretch">
+  <!-- User Overview (+) -->
+  <div class="col-md-2 bg-light">
+    <div class="h-100 p-3">
+      <!-- Author Image (+) -->
+      <section class="text-center">
+        <img src="{{ entry.authorImageUrl }}" alt="{{ entry.authorUserName }}" class="img-fluid rounded w-50">
+      </section>
+      <!-- Author Image (-) -->
+
+      <!-- Author Username (+) -->
+      <section class="text-center my-3">
+        <a href="" class="d-block text-decoration-none font-weight-bold text-warning px-3">{{ entry.authorUserName }}</a>
+        <small class="d-inline-block bg-warning px-3">Yönetici</small>
+      </section>
+      <!-- Author Username (-) -->
+
+      <!-- Author Posts and Replies (+) -->
+      <section class="d-flex justify-content-between">
+        <small class="text-secondary">Toplam Gönderi</small>
+        <small>{{ entry.authorPostsAndRepliesCount }}</small>
+      </section>
+      <!-- Author Posts and Replies (-) -->
+
+      <!-- Author Registration Date (+) -->
+      <section class="d-flex justify-content-between">
+        <small class="text-secondary">Üyelik Tarihi</small>
+        <small>{{ entry.authorRegisteredAt | date:'dd.mm.yyyy' }}</small>
+      </section>
+      <!-- Author Registration Date (-) -->
+
+      <!-- Author Rating (+) -->
+      <section class="d-flex justify-content-between">
+        <small class="text-secondary">Beğeniler</small>
+        <small>{{ entry.authorRating }}</small>
+      </section>
+      <!-- Author Rating (-) -->
+    </div>
+  </div>
+  <!-- User Overview (-) -->
+
+  <!-- Entry Details (+) -->
+  <div class="col-md-10">
+    <div class="d-flex align-items-start flex-column h-100 p-3">
+      <div class="text-secondary d-flex justify-content-between w-100 mb-1">
+        <small>{{ entry.postedAt | date:'dd.mm.yyyy, hh:mm:ss' }}</small>
+        <small>{{ index ? '#' + index : '#1' }}</small>
+      </div>
+
+      <div>
+        {{ entry.body }}
+      </div>
+
+      <!-- Entry Actions (+) -->
+      <div class="mt-auto d-flex justify-content-between w-100">
+        <small>
+          <i class="fas fa-flag text-danger mr-1"></i> 
+          <a href="" class="text-danger text-decoration-none">Gönderiyi Şikayet Et</a>
+        </small>
+
+        <div>
+          <small>
+            <i class="far fa-thumbs-up text-success mr-1"></i>
+            <a href="" class="text-success text-decoration-none">Beğen</a>
+          </small>
+
+          <small class="ml-3">
+            <i class="fas fa-quote-right text-secondary mr-1"></i>
+            <a href="" class="text-secondary text-decoration-none">Alıntı Yap</a>
+          </small>
+
+          <small class="ml-3">
+            <i class="fas fa-reply text-secondary mr-1"></i>
+            <a href="" class="text-secondary text-decoration-none">Cevapla</a>
+          </small>
+        </div>
+      </div>
+      <!-- Entry Actions (-) -->
+    </div>
+  </div>
+  <!-- Entry Details (-) -->
+</div>
