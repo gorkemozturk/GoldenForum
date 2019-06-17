@@ -3,6 +3,7 @@ import { Reply } from 'src/app/models/reply';
 import { ReplyService } from 'src/app/services/reply.service';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-post-reply-entry',
@@ -17,7 +18,7 @@ export class PostReplyEntryComponent implements OnInit {
   collapsed: boolean = false;
   selectedEntry: any = new Object();
 
-  constructor(private replyService: ReplyService, private postService: PostService, private route: ActivatedRoute) { }
+  constructor(private replyService: ReplyService, private postService: PostService, private route: ActivatedRoute, private authService: AuthService) { }
 
   ngOnInit() {
   }

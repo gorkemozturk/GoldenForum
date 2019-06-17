@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class PostDetailComponent implements OnInit {
   post: Post = new Post();
 
-  constructor(private postService: PostService, private route: ActivatedRoute, private replyService: ReplyService) { }
+  constructor(private postService: PostService, private route: ActivatedRoute, private replyService: ReplyService, private authService: AuthService) { }
 
   ngOnInit() {
     this.getPostWithReplies();

@@ -1,4 +1,4 @@
-<div class="bg-white shadow-lg rounded overflow-hidden" [class.mb-5]="post.replies.length">
+<div class="bg-white shadow-lg rounded overflow-hidden mb-5">
   <app-post-reply-entry [entry]="post" [type]="'post'"></app-post-reply-entry>
 </div>
 
@@ -7,4 +7,4 @@
   <app-post-reply-entry [entry]="reply" [index]="i+2" [type]="'reply'"></app-post-reply-entry>
 </div>
 
-<app-reply-form (submission)="onSubmit($event)"></app-reply-form>
+<app-reply-form (submission)="onSubmit($event)" *ngIf="authService.isAuthanticated"></app-reply-form>

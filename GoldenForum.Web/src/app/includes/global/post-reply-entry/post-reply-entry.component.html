@@ -75,18 +75,18 @@
 
       <!-- Entry Actions (+) -->
       <div class="mt-auto d-flex justify-content-between w-100">
-        <div>
+        <div *ngIf="authService.isAuthanticated">
           <small class="text-danger" style="cursor: pointer">
             <i class="fas fa-flag"></i> Gönderiyi Şikayet Et
           </small>
         </div>
 
-        <div class="text-secondary">
+        <div class="text-secondary" *ngIf="authService.isAuthanticated">
           <small [hidden]="type !== 'post'" class="text-success" style="cursor: pointer">
             <i class="far fa-thumbs-up"></i> Beğen
           </small>
 
-          <small class="ml-3" (click)="onUpdateToggle(entry)" style="cursor: pointer">
+          <small class="ml-3" (click)="onUpdateToggle(entry)" style="cursor: pointer" *ngIf="authService.currentUser.sub === entry.authorId">
             <i class="far fa-edit"></i> Düzenle
           </small>
 

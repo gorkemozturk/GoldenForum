@@ -75,7 +75,7 @@ namespace GoldenForum.Service.Controllers
                 return BadRequest(registration);
             }
 
-            var user = new User { UserName = registration.UserName, Email = registration.Email, ImageUrl = "/assets/images/user/avatars/avatar.png", RegisteredAt = DateTime.Now };
+            var user = new User { UserName = registration.UserName, Email = registration.Email, ImageUrl = "/assets/images/user/avatar/avatar.png", RegisteredAt = DateTime.Now };
             var result = await _userManager.CreateAsync(user, registration.Password);
 
             if (!result.Succeeded)

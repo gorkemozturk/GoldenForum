@@ -1,3 +1,31 @@
-<p>
-  post-form works!
-</p>
+<div class="shadow-lg rounded overflow-hidden">
+  <div class="bg-light p-3">
+    <app-forum-overview [forum]="forum"></app-forum-overview>
+  </div>
+  <div class="bg-light border-top border-white p-3">
+    <small class="text-secondary">{{ title }}</small>
+  </div>
+
+  <div class="bg-white p-3">
+    <form [formGroup]="form" autocomplete="off">
+      <div class="form-group">
+        <small class="text-secondary">Gönderi Başlığı</small>
+        <input type="text" class="form-control" rows="3" formControlName="title" [ngClass]="{ 'is-invalid': submitted && field.title.errors }"/>
+        <div *ngIf="submitted && field.title.errors" class="invalid-feedback">
+          <div *ngIf="field.title.errors.required">Gönderi başlıkğı alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <small class="text-secondary">Gönderi Yazısı</small>
+        <textarea formControlName="body" class="form-control" rows="10" [ngClass]="{ 'is-invalid': submitted && field.body.errors }"></textarea>
+        <div *ngIf="submitted && field.body.errors" class="invalid-feedback">
+          <div *ngIf="field.body.errors.required">Gönderi yazısı alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+      
+      <div class="text-right">
+        <button class="btn btn-primary" (click)="onSubmit(form)">Gönderiyi Kaydet</button>
+      </div>
+    </form>
+  </div>
+</div>
