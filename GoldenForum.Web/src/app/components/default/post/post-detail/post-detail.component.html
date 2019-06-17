@@ -1,7 +1,10 @@
 <div class="bg-white shadow-lg rounded overflow-hidden" [class.mb-5]="post.replies.length">
-  <app-post-reply-entry [entry]="post"></app-post-reply-entry>
+  <app-post-reply-entry [entry]="post" [type]="'post'"></app-post-reply-entry>
 </div>
 
-<div class="bg-white shadow-lg rounded overflow-hidden" *ngFor="let reply of post.replies; let i = index" [class.mb-1]="(i+1) !== post.replies">
-  <app-post-reply-entry [entry]="reply" [index]="i+2"></app-post-reply-entry>
+<div class="bg-white shadow-lg rounded overflow-hidden" *ngFor="let reply of post.replies; let i = index" 
+[ngClass]="{'mb-1': (i+1) !== post.replies.length, 'mb-5': (i+1) === post.replies.length}">
+  <app-post-reply-entry [entry]="reply" [index]="i+2" [type]="'reply'"></app-post-reply-entry>
 </div>
+
+<app-reply-form (submission)="onSubmit($event)"></app-reply-form>

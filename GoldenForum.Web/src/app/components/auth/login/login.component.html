@@ -1,3 +1,40 @@
-<p>
-  login works!
-</p>
+<div style="height: 100vh" class="d-flex align-items-center">
+  <div class="bg-white rounded shadow-lg mx-auto overflow-hidden w-50">
+    <div class="row no-gutters">
+      <div class="col-md" style="background-image: url('assets/images/auth/login-bg.png'); background-position: center"></div>
+
+      <div class="col-md">
+        <div class="p-5">
+          <strong class="text-uppercase">Kullanıcı Girişi</strong>
+
+          <form [formGroup]="form" class="py-5" autocomplete="off">
+            <div class="form-group">
+              <input type="text" class="form-control text-center" placeholder="Kullanıcı Adı"
+              formControlName="userName" [ngClass]="{ 'is-invalid': submitted && field.userName.errors }">
+              <div *ngIf="submitted && field.userName.errors" class="invalid-feedback">
+                <div *ngIf="field.userName.errors.required">Kullanıcı adı alanının doldurulması zorunludur.</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control text-center" placeholder="Şifre"
+              formControlName="password" [ngClass]="{ 'is-invalid': submitted && field.password.errors }">
+              <div *ngIf="submitted && field.password.errors" class="invalid-feedback">
+                <div *ngIf="field.password.errors.required">Şifre alanının doldurulması zorunludur.</div>
+              </div>
+            </div>
+      
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary" (click)="onSubmit(form)">Giriş Yap</button>
+            </div>
+          </form>
+          <div class="text-center">
+            <small>
+              <a href="" class="d-block text-secondary">Henüz bir hesabın yok mu? Kayıt Ol.</a>
+              <a href="" class="d-block text-secondary">Kullanıcı şifremi unuttum.</a>
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

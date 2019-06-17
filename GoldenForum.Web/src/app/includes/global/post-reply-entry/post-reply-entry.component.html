@@ -11,7 +11,7 @@
       <!-- Author Username (+) -->
       <section class="text-center my-3">
         <a href="" class="d-block text-decoration-none font-weight-bold text-warning px-3">{{ entry.authorUserName }}</a>
-        <small class="d-inline-block bg-warning px-3">Yönetici</small>
+        <span class="badge badge-warning text-uppercase rounded-0 p-1">Yönetici</span>
       </section>
       <!-- Author Username (-) -->
 
@@ -43,7 +43,8 @@
   <div class="col-md-10">
     <div class="d-flex align-items-start flex-column h-100 p-3">
       <div class="text-secondary d-flex justify-content-between w-100 mb-1">
-        <small>{{ entry.postedAt | date:'dd.mm.yyyy, hh:mm:ss' }}</small>
+        <small>{{ type === 'post' ? 'Gönderi Tarihi: ' + (entry.postedAt | date:'dd.MM.yyyy, HH:mm:ss') : 'Cevap Tarihi: ' + (entry.repliedAt | date:'dd.MM.yyyy, HH:mm:ss') }}</small>
+        
         <small>{{ index ? '#' + index : '#1' }}</small>
       </div>
 

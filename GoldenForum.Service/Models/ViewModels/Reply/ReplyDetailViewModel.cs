@@ -5,16 +5,17 @@ using System.Threading.Tasks;
 
 namespace GoldenForum.Service.Models.ViewModels.Reply
 {
-    public class ReplySummaryViewModel
+    public class ReplyDetailViewModel
     {
         public int Id { get; set; }
-        public int PostId { get; set; }
-        public string PostSlug { get; set; }
-        public string Title { get; set; }
+        public string Body { get; set; }
         public DateTime RepliedAt { get; set; }
 
         public string AuthorId { get; set; }
         public string AuthorUserName { get; set; }
+        public int AuthorRating { get; set; }
+        public int AuthorPostsAndRepliesCount { get; set; }
         public string AuthorImageUrl { get; set; }
+        public DateTime AuthorRegisteredAt { get; set; }
     }
 }

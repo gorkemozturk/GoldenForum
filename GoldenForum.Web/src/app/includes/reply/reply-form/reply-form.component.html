@@ -1,0 +1,19 @@
+    
+<div class="shadow-lg bg-white rounded" [hidden]="!authService.isAuthanticated">
+  <div class="rounded bg-light p-3">
+    {{ title }}
+  </div>
+  <div class="rounded bg-white p-3">
+    <form [formGroup]="form" autocomplete="off">
+      <div class="form-group">
+        <textarea class="form-control" formControlName="body"></textarea>
+        <div *ngIf="submitted && field.body.errors" class="invalid-feedback">
+          <div *ngIf="field.body.errors.required">Bu alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+      <div class="text-right">
+        <button class="btn btn-primary" (click)="onSubmit(form)" [disabled]="form.invalid">Hızlı Cevapla</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class PostReplyEntryComponent implements OnInit {
   @Input() entry: any = new Object();
   @Input() index?: number = null;
+  @Input() type: string = null;
 
   constructor() { }
 

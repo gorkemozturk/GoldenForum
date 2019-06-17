@@ -58,7 +58,7 @@ namespace GoldenForum.Service.Controllers
                     AuthorPostsAndRepliesCount = r.User.Posts.Count() + r.User.Replies.Count(),
                     AuthorRegisteredAt = r.User.RegisteredAt,
                     Body = r.Body,
-                    RepliedAt = r.RepliedAt,
+                    RepliedAt = r.RepliedAt
                 })
             }).FirstOrDefaultAsync(p => p.Id == id);
 
