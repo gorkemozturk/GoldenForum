@@ -13,6 +13,7 @@ namespace GoldenForum.Service.Models
         public int PostId { get; set; }
         public string Body { get; set; }
         public DateTime RepliedAt { get; set; }
+        public DateTime? ModifiedAt { get; set; }
 
         [ForeignKey("UserId")]
         public virtual User User { get; set; }

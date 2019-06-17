@@ -40,6 +40,7 @@ namespace GoldenForum.Service.Controllers
                 Id = p.Id,
                 ForumId = p.ForumId,
                 Title = p.Title,
+                Slug = p.Slug,
                 AuthorId = p.User.Id,
                 AuthorUserName = p.User.UserName,
                 AuthorImageUrl = p.User.ImageUrl,
@@ -48,6 +49,7 @@ namespace GoldenForum.Service.Controllers
                 AuthorPostsAndRepliesCount = p.User.Posts.Count() + p.User.Replies.Count(),
                 Body = p.Body,
                 PostedAt = p.PostedAt,
+                ModifiedAt = p.ModifiedAt,
                 Replies = p.Replies.Select(r => new ReplyListViewModel
                 {
                     Id = r.Id,
@@ -58,7 +60,8 @@ namespace GoldenForum.Service.Controllers
                     AuthorPostsAndRepliesCount = r.User.Posts.Count() + r.User.Replies.Count(),
                     AuthorRegisteredAt = r.User.RegisteredAt,
                     Body = r.Body,
-                    RepliedAt = r.RepliedAt
+                    RepliedAt = r.RepliedAt,
+                    ModifiedAt = r.ModifiedAt
                 })
             }).FirstOrDefaultAsync(p => p.Id == id);
 

@@ -52,6 +52,7 @@ namespace GoldenForum.Service.Controllers
                 return BadRequest();
             }
 
+            reply.ModifiedAt = DateTime.Now;
             _context.Entry(reply).State = EntityState.Modified;
 
             try

@@ -6,7 +6,7 @@
   <div class="rounded bg-white p-3">
     <form [formGroup]="form" autocomplete="off">
       <div class="form-group">
-        <textarea class="form-control" formControlName="body"></textarea>
+        <textarea class="form-control" formControlName="body" rows="5"></textarea>
         <div *ngIf="submitted && field.body.errors" class="invalid-feedback">
           <div *ngIf="field.body.errors.required">Bu alanının doldurulması zorunludur.</div>
         </div>
