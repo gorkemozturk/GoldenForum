@@ -22,7 +22,7 @@ export class PostReplyEntryComponent implements OnInit {
   ngOnInit() {
   }
 
-  onToggle(entry?: any) {
+  onUpdateToggle(entry?: any) {
     this.collapsed = !this.collapsed;
     if (entry) { this.selectedEntry = entry; }
   }
@@ -57,6 +57,15 @@ export class PostReplyEntryComponent implements OnInit {
         this.collapsed = !this.collapsed;
         this.selectedEntry.modifiedAt = new Date()
       });
+    }
+  }
+
+  onDeleteToggle(entry: any) {
+    if (this.type === 'reply') {
+      this.replyService.deleteResource(entry.id).subscribe(response => entry.isDeleted = !entry.isDeleted);
+    }
+    else if (this.type === 'post') {
+      this.postService.deleteResource(entry.id).subscribe(response => entry.isDeleted = !entry.isDeleted);
     }
   }
 

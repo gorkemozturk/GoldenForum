@@ -16,6 +16,7 @@ namespace GoldenForum.Service.Models
         public string Body { get; set; }
         public DateTime PostedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
+        public bool IsDeleted { get; set; }
 
         [ForeignKey("UserId")]
         public virtual User User { get; set; }

@@ -2,7 +2,7 @@
   <!-- Latest Replies (+) -->
   <div class="col-md">
     <div class="rounded shadow-lg overflow-hidden bg-light">
-      <div class="bg-light p-3">
+      <div class="bg-light font-weight-bold text-uppercase p-3">
         <i class="fas fa-comments"></i> Son Gönderi Cevapları
       </div>
       <app-reply-shortlist [replies]="latestReplies"></app-reply-shortlist>
@@ -13,7 +13,7 @@
   <!-- Latest Posts (+) -->
   <div class="col-md">
     <div class="rounded shadow-lg overflow-hidden bg-light">
-      <div class="bg-light p-3">
+      <div class="bg-light font-weight-bold text-uppercase p-3">
         <i class="fas fa-fire"></i> Son Forum Gönderileri
       </div>
       <app-post-shortlist [posts]="latestPosts"></app-post-shortlist>
@@ -28,7 +28,7 @@
 <!-- Forums (+) -->
 <div class="rounded shadow-lg overflow-hidden bg-light" *ngFor="let category of categories; let i = index" [class.mb-5]="(i+1) !== categories.length">
   <!-- Category Name (+) -->
-  <div class="bg-light p-3">
+  <div class="bg-light font-weight-bold text-uppercase p-3">
     <i class="far fa-folder-open"></i> {{ category.categoryName }}
   </div>
   <!-- Category Name (-) -->
@@ -54,20 +54,7 @@
       <div class="row d-flex align-items-center">
         <!-- Forum Details (+) -->
         <div class="col-md-6">
-          <div class="media">
-            <!-- Forum Image (+) -->
-            <img src="{{ forum.imageUrl }}" style="width: 50px" class="rounded mr-3" alt="{{ forum.title }}">
-            <!-- Forum Image (-) -->
-            
-            <!-- Forum Description (+) -->
-            <div class="media-body">
-              <a class="d-block" [routerLink]="['/forum/' + forum.id]">{{ forum.title }}</a>
-              <small class="text-secondary">
-                {{ forum.description }}
-              </small>
-            </div>
-            <!-- Forum Description (-) -->
-          </div>
+          <app-forum-overview [forum]="forum"></app-forum-overview>
         </div>
         <!-- Forum Details (-) -->
 

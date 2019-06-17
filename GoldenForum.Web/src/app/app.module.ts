@@ -20,6 +20,8 @@ import { PostDetailComponent } from './components/default/post/post-detail/post-
 import { PostReplyEntryComponent } from './includes/global/post-reply-entry/post-reply-entry.component';
 import { PostFormComponent } from './components/default/post/post-form/post-form.component';
 import { ReplyFormComponent } from './includes/reply/reply-form/reply-form.component';
+import { ForumDetailComponent } from './components/default/forum/forum-detail/forum-detail.component';
+import { ForumOverviewComponent } from './includes/forum/forum-overview/forum-overview.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ReplyFormComponent } from './includes/reply/reply-form/reply-form.compo
     PostDetailComponent,
     PostReplyEntryComponent,
     PostFormComponent,
-    ReplyFormComponent
+    ReplyFormComponent,
+    ForumDetailComponent,
+    ForumOverviewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,62 @@
+<div class="shadow-lg bg-light rounded overflow-hidden">
+  <!-- Forum Header (+) -->
+  <div class="bg-light p-3">
+    <div class="row d-flex align-items-center">
+      <div class="col">
+        <app-forum-overview [forum]="forum"></app-forum-overview>
+      </div>
+
+      <div class="col text-right">
+        <a [routerLink]="['/forum/' + forum.slug + '/' + forum.id + '/post/new']" class="btn btn-primary">Yeni Gönderi Oluştur</a>
+      </div>
+    </div>
+  </div>
+  <!-- Forum Header (-) -->
+
+  <ul class="list-group list-group-flush">
+    <!-- Post Attributes (-) -->
+    <li class="bg-light list-group-item border-white p-3">
+      <div class="row">
+        <div class="col-md-6"><small class="text-secondary">Gönderi Başlığı</small></div>
+        <div class="col-md-4"><small class="text-secondary">Konu Sahibi</small></div>
+        <div class="col-md-2 text-right"><small class="text-secondary">İstatistikler</small></div>
+      </div>
+    </li>
+    <!-- Post Attributes (-) -->
+
+    <!-- Post Entiries (+) -->
+    <li class="list-group-item border-0 p-3" *ngFor="let post of forum.posts; let i = index" [class.bg-light]="(i+1) % 2 === 0">
+      <div class="row d-flex align-items-center">
+        <!-- Post Details (+) -->
+        <div class="col-md-6">
+          <i class="text-warning fas fa-folder mr-3"></i>
+          <a [routerLink]="['/post/' + post.slug + '/' + post.id]">{{ post.title }}</a>
+        </div>
+        <!-- Post Details (-) -->
+
+        <!-- Post Owner (+) -->
+        <div class="col-md-4">
+          <div class="media">
+            <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+            
+            <div class="media-body">
+              <a class="d-block" [routerLink]="['/user/' + post.authorId]">{{ post.authorUserName }}</a>
+              <small>
+                Karizma: {{ post.authorRating }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <!-- Post Owner (-) -->
+
+        <!-- Statistics (+) -->
+        <div class="col-md-2 text-right">
+          <small class="d-block">Gönderi Cevapları: {{ post.repliesCount }}</small>
+        </div>
+        <!-- Statistics (-) -->
+
+      </div>
+    </li>
+    <!-- Post Entiries (-) -->
+  </ul>
+</div>

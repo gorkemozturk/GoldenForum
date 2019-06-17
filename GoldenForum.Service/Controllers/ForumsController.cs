@@ -9,6 +9,7 @@ using GoldenForum.Service.Data;
 using GoldenForum.Service.Models;
 using GoldenForum.Service.Models.ViewModels.Forum;
 using GoldenForum.Service.Models.ViewModels.Post;
+using GoldenForum.Service.Helpers;
 
 namespace GoldenForum.Service.Controllers
 {
@@ -38,12 +39,14 @@ namespace GoldenForum.Service.Controllers
             {
                 Id = f.Id,
                 Title = f.Title,
+                Slug = f.Slug,
                 Description = f.Description,
                 ImageUrl = f.ImageUrl,
                 Posts = f.Posts.Select(p => new PostListViewModel
                 {
                     Id = p.Id,
                     Title = p.Title,
+                    Slug = p.Slug,
                     PostedAt = p.PostedAt,
                     AuthorId = p.User.Id,
                     AuthorUserName = p.User.UserName,
@@ -95,6 +98,10 @@ namespace GoldenForum.Service.Controllers
         [HttpPost]
         public async Task<ActionResult<Forum>> PostForum(Forum forum)
         {
+            var slugHelper = new SlugHelper();
+
+            forum.Slug = slugHelper.GenerateSlug(forum.Title);
+
             _context.Forums.Add(forum);
             await _context.SaveChangesAsync();
 

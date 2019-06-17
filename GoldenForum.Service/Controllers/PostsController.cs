@@ -50,6 +50,7 @@ namespace GoldenForum.Service.Controllers
                 Body = p.Body,
                 PostedAt = p.PostedAt,
                 ModifiedAt = p.ModifiedAt,
+                IsDeleted = p.IsDeleted,
                 Replies = p.Replies.Select(r => new ReplyListViewModel
                 {
                     Id = r.Id,
@@ -61,7 +62,8 @@ namespace GoldenForum.Service.Controllers
                     AuthorRegisteredAt = r.User.RegisteredAt,
                     Body = r.Body,
                     RepliedAt = r.RepliedAt,
-                    ModifiedAt = r.ModifiedAt
+                    ModifiedAt = r.ModifiedAt,
+                    IsDeleted = r.IsDeleted
                 })
             }).FirstOrDefaultAsync(p => p.Id == id);
 
@@ -129,7 +131,7 @@ namespace GoldenForum.Service.Controllers
                 return NotFound();
             }
 
-            _context.Posts.Remove(post);
+            post.IsDeleted = !post.IsDeleted;
             await _context.SaveChangesAsync();
 
             return post;

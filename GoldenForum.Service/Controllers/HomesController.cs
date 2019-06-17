@@ -34,6 +34,7 @@ namespace GoldenForum.Service.Controllers
                 {
                     Id = f.Id,
                     Title = f.Title,
+                    Slug = f.Slug,
                     Description = f.Description,
                     ImageUrl = f.ImageUrl,
                     PostsCount = f.Posts.Count(),

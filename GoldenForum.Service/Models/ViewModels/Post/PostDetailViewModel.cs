@@ -15,6 +15,7 @@ namespace GoldenForum.Service.Models.ViewModels.Post
         public string Body { get; set; }
         public DateTime PostedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
+        public bool IsDeleted { get; set; }
 
         public string AuthorId { get; set; }
         public string AuthorUserName { get; set; }

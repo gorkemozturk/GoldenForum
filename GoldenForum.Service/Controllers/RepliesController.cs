@@ -109,7 +109,7 @@ namespace GoldenForum.Service.Controllers
                 return NotFound();
             }
 
-            _context.Replies.Remove(reply);
+            reply.IsDeleted = !reply.IsDeleted;
             await _context.SaveChangesAsync();
 
             return reply;

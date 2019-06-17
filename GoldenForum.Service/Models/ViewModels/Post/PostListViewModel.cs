@@ -6,6 +6,7 @@ namespace GoldenForum.Service.Models.ViewModels.Post
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public string Slug { get; set; }
         public DateTime PostedAt { get; set; }
 
         public string AuthorId { get; set; }
