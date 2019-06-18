@@ -28,12 +28,48 @@
     </li>
     <!-- Post Attributes (-) -->
 
+    <!-- Attached Post Entiries (+) -->
+    <li class="list-group-item border-0 p-3" *ngFor="let post of attachedPosts" style="background: rgb(255, 250, 220)">
+      <div class="row d-flex align-items-center">
+        <!-- Post Details (+) -->
+        <div class="col-md-6">
+          <i class="text-warning fas fa-folder mr-3"></i>
+          <span class="font-weight-bold text-warning">Sabit Konu: </span> 
+          <a [routerLink]="['/post/' + post.slug + '/' + post.id]" class="font-weight-bold text-warning">{{ post.title }}</a>
+        </div>
+        <!-- Post Details (-) -->
+
+        <!-- Post Owner (+) -->
+        <div class="col-md-4">
+          <div class="media">
+            <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+            
+            <div class="media-body">
+              <a class="d-block" [routerLink]="['/user/' + post.authorId]">{{ post.authorUserName }}</a>
+              <small>
+                Karizma: {{ post.authorRating }}
+              </small>
+            </div>
+          </div>
+        </div>
+        <!-- Post Owner (-) -->
+
+        <!-- Statistics (+) -->
+        <div class="col-md-2 text-right">
+          <small class="d-block text-secondary">Gönderi Cevapları: {{ post.repliesCount }}</small>
+        </div>
+        <!-- Statistics (-) -->
+
+      </div>
+    </li>
+    <!-- Attached Post Entiries (-) -->
+
     <!-- Post Entiries (+) -->
     <li class="list-group-item border-0 p-3" *ngFor="let post of forum.posts; let i = index" [class.bg-light]="(i+1) % 2 === 0">
       <div class="row d-flex align-items-center">
         <!-- Post Details (+) -->
         <div class="col-md-6">
-          <i class="text-warning fas fa-folder mr-3"></i>
+          <i class="text-secondary far fa-folder mr-3"></i>
           <a [routerLink]="['/post/' + post.slug + '/' + post.id]">{{ post.title }}</a>
         </div>
         <!-- Post Details (-) -->

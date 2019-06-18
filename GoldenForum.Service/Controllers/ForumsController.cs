@@ -48,6 +48,7 @@ namespace GoldenForum.Service.Controllers
                     Title = p.Title,
                     Slug = p.Slug,
                     PostedAt = p.PostedAt,
+                    IsAttached = p.IsAttached,
                     RepliesCount = p.Replies.Count(),
                     AuthorId = p.User.Id,
                     AuthorUserName = p.User.UserName,
