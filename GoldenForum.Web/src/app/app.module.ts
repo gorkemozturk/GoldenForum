@@ -23,6 +23,7 @@ import { ReplyFormComponent } from './includes/reply/reply-form/reply-form.compo
 import { ForumDetailComponent } from './components/default/forum/forum-detail/forum-detail.component';
 import { ForumOverviewComponent } from './includes/forum/forum-overview/forum-overview.component';
 import { PostOwnerComponent } from './includes/post/post-owner/post-owner.component';
+import { PostListComponent } from './includes/post/post-list/post-list.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { PostOwnerComponent } from './includes/post/post-owner/post-owner.compon
     ReplyFormComponent,
     ForumDetailComponent,
     ForumOverviewComponent,
-    PostOwnerComponent
+    PostOwnerComponent,
+    PostListComponent
   ],
   imports: [
     BrowserModule,

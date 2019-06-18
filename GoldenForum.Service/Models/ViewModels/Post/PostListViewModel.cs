@@ -9,7 +9,7 @@ namespace GoldenForum.Service.Models.ViewModels.Post
         public string Title { get; set; }
         public string Slug { get; set; }
         public int RepliesCount { get; set; }
-        public bool IsAttached { get; set; }
+        public string Type { get; set; }
         public DateTime PostedAt { get; set; }
 
         public UserSummaryViewModel Author { get; set; }

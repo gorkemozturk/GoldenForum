@@ -13,11 +13,11 @@
   </div>
   <!-- Forum Header (-) -->
 
-  <div *ngIf="!forum.posts.length || !attachedPosts.length" class="text-secondary text-center m-3" role="alert">
+  <div *ngIf="!forum.posts.length && !forum.attachedPosts.length && !forum.closedPosts.length" class="text-secondary text-center m-3" role="alert">
     <i class="fas fa-info-circle fa-2x d-block"></i> Bu foruma ait harhangi bir gönderi bulunmuyor. İlk gönderiyi paylaşan siz olabilirsiniz.
   </div>
   
-  <ul *ngIf="forum.posts.length" class="list-group list-group-flush">
+  <ul *ngIf="forum.posts.length || forum.attachedPosts.length || forum.closedPosts.length" class="list-group list-group-flush">
     <!-- Post Attributes (-) -->
     <li class="bg-light list-group-item border-white p-3">
       <div class="row">
@@ -29,56 +29,11 @@
     <!-- Post Attributes (-) -->
 
     <!-- Attached Post Entiries (+) -->
-    <li class="list-group-item border-0 p-3" *ngFor="let post of attachedPosts" style="background: rgb(255, 250, 220)">
-      <div class="row d-flex align-items-center">
-        <!-- Post Details (+) -->
-        <div class="col-md-6">
-          <i class="text-warning fas fa-folder mr-3"></i>
-          <span class="font-weight-bold text-warning">Sabit Konu: </span> 
-          <a [routerLink]="['/post/' + post.slug + '/' + post.id]" class="font-weight-bold text-warning">{{ post.title }}</a>
-        </div>
-        <!-- Post Details (-) -->
-
-        <!-- Post Owner (+) -->
-        <div class="col-md-4">
-          <app-post-owner [author]="post.author"></app-post-owner>
-        </div>
-        <!-- Post Owner (-) -->
-
-        <!-- Statistics (+) -->
-        <div class="col-md-2 text-right">
-          <small class="d-block text-secondary">Gönderi Cevapları: {{ post.repliesCount }}</small>
-        </div>
-        <!-- Statistics (-) -->
-
-      </div>
-    </li>
+    <app-post-list [posts]="forum.attachedPosts"></app-post-list>
     <!-- Attached Post Entiries (-) -->
 
     <!-- Post Entiries (+) -->
-    <li class="list-group-item border-0 p-3" *ngFor="let post of forum.posts; let i = index" [class.bg-light]="(i+1) % 2 === 0">
-      <div class="row d-flex align-items-center">
-        <!-- Post Details (+) -->
-        <div class="col-md-6">
-          <i class="text-secondary far fa-folder mr-3"></i>
-          <a [routerLink]="['/post/' + post.slug + '/' + post.id]">{{ post.title }}</a>
-        </div>
-        <!-- Post Details (-) -->
-
-        <!-- Post Owner (+) -->
-        <div class="col-md-4">
-          <app-post-owner [author]="post.author"></app-post-owner>
-        </div>
-        <!-- Post Owner (-) -->
-
-        <!-- Statistics (+) -->
-        <div class="col-md-2 text-right">
-          <small class="d-block text-secondary">Gönderi Cevapları: {{ post.repliesCount }}</small>
-        </div>
-        <!-- Statistics (-) -->
-
-      </div>
-    </li>
+    <app-post-list [posts]="forum.posts"></app-post-list>
     <!-- Post Entiries (-) -->
   </ul>
 </div>

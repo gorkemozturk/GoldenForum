@@ -14,10 +14,10 @@ namespace GoldenForum.Service.Models
         public string Title { get; set; }
         public string Slug { get; set; }
         public string Body { get; set; }
+        public bool IsDeleted { get; set; }
+        public PostType PostType { get; set; }
         public DateTime PostedAt { get; set; }
         public DateTime? ModifiedAt { get; set; }
-        public bool IsDeleted { get; set; }
-        public bool IsAttached { get; set; }
 
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
@@ -25,5 +25,12 @@ namespace GoldenForum.Service.Models
         [ForeignKey("ForumId")]
         public virtual Forum Forum { get; set; }
         public virtual ICollection<Reply> Replies { get; set; }
+    }
+
+    public enum PostType
+    {
+        Opened = 1,
+        Attached = 2,
+        Closed = 3
     }
 }

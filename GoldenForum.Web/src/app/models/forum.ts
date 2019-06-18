@@ -8,4 +8,6 @@ export class Forum {
     imageUrl: string;
     
     posts: Post[] = [];
+    attachedPosts: Post[] = [];
+    closedPosts: Post[] = [];
 }

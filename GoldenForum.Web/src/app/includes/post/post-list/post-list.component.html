@@ -1,0 +1,29 @@
+<li class="list-group-item border-0 p-3" *ngFor="let post of posts; let i = index" 
+[style.background-color]="post.type === 'Attached' ? 'rgb(255, 250, 220)' : (i+1) % 2 === 0 ? '#f8f9fa' : ''">
+  <div class="row d-flex align-items-center">
+    <!-- Post Details (+) -->
+    <div class="col-md-6">
+      <i class="fas fa-folder text-warning mr-1" *ngIf="post.type === 'Attached'"></i>
+      <i class="far fa-folder text-secondary mr-1" *ngIf="post.type === 'Opened'"></i>
+      <i class="fas fa-lock text-secondary mr-1" *ngIf="post.type === 'Closed'"></i>
+
+      <span [ngClass]="{'font-weight-bold text-warning': post.type === 'Attached', 'text-secondary': post.type === 'Opened' || 'Closed'}">
+        {{ post.type === 'Attached' ? 'Sabit Gönderi:' : post.type === 'Closed' ? 'Kapalı Gönderi:' : 'Gönderi:' }} 
+      </span> 
+      <a [routerLink]="['/post/' + post.slug + '/' + post.id]" [ngClass]="{'font-weight-bold text-warning': post.type === 'Attached'}">{{ post.title }}</a>
+    </div>
+    <!-- Post Details (-) -->
+
+    <!-- Post Owner (+) -->
+    <div class="col-md-4">
+      <app-post-owner [author]="post.author"></app-post-owner>
+    </div>
+    <!-- Post Owner (-) -->
+
+    <!-- Statistics (+) -->
+    <div class="col-md-2 text-right">
+      <small class="d-block text-secondary">Gönderi Cevapları: {{ post.repliesCount }}</small>
+    </div>
+    <!-- Statistics (-) -->
+  </div>
+</li>

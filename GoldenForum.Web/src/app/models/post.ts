@@ -7,6 +7,8 @@ export class Post {
     body: string;
     repliesCount: number;
     postedAt: Date;
+    modifiedAt?: Date;
+    isDeleted: boolean;
 
     author: User = new User();
     replies: Reply[] = [];

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ForumService } from 'src/app/services/forum.service';
 import { Forum } from 'src/app/models/forum';
 import { ActivatedRoute } from '@angular/router';
-import { Post } from 'src/app/models/post';
 
 @Component({
   selector: 'app-forum-detail',
@@ -11,7 +10,6 @@ import { Post } from 'src/app/models/post';
 })
 export class ForumDetailComponent implements OnInit {
   forum: Forum = new Forum();
-  attachedPosts: Post[] = [];
 
   constructor(private forumService: ForumService, private route: ActivatedRoute) { }
 
@@ -28,8 +26,8 @@ export class ForumDetailComponent implements OnInit {
       this.forum.imageUrl = response.imageUrl;
       this.forum.description = response.description;
 
-      this.forum.posts = response.posts.filter(p => p.isAttached === false);
-      this.attachedPosts = response.posts.filter(p => p.isAttached === true);
+      this.forum.posts = response.posts.filter(p => p.type === 'Opened' || p.type === 'Closed');
+      this.forum.attachedPosts = response.posts.filter(p => p.type === 'Attached');
     });
   }
 }

@@ -32,9 +32,15 @@ namespace GoldenForum.Service.Controllers
 
         // GET: api/Replies/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Reply>> GetReply(int id)
+        public async Task<ActionResult<ReplyDetailViewModel>> GetReply(int id)
         {
-            var reply = await _context.Replies.FindAsync(id);
+            var reply = await _context.Replies.Select(r => new ReplyDetailViewModel
+            {
+                Id = r.Id,
+                Body = r.Body,
+                RepliedAt = r.RepliedAt,
+                Author = GetAuthor(r.User, r.User.Posts.Count() + r.User.Replies.Count())
+            }).FirstOrDefaultAsync(p => p.Id == id);
 
             if (reply == null)
             {
