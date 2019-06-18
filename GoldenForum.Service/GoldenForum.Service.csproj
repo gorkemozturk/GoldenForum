@@ -6,6 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190618105531_CreateAppRoles.cs" />
+    <Compile Remove="Migrations\20190618105531_CreateAppRoles.Designer.cs" />
+    <Compile Remove="Migrations\20190618105804_CreateAppRoles.cs" />
+    <Compile Remove="Migrations\20190618105804_CreateAppRoles.Designer.cs" />
+    <Compile Remove="Migrations\20190618134731_CreateAppRoles.cs" />
+    <Compile Remove="Migrations\20190618134731_CreateAppRoles.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />

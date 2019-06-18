@@ -24,9 +24,9 @@ namespace GoldenForum.Service.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserDetailViewModel>> GetUser(string id)
+        public async Task<ActionResult<UserProfileViewModel>> GetUser(string id)
         {
-            var user = await _context.ApplicationUsers.Include(u => u.Posts).Include(u => u.Replies).Select(u => new UserDetailViewModel
+            var user = await _context.ApplicationUsers.Include(u => u.Posts).Include(u => u.Replies).Select(u => new UserProfileViewModel
             {
                 Id = u.Id,
                 UserName = u.UserName,

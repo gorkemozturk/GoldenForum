@@ -1,4 +1,5 @@
 ﻿using GoldenForum.Service.Models.ViewModels.Reply;
+using GoldenForum.Service.Models.ViewModels.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,7 @@ namespace GoldenForum.Service.Models.ViewModels.Post
         public DateTime? ModifiedAt { get; set; }
         public bool IsDeleted { get; set; }
 
-        public string AuthorId { get; set; }
-        public string AuthorUserName { get; set; }
-        public string AuthorImageUrl { get; set; }
-        public int AuthorRating { get; set; }
-        public int AuthorPostsAndRepliesCount { get; set; }
-        public DateTime AuthorRegisteredAt { get; set; }
-
+        public UserDetailViewModel Author { get; set; }
         public IEnumerable<ReplyListViewModel> Replies { get; set; }
     }
 }

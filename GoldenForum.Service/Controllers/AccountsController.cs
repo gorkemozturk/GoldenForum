@@ -85,8 +85,11 @@ namespace GoldenForum.Service.Controllers
 
             try
             {
-                if (await _roleManager.RoleExistsAsync("User") == false) { await _roleManager.CreateAsync(new IdentityRole("User")); }
-                await _userManager.AddToRoleAsync(user, "User");
+                if (!await _roleManager.RoleExistsAsync("Kullanıcı")) { await _roleManager.CreateAsync(new IdentityRole("Kullanıcı")); }
+                if (!await _roleManager.RoleExistsAsync("Moderatör")) { await _roleManager.CreateAsync(new IdentityRole("Moderatör")); }
+                if (!await _roleManager.RoleExistsAsync("Yönetici")) { await _roleManager.CreateAsync(new IdentityRole("Yönetici")); }
+
+                await _userManager.AddToRoleAsync(user, "Kullanıcı");
             }
             catch (Exception e)
             {
@@ -104,8 +107,6 @@ namespace GoldenForum.Service.Controllers
             {
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id),
                 new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
-                new Claim("image_url", user.ImageUrl),
-                new Claim("rating", user.Rating.ToString()),
             };
 
             foreach (var role in roles)

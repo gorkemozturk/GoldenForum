@@ -32,7 +32,7 @@ export class PostReplyEntryComponent implements OnInit {
     if (this.type === 'reply') {
       const newEntry = { 
         id: this.selectedEntry.id, 
-        userId: this.selectedEntry.authorId, 
+        userId: this.selectedEntry.author.id, 
         postId: this.route.snapshot.paramMap.get('id'),
         body: this.selectedEntry.body, 
         repliedAt: this.selectedEntry.repliedAt
@@ -46,7 +46,7 @@ export class PostReplyEntryComponent implements OnInit {
     else if (this.type === 'post') {
       const newEntry = { 
         id: this.selectedEntry.id, 
-        userId: this.selectedEntry.authorId, 
+        userId: this.selectedEntry.author.id, 
         forumId: this.selectedEntry.forumId,
         title: this.selectedEntry.title,
         slug: this.selectedEntry.slug,

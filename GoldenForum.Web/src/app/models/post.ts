@@ -1,17 +1,13 @@
 import { Reply } from './reply';
+import { User } from './user';
 
 export class Post {
     id: number;
     title: string;
     body: string;
-
-    authorId: string;
-    authorUserName: string;
-    authorRating: number;
     repliesCount: number;
     postedAt: Date;
-    authorRegisteredAt: Date;
-    authorPostsAndRepliesCount: number;
 
+    author: User = new User();
     replies: Reply[] = [];
 }

@@ -33,12 +33,14 @@ export class PostDetailComponent implements OnInit {
         repliedAt: response.repliedAt, 
         body: response.body, 
         
-        authorUserName: response.authorUserName, 
-        authorImageUrl: response.authorImageUrl, 
-        authorRating: response.authorRating, 
-        authorId: response.authorId,
-        authorRegisteredAt: response.authorRegisteredAt,
-        authorPostsAndRepliesCount: response.authorPostsAndRepliesCount
+        author: {
+          id: response.author.id,
+          userName: response.author.userName, 
+          imageUrl: response.author.imageUrl, 
+          rating: response.author.rating, 
+          registeredAt: response.author.registeredAt,
+          postsAndRepliesCount: response.author.postsAndRepliesCount
+        }
       }
 
       this.post.replies.push(reply);

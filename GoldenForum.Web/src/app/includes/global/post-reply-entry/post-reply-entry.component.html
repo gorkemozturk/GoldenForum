@@ -1,110 +1,111 @@
 <div class="row no-gutters d-flex align-items-stretch">
-  <!-- User Overview (+) -->
-  <div class="col-md-2 bg-light">
-    <div class="h-100 p-3">
-      <!-- Author Image (+) -->
-      <section class="text-center">
-        <img src="{{ entry.authorImageUrl }}" alt="{{ entry.authorUserName }}" class="img-fluid rounded w-50">
-      </section>
-      <!-- Author Image (-) -->
-
-      <!-- Author Username (+) -->
-      <section class="text-center my-3">
-        <a href="" class="d-block text-decoration-none font-weight-bold text-warning px-3">{{ entry.authorUserName }}</a>
-        <span class="badge badge-warning text-uppercase rounded-0 p-1">Yönetici</span>
-      </section>
-      <!-- Author Username (-) -->
-
-      <!-- Author Posts and Replies (+) -->
-      <section class="d-flex justify-content-between">
-        <small class="text-secondary">Toplam Gönderi</small>
-        <small>{{ entry.authorPostsAndRepliesCount }}</small>
-      </section>
-      <!-- Author Posts and Replies (-) -->
-
-      <!-- Author Registration Date (+) -->
-      <section class="d-flex justify-content-between">
-        <small class="text-secondary">Üyelik Tarihi</small>
-        <small>{{ entry.authorRegisteredAt | date:'dd.mm.yyyy' }}</small>
-      </section>
-      <!-- Author Registration Date (-) -->
-
-      <!-- Author Rating (+) -->
-      <section class="d-flex justify-content-between">
-        <small class="text-secondary">Beğeniler</small>
-        <small>{{ entry.authorRating }}</small>
-      </section>
-      <!-- Author Rating (-) -->
+    <!-- User Overview (+) -->
+    <div class="col-md-2 bg-light">
+      <div class="h-100 p-3">
+        <!-- Author Image (+) -->
+        <section class="text-center">
+          <img src="{{ entry.author?.imageUrl }}" alt="{{ entry.author?.userName }}" class="img-fluid rounded w-50">
+        </section>
+        <!-- Author Image (-) -->
+  
+        <!-- Author Username (+) -->
+        <section class="text-center my-3">
+          <a href="" class="d-block text-decoration-none font-weight-bold text-warning px-3">{{ entry.author?.userName }}</a>
+          <span class="badge badge-warning text-uppercase rounded-0 p-1">Yönetici</span>
+        </section>
+        <!-- Author Username (-) -->
+  
+        <!-- Author Posts and Replies (+) -->
+        <section class="d-flex justify-content-between">
+          <small class="text-secondary">Toplam Gönderi</small>
+          <small>{{ entry.author?.postsAndRepliesCount }}</small>
+        </section>
+        <!-- Author Posts and Replies (-) -->
+  
+        <!-- Author Registration Date (+) -->
+        <section class="d-flex justify-content-between">
+          <small class="text-secondary">Üyelik Tarihi</small>
+          <small>{{ entry.author?.registeredAt | date:'dd.mm.yyyy' }}</small>
+        </section>
+        <!-- Author Registration Date (-) -->
+  
+        <!-- Author Rating (+) -->
+        <section class="d-flex justify-content-between">
+          <small class="text-secondary">Beğeniler</small>
+          <small>{{ entry.author?.rating }}</small>
+        </section>
+        <!-- Author Rating (-) -->
+      </div>
     </div>
-  </div>
-  <!-- User Overview (-) -->
-
-  <!-- Entry Details (+) -->
-  <div class="col-md-10">
-    <div class="d-flex align-items-start flex-column h-100 p-3">
-      <div class="text-secondary d-flex justify-content-between w-100">
-        <small>
-          {{ type === 'post' ? 'Gönderi Tarihi: ' + (entry.postedAt | date:'dd.MM.yyyy, HH:mm:ss') : 'Cevap Tarihi: ' + (entry.repliedAt | date:'dd.MM.yyyy, HH:mm:ss') }}
-        </small>
-        
-        <small>{{ index ? '#' + index : '#1' }}</small>
+    <!-- User Overview (-) -->
+  
+    <!-- Entry Details (+) -->
+    <div class="col-md-10">
+      <div class="d-flex align-items-start flex-column h-100 p-3">
+        <div class="text-secondary d-flex justify-content-between w-100">
+          <small>
+            {{ type === 'post' ? 'Gönderi Tarihi: ' + (entry.postedAt | date:'dd.MM.yyyy, HH:mm:ss') : 'Cevap Tarihi: ' + (entry.repliedAt | date:'dd.MM.yyyy, HH:mm:ss') }}
+          </small>
+          
+          <small>{{ index ? '#' + index : '#1' }}</small>
+        </div>
+  
+        <div class="w-100 py-3">
+          <div>
+            <div [hidden]="collapsed">
+              <span [hidden]="entry.isDeleted">{{ entry.body }}</span>
+              <i [hidden]="!entry.isDeleted" class="text-secondary">Bu mesaj yönetici tarafından silinmiştir.</i>
+            </div>
+  
+            <div [hidden]="!entry.modifiedAt" class="text-secondary text-right"> 
+              <small><i>Son Düzenlenme Tarihi: {{ entry.modifiedAt | date:'dd.MM.yyyy, HH:mm:ss' }}</i></small>
+            </div>
+          </div>
+  
+          <div [hidden]="!collapsed">
+            <div class="form-group">
+              <textarea [(ngModel)]="entry.body" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="text-right">
+              <button class="btn btn-secondary btn-sm" (click)="onUpdateToggle()">Vazgeç</button>
+              <button class="btn btn-primary btn-sm ml-1" (click)="onUpdate()">Hızlı Kaydet</button>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Entry Actions (+) -->
+        <div class="mt-auto d-flex justify-content-between w-100">
+          <div *ngIf="authService.isAuthanticated">
+            <small class="text-danger" style="cursor: pointer">
+              <i class="fas fa-flag"></i> Gönderiyi Şikayet Et
+            </small>
+          </div>
+  
+          <div class="text-secondary" *ngIf="authService.isAuthanticated">
+            <small *ngIf="type === 'post'" class="text-success" style="cursor: pointer">
+              <i class="far fa-thumbs-up"></i> Beğen
+            </small>
+  
+            <small class="ml-3" (click)="onUpdateToggle(entry)" style="cursor: pointer" 
+            *ngIf="authService.currentUser.sub === entry.author.id || authService.currentUser.typ === 'Yönetici'">
+              <i class="far fa-edit"></i> Düzenle
+            </small>
+  
+            <small class="ml-3" (click)="onDeleteToggle(entry)" style="cursor: pointer" *ngIf="authService.currentUser.typ === 'Yönetici'">
+              <i class="far fa-trash-alt"></i> {{ entry.isDeleted ? 'Geri Al' : 'Sil' }}
+            </small>
+  
+            <small class="ml-3" style="cursor: pointer">
+              <i class="fas fa-quote-right"></i> Alıntı Yap
+            </small>
+  
+            <small class="ml-3" [hidden]="type !== 'post'" style="cursor: pointer">
+              <i class="fas fa-reply"></i> Cevapla
+            </small>
+          </div>
+        </div>
+        <!-- Entry Actions (-) -->
       </div>
-
-      <div class="w-100 py-3">
-        <div>
-          <div [hidden]="collapsed">
-            <span [hidden]="entry.isDeleted">{{ entry.body }}</span>
-            <i [hidden]="!entry.isDeleted" class="text-secondary">Bu mesaj yönetici tarafından silinmiştir.</i>
-          </div>
-
-          <div [hidden]="!entry.modifiedAt" class="text-secondary text-right"> 
-            <small><i>Son Düzenlenme Tarihi: {{ entry.modifiedAt | date:'dd.MM.yyyy, HH:mm:ss' }}</i></small>
-          </div>
-        </div>
-
-        <div [hidden]="!collapsed">
-          <div class="form-group">
-            <textarea [(ngModel)]="entry.body" class="form-control" rows="5"></textarea>
-          </div>
-          <div class="text-right">
-            <button class="btn btn-secondary btn-sm" (click)="onUpdateToggle()">Vazgeç</button>
-            <button class="btn btn-primary btn-sm ml-1" (click)="onUpdate()">Hızlı Kaydet</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Entry Actions (+) -->
-      <div class="mt-auto d-flex justify-content-between w-100">
-        <div *ngIf="authService.isAuthanticated">
-          <small class="text-danger" style="cursor: pointer">
-            <i class="fas fa-flag"></i> Gönderiyi Şikayet Et
-          </small>
-        </div>
-
-        <div class="text-secondary" *ngIf="authService.isAuthanticated">
-          <small [hidden]="type !== 'post'" class="text-success" style="cursor: pointer">
-            <i class="far fa-thumbs-up"></i> Beğen
-          </small>
-
-          <small class="ml-3" (click)="onUpdateToggle(entry)" style="cursor: pointer" *ngIf="authService.currentUser.sub === entry.authorId">
-            <i class="far fa-edit"></i> Düzenle
-          </small>
-
-          <small class="ml-3" (click)="onDeleteToggle(entry)" style="cursor: pointer">
-            <i class="far fa-trash-alt"></i> {{ entry.isDeleted ? 'Geri Al' : 'Sil' }}
-          </small>
-
-          <small class="ml-3" style="cursor: pointer">
-            <i class="fas fa-quote-right"></i> Alıntı Yap
-          </small>
-
-          <small class="ml-3" [hidden]="type !== 'post'" style="cursor: pointer">
-            <i class="fas fa-reply"></i> Cevapla
-          </small>
-        </div>
-      </div>
-      <!-- Entry Actions (-) -->
     </div>
+    <!-- Entry Details (-) -->
   </div>
-  <!-- Entry Details (-) -->
-</div>

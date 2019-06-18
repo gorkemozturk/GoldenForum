@@ -10,6 +10,9 @@ using GoldenForum.Service.Models;
 using GoldenForum.Service.Models.ViewModels.Post;
 using GoldenForum.Service.Models.ViewModels.Reply;
 using GoldenForum.Service.Helpers;
+using Microsoft.AspNetCore.Identity;
+using GoldenForum.Service.Models.ViewModels;
+using GoldenForum.Service.Models.ViewModels.User;
 
 namespace GoldenForum.Service.Controllers
 {
@@ -18,10 +21,12 @@ namespace GoldenForum.Service.Controllers
     public class PostsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public PostsController(ApplicationDbContext context)
+        public PostsController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/Posts
@@ -41,29 +46,19 @@ namespace GoldenForum.Service.Controllers
                 ForumId = p.ForumId,
                 Title = p.Title,
                 Slug = p.Slug,
-                AuthorId = p.User.Id,
-                AuthorUserName = p.User.UserName,
-                AuthorImageUrl = p.User.ImageUrl,
-                AuthorRating = p.User.Rating,
-                AuthorRegisteredAt = p.User.RegisteredAt,
-                AuthorPostsAndRepliesCount = p.User.Posts.Count() + p.User.Replies.Count(),
                 Body = p.Body,
                 PostedAt = p.PostedAt,
                 ModifiedAt = p.ModifiedAt,
                 IsDeleted = p.IsDeleted,
+                Author = GetAuthor(p.User, p.User.Posts.Count() + p.User.Replies.Count()),
                 Replies = p.Replies.Select(r => new ReplyListViewModel
                 {
                     Id = r.Id,
-                    AuthorId = r.User.Id,
-                    AuthorUserName = r.User.UserName,
-                    AuthorImageUrl = r.User.ImageUrl,
-                    AuthorRating = r.User.Rating,
-                    AuthorPostsAndRepliesCount = r.User.Posts.Count() + r.User.Replies.Count(),
-                    AuthorRegisteredAt = r.User.RegisteredAt,
                     Body = r.Body,
                     RepliedAt = r.RepliedAt,
                     ModifiedAt = r.ModifiedAt,
-                    IsDeleted = r.IsDeleted
+                    IsDeleted = r.IsDeleted,
+                    Author = GetAuthor(r.User, r.User.Posts.Count() + r.User.Replies.Count())
                 })
             }).FirstOrDefaultAsync(p => p.Id == id);
 
@@ -73,6 +68,19 @@ namespace GoldenForum.Service.Controllers
             }
 
             return post;
+        }
+
+        private UserDetailViewModel GetAuthor(User user, int count)
+        {
+            return new UserDetailViewModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Rating = user.Rating,
+                PostsAndRepliesCount = count,
+                ImageUrl = user.ImageUrl,
+                RegisteredAt = user.RegisteredAt
+            };
         }
 
         // PUT: api/Posts/5

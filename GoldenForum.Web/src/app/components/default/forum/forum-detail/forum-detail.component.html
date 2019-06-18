@@ -13,7 +13,11 @@
   </div>
   <!-- Forum Header (-) -->
 
-  <ul class="list-group list-group-flush">
+  <div *ngIf="!forum.posts.length" class="text-secondary text-center m-3" role="alert">
+    <i class="fas fa-info-circle fa-2x d-block"></i> Bu foruma ait harhangi bir gönderi bulunmuyor. İlk gönderiyi paylaşan siz olabilirsiniz.
+  </div>
+  
+  <ul *ngIf="forum.posts.length" class="list-group list-group-flush">
     <!-- Post Attributes (-) -->
     <li class="bg-light list-group-item border-white p-3">
       <div class="row">
@@ -51,7 +55,7 @@
 
         <!-- Statistics (+) -->
         <div class="col-md-2 text-right">
-          <small class="d-block">Gönderi Cevapları: {{ post.repliesCount }}</small>
+          <small class="d-block text-secondary">Gönderi Cevapları: {{ post.repliesCount }}</small>
         </div>
         <!-- Statistics (-) -->
 

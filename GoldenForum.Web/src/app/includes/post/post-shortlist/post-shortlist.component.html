@@ -1,4 +1,8 @@
-<ul class="list-group list-group-flush">
+<div *ngIf="!posts.length" class="text-secondary text-center m-3" role="alert">
+  <i class="fas fa-info-circle fa-2x d-block"></i> Listelenecek herhangi bir gönderi bulunmuyor.
+</div>
+
+<ul *ngIf="posts.length" class="list-group list-group-flush">
   <li class="list-group-item border-0 p-3" *ngFor="let post of posts; let i = index" [class.bg-light]="(i+1) % 2 === 0">
     <app-post-overview [post]="post" [limit]=60></app-post-overview>
   </li>

@@ -48,11 +48,11 @@ namespace GoldenForum.Service.Controllers
                     Title = p.Title,
                     Slug = p.Slug,
                     PostedAt = p.PostedAt,
+                    RepliesCount = p.Replies.Count(),
                     AuthorId = p.User.Id,
                     AuthorUserName = p.User.UserName,
                     AuthorImageUrl = p.User.ImageUrl,
-                    AuthorRating = p.User.Rating,
-                    RepliesCount = p.Replies.Count()
+                    AuthorRating = p.User.Rating
                 })
             }).FirstOrDefaultAsync(f => f.Id == id);
 

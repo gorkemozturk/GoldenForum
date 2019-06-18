@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using GoldenForum.Service.Data;
 using GoldenForum.Service.Models;
 using GoldenForum.Service.Models.ViewModels.Reply;
+using GoldenForum.Service.Models.ViewModels.User;
 
 namespace GoldenForum.Service.Controllers
 {
@@ -86,17 +87,25 @@ namespace GoldenForum.Service.Controllers
             var createdReply = await _context.Replies.Select(r => new ReplyDetailViewModel
             {
                 Id = r.Id,
-                AuthorId = r.User.Id,
-                AuthorUserName = r.User.UserName,
-                AuthorImageUrl = r.User.ImageUrl,
-                AuthorRating = r.User.Rating,
-                AuthorPostsAndRepliesCount = r.User.Posts.Count() + r.User.Replies.Count(),
-                AuthorRegisteredAt = r.User.RegisteredAt,
                 Body = r.Body,
-                RepliedAt = r.RepliedAt
+                RepliedAt = r.RepliedAt,
+                Author = GetAuthor(r.User, r.User.Posts.Count() + r.User.Replies.Count())
             }).FirstOrDefaultAsync(p => p.Id == reply.Id);
 
             return CreatedAtAction("GetReply", new ReplyDetailViewModel { Id = createdReply.Id }, createdReply);
+        }
+
+        private UserDetailViewModel GetAuthor(User user, int count)
+        {
+            return new UserDetailViewModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                Rating = user.Rating,
+                PostsAndRepliesCount = count,
+                ImageUrl = user.ImageUrl,
+                RegisteredAt = user.RegisteredAt
+            };
         }
 
         // DELETE: api/Replies/5

@@ -34,7 +34,7 @@
   <!-- Category Name (-) -->
 
   <div *ngIf="!category.forums.length" class="text-secondary text-center m-3" role="alert">
-    <i class="fas fa-info fa-2x d-block"></i> Bu foruma ait harhangi bir gönderi bulunmuyor. İlk gönderiyi paylaşan siz olabilirsiniz.
+    <i class="fas fa-info-circle fa-2x d-block"></i> Bu foruma ait listelenecek herhangi bir gönderi bulunmuyor.
   </div>
 
   <ul *ngIf="category.forums.length" class="list-group list-group-flush">
@@ -60,6 +60,10 @@
 
         <!-- Latest Post (+) -->
         <div class="col-md-4">
+          <small *ngIf="!forum.latestPost" class="text-secondary">
+            <i class="fas fa-info-circle"></i> Listelenecek herhangi bir gönderi bulunmuyor.
+          </small>
+
           <app-post-overview [post]="forum.latestPost" [limit]=35 *ngIf="forum.latestPost"></app-post-overview>
         </div>
         <!-- Latest Post (-) -->
