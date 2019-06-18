@@ -1,11 +1,13 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using GoldenForum.Service.Data;
+using GoldenForum.Service.Models;
 using GoldenForum.Service.Models.ViewModels.Category;
 using GoldenForum.Service.Models.ViewModels.Forum;
 using GoldenForum.Service.Models.ViewModels.Home;
 using GoldenForum.Service.Models.ViewModels.Post;
 using GoldenForum.Service.Models.ViewModels.Reply;
+using GoldenForum.Service.Models.ViewModels.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -44,9 +46,7 @@ namespace GoldenForum.Service.Controllers
                         Slug = p.Slug,
                         Title = p.Title,
                         PostedAt = p.PostedAt,
-                        AuthorId = p.User.Id,
-                        AuthorUserName = p.User.UserName,
-                        AuthorImageUrl = p.User.ImageUrl
+                        Author = GetAuthor(p.User)
                     }).Take(1).FirstOrDefault()
                 })
             }).ToListAsync();
@@ -57,9 +57,7 @@ namespace GoldenForum.Service.Controllers
                 Slug = p.Slug,
                 Title = p.Title,
                 PostedAt = p.PostedAt,
-                AuthorId = p.User.Id,
-                AuthorUserName = p.User.UserName,
-                AuthorImageUrl = p.User.ImageUrl
+                Author = GetAuthor(p.User)
             }).Take(5).OrderByDescending(p => p.Id).ToListAsync();
 
             var latestReplies = await _context.Replies.Include(p => p.Post).Select(p => new ReplySummaryViewModel
@@ -69,9 +67,7 @@ namespace GoldenForum.Service.Controllers
                 PostSlug = p.Post.Slug,
                 Title = p.Post.Title,
                 RepliedAt = p.RepliedAt,
-                AuthorId = p.User.Id,
-                AuthorUserName = p.User.UserName,
-                AuthorImageUrl = p.User.ImageUrl
+                Author = GetAuthor(p.User)
             }).Take(5).OrderByDescending(p => p.Id).ToListAsync();
 
             var model = new HomeDetailViewModel()
@@ -82,6 +78,17 @@ namespace GoldenForum.Service.Controllers
             };
 
             return model;
+        }
+
+        private UserSummaryViewModel GetAuthor(User user)
+        {
+            return new UserSummaryViewModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                ImageUrl = user.ImageUrl,
+                Rating = user.Rating
+            };
         }
     }
 }

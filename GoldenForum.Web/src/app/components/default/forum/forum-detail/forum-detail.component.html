@@ -13,7 +13,7 @@
   </div>
   <!-- Forum Header (-) -->
 
-  <div *ngIf="!forum.posts.length" class="text-secondary text-center m-3" role="alert">
+  <div *ngIf="!forum.posts.length || !attachedPosts.length" class="text-secondary text-center m-3" role="alert">
     <i class="fas fa-info-circle fa-2x d-block"></i> Bu foruma ait harhangi bir gönderi bulunmuyor. İlk gönderiyi paylaşan siz olabilirsiniz.
   </div>
   
@@ -41,16 +41,7 @@
 
         <!-- Post Owner (+) -->
         <div class="col-md-4">
-          <div class="media">
-            <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
-            
-            <div class="media-body">
-              <a class="d-block" [routerLink]="['/user/' + post.authorId]">{{ post.authorUserName }}</a>
-              <small>
-                Karizma: {{ post.authorRating }}
-              </small>
-            </div>
-          </div>
+          <app-post-owner [author]="post.author"></app-post-owner>
         </div>
         <!-- Post Owner (-) -->
 
@@ -76,16 +67,7 @@
 
         <!-- Post Owner (+) -->
         <div class="col-md-4">
-          <div class="media">
-            <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
-            
-            <div class="media-body">
-              <a class="d-block" [routerLink]="['/user/' + post.authorId]">{{ post.authorUserName }}</a>
-              <small>
-                Karizma: {{ post.authorRating }}
-              </small>
-            </div>
-          </div>
+          <app-post-owner [author]="post.author"></app-post-owner>
         </div>
         <!-- Post Owner (-) -->
 

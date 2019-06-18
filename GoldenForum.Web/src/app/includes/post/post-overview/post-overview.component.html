@@ -1,6 +1,6 @@
 <div class="media">
   <!-- Author Image (+) -->
-  <img src="{{ post.authorImageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+  <img src="{{ post.author.imageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
   <!-- Author Image (-) -->
   
   <!-- Post Body (+) -->
@@ -9,7 +9,7 @@
     
     <div class="text-secondary d-flex justify-content-between">
       <small>
-        <a [routerLink]="['/user/' + post.authorId]" class="text-secondary">{{ post.authorUserName }}</a>
+        <a [routerLink]="['/user/' + post.author.id]" class="text-secondary">{{ post.author.userName }}</a>
       </small>
       <small>
         {{ post.postedAt | date:'dd.MM.yyyy, HH:mm:ss' }}

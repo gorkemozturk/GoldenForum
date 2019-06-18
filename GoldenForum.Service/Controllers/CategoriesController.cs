@@ -10,6 +10,7 @@ using GoldenForum.Service.Models;
 using GoldenForum.Service.Models.ViewModels.Category;
 using GoldenForum.Service.Models.ViewModels.Forum;
 using GoldenForum.Service.Models.ViewModels.Post;
+using GoldenForum.Service.Models.ViewModels.User;
 
 namespace GoldenForum.Service.Controllers
 {
@@ -45,12 +46,21 @@ namespace GoldenForum.Service.Controllers
                         Slug = p.Slug,
                         Title = p.Title,
                         PostedAt = p.PostedAt,
-                        AuthorId = p.User.Id,
-                        AuthorUserName = p.User.UserName,
-                        AuthorImageUrl = p.User.ImageUrl
+                        Author = GetAuthor(p.User)
                     }).Take(1).FirstOrDefault()
                 })
             }).ToListAsync();
+        }
+
+        private UserSummaryViewModel GetAuthor(User user)
+        {
+            return new UserSummaryViewModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                ImageUrl = user.ImageUrl,
+                Rating = user.Rating
+            };
         }
 
         // GET: api/Categories/5

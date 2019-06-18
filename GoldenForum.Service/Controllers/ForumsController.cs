@@ -10,6 +10,7 @@ using GoldenForum.Service.Models;
 using GoldenForum.Service.Models.ViewModels.Forum;
 using GoldenForum.Service.Models.ViewModels.Post;
 using GoldenForum.Service.Helpers;
+using GoldenForum.Service.Models.ViewModels.User;
 
 namespace GoldenForum.Service.Controllers
 {
@@ -50,10 +51,7 @@ namespace GoldenForum.Service.Controllers
                     PostedAt = p.PostedAt,
                     IsAttached = p.IsAttached,
                     RepliesCount = p.Replies.Count(),
-                    AuthorId = p.User.Id,
-                    AuthorUserName = p.User.UserName,
-                    AuthorImageUrl = p.User.ImageUrl,
-                    AuthorRating = p.User.Rating
+                    Author = GetAuthor(p.User)
                 })
             }).FirstOrDefaultAsync(f => f.Id == id);
 
@@ -63,6 +61,17 @@ namespace GoldenForum.Service.Controllers
             }
 
             return forum;
+        }
+
+        private UserSummaryViewModel GetAuthor(User user)
+        {
+            return new UserSummaryViewModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                ImageUrl = user.ImageUrl,
+                Rating = user.Rating
+            };
         }
 
         // PUT: api/Forums/5

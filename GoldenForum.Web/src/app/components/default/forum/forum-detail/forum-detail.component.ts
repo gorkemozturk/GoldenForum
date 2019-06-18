@@ -22,7 +22,13 @@ export class ForumDetailComponent implements OnInit {
   getForumWithPosts(): void {
     const id = this.route.snapshot.paramMap.get('id');
     this.forumService.getResource(id).subscribe(response => {
-      this.forum = response;
+      this.forum.id = response.id;
+      this.forum.title = response.title;
+      this.forum.slug = response.slug;
+      this.forum.imageUrl = response.imageUrl;
+      this.forum.description = response.description;
+
+      this.forum.posts = response.posts.filter(p => p.isAttached === false);
       this.attachedPosts = response.posts.filter(p => p.isAttached === true);
     });
   }

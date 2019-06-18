@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GoldenForum.Service.Data;
+using GoldenForum.Service.Models;
 using GoldenForum.Service.Models.ViewModels.Post;
 using GoldenForum.Service.Models.ViewModels.Reply;
 using GoldenForum.Service.Models.ViewModels.User;
@@ -40,9 +41,7 @@ namespace GoldenForum.Service.Controllers
                     Slug = p.Slug,
                     Title = p.Title,
                     PostedAt = p.PostedAt,
-                    AuthorId = p.User.Id,
-                    AuthorUserName = p.User.UserName,
-                    AuthorImageUrl = p.User.ImageUrl
+                    Author = GetAuthor(p.User)
                 }),
                 Replies = u.Replies.Select(p => new ReplySummaryViewModel
                 {
@@ -50,9 +49,7 @@ namespace GoldenForum.Service.Controllers
                     PostId = p.Post.Id,
                     Title = p.Post.Title,
                     RepliedAt = p.RepliedAt,
-                    AuthorId = p.User.Id,
-                    AuthorUserName = p.User.UserName,
-                    AuthorImageUrl = p.User.ImageUrl
+                    Author = GetAuthor(p.User)
                 })
             }).FirstOrDefaultAsync(u => u.Id == id);
 
@@ -62,6 +59,17 @@ namespace GoldenForum.Service.Controllers
             }
 
             return user;
+        }
+
+        private UserSummaryViewModel GetAuthor(User user)
+        {
+            return new UserSummaryViewModel()
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                ImageUrl = user.ImageUrl,
+                Rating = user.Rating
+            };
         }
     }
 }
