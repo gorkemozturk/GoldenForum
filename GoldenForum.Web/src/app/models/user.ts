@@ -1,4 +1,5 @@
 import { Post } from './post';
+import { Reply } from './reply';
 
 export class User {
     id: string;
@@ -9,4 +10,5 @@ export class User {
     postsAndRepliesCount: number;
 
     posts: Post[] = [];
+    replies: Reply[] = [];
 }

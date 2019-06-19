@@ -8,6 +8,8 @@ import { PostDetailComponent } from './components/default/post/post-detail/post-
 import { ForumDetailComponent } from './components/default/forum/forum-detail/forum-detail.component';
 import { PostFormComponent } from './components/default/post/post-form/post-form.component';
 import { UserDetailComponent } from './components/default/user/user-detail/user-detail.component';
+import { ManagementComponent } from './layouts/management/management.component';
+import { ManagementForumsComponent } from './components/management/forum/management-forums/management-forums.component';
 
 const routes: Routes = [
     // Default Routes
@@ -17,6 +19,11 @@ const routes: Routes = [
         { path: 'forum/:slug/:id', component: ForumDetailComponent },
         { path: 'forum/:slug/:id/post/new', component: PostFormComponent },
         { path: 'user/:username', component: UserDetailComponent }
+    ]},
+
+    // Management Routes
+    { path: 'management', component: ManagementComponent, children: [ 
+        { path: 'forums', component: ManagementForumsComponent },
     ]},
 
     // Auth Routes

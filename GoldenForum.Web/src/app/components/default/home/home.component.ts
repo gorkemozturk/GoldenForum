@@ -17,10 +17,10 @@ export class HomeComponent implements OnInit {
   constructor(private homeService: HomeService) { }
 
   ngOnInit() {
-    this.getCategoriesWithPostsAndReplies();
+    this.getCategoriesWithForums();
   }
 
-  getCategoriesWithPostsAndReplies(): void {
+  getCategoriesWithForums(): void {
     this.homeService.getResources().subscribe(response => {
       this.categories = response.categories;
       this.latestPosts = response.latestPosts;

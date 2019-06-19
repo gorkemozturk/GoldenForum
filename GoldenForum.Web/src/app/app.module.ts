@@ -25,6 +25,8 @@ import { PostOwnerComponent } from './includes/post/post-owner/post-owner.compon
 import { PostListComponent } from './includes/post/post-list/post-list.component';
 import { PostReplyOverviewComponent } from './includes/global/post-reply-overview/post-reply-overview.component';
 import { UserDetailComponent } from './components/default/user/user-detail/user-detail.component';
+import { ManagementComponent } from './layouts/management/management.component';
+import { ManagementForumsComponent } from './components/management/forum/management-forums/management-forums.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,9 @@ import { UserDetailComponent } from './components/default/user/user-detail/user-
     PostOwnerComponent,
     PostListComponent,
     PostReplyOverviewComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    ManagementComponent,
+    ManagementForumsComponent
   ],
   imports: [
     BrowserModule,
