@@ -74,7 +74,7 @@ namespace GoldenForum.Service.Controllers
         {
             return new UserDetailViewModel()
             {
-                Id = user.Id,
+                Id = user.UserName.ToLower(),
                 UserName = user.UserName,
                 Rating = user.Rating,
                 PostsAndRepliesCount = count,

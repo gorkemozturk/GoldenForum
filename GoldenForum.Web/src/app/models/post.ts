@@ -9,6 +9,7 @@ export class Post {
     postedAt: Date;
     modifiedAt?: Date;
     isDeleted: boolean;
+    type: string;
 
     author: User = new User();
     replies: Reply[] = [];

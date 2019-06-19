@@ -10,7 +10,7 @@
   
         <!-- Author Username (+) -->
         <section class="text-center my-3">
-          <a href="" class="d-block text-decoration-none font-weight-bold text-warning px-3">{{ entry.author?.userName }}</a>
+          <a [routerLink]="['/user/' + entry.author.id]" class="d-block text-decoration-none font-weight-bold text-warning px-3">{{ entry.author?.userName }}</a>
           <span class="badge badge-warning text-uppercase rounded-0 p-1">Yönetici</span>
         </section>
         <!-- Author Username (-) -->

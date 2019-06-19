@@ -12,7 +12,7 @@ namespace GoldenForum.Service.Models.ViewModels.User
         public string Id { get; set; }
         public string UserName { get; set; }
         public int Rating { get; set; }
-        public int PostsCount { get; set; }
+        public int PostsAndRepliesCount { get; set; }
         public string ImageUrl { get; set; }
         public DateTime RegisteredAt { get; set; }
 

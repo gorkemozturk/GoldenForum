@@ -8,6 +8,7 @@ import { Reply } from 'src/app/models/reply';
 })
 export class ReplyShortlistComponent implements OnInit {
   @Input() replies: Reply[] = [];
+  @Input() limit?: number = null;
 
   constructor() { }
 

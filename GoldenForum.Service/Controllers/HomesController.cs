@@ -58,17 +58,17 @@ namespace GoldenForum.Service.Controllers
                 Title = p.Title,
                 PostedAt = p.PostedAt,
                 Author = GetAuthor(p.User)
-            }).Take(5).OrderByDescending(p => p.Id).ToListAsync();
+            }).OrderByDescending(p => p.PostedAt).Take(5).ToListAsync();
 
-            var latestReplies = await _context.Replies.Include(p => p.Post).Select(p => new ReplySummaryViewModel
+            var latestReplies = await _context.Replies.Include(r => r.Post).Select(r => new ReplySummaryViewModel
             {
-                Id = p.Id,
-                PostId = p.Post.Id,
-                PostSlug = p.Post.Slug,
-                Title = p.Post.Title,
-                RepliedAt = p.RepliedAt,
-                Author = GetAuthor(p.User)
-            }).Take(5).OrderByDescending(p => p.Id).ToListAsync();
+                Id = r.Id,
+                PostId = r.Post.Id,
+                PostSlug = r.Post.Slug,
+                Title = r.Post.Title,
+                RepliedAt = r.RepliedAt,
+                Author = GetAuthor(r.User)
+            }).OrderByDescending(r => r.RepliedAt).Take(5).ToListAsync();
 
             var model = new HomeDetailViewModel()
             {
@@ -84,7 +84,7 @@ namespace GoldenForum.Service.Controllers
         {
             return new UserSummaryViewModel()
             {
-                Id = user.Id,
+                Id = user.UserName.ToLower(),
                 UserName = user.UserName,
                 ImageUrl = user.ImageUrl,
                 Rating = user.Rating

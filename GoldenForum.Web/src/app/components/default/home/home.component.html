@@ -2,10 +2,10 @@
   <!-- Latest Replies (+) -->
   <div class="col-md">
     <div class="rounded shadow-lg overflow-hidden bg-light">
-      <div class="bg-light font-weight-bold text-uppercase p-3">
+      <div class="bg-light font-weight-bold text-secondary text-uppercase p-3">
         <i class="fas fa-comments"></i> Son Gönderi Cevapları
       </div>
-      <app-reply-shortlist [replies]="latestReplies"></app-reply-shortlist>
+      <app-reply-shortlist [replies]="latestReplies" [limit]=65></app-reply-shortlist>
     </div>
   </div>
   <!-- Latest Replies (-) -->
@@ -13,10 +13,10 @@
   <!-- Latest Posts (+) -->
   <div class="col-md">
     <div class="rounded shadow-lg overflow-hidden bg-light">
-      <div class="bg-light font-weight-bold text-uppercase p-3">
+      <div class="bg-light font-weight-bold text-secondary text-uppercase p-3">
         <i class="fas fa-fire"></i> Son Forum Gönderileri
       </div>
-      <app-post-shortlist [posts]="latestPosts"></app-post-shortlist>
+      <app-post-shortlist [posts]="latestPosts" [limit]=65></app-post-shortlist>
     </div>
   </div>
   <!-- Latest Posts (-) -->
@@ -28,7 +28,7 @@
 <!-- Forums (+) -->
 <div class="rounded shadow-lg overflow-hidden bg-light" *ngFor="let category of categories; let i = index" [class.mb-5]="(i+1) !== categories.length">
   <!-- Category Name (+) -->
-  <div class="bg-light font-weight-bold text-uppercase p-3">
+  <div class="bg-light font-weight-bold text-secondary text-uppercase p-3">
     <i class="far fa-folder-open"></i> {{ category.categoryName }}
   </div>
   <!-- Category Name (-) -->
@@ -61,10 +61,10 @@
         <!-- Latest Post (+) -->
         <div class="col-md-4">
           <small *ngIf="!forum.latestPost" class="text-secondary">
-            <i class="fas fa-info-circle"></i> Listelenecek herhangi bir gönderi bulunmuyor.
+            <i class="fas fa-info-circle"></i> Listelenecek herhangi bir forum bulunmuyor.
           </small>
 
-          <app-post-overview [post]="forum.latestPost" [limit]=35 *ngIf="forum.latestPost"></app-post-overview>
+          <app-post-reply-overview [entry]="forum.latestPost" [limit]=40 *ngIf="forum.latestPost" [type]="'post'"></app-post-reply-overview>
         </div>
         <!-- Latest Post (-) -->
 
@@ -75,7 +75,6 @@
           </small>
         </div>
         <!-- Statistics (-) -->
-
       </div>
     </li>
     <!-- Forum Entiries (-) -->

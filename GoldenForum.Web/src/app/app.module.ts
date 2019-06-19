@@ -15,7 +15,6 @@ import { ApplicationRoutes } from './app.route';
 import { SummaryPipe } from './pipes/summary.pipe';
 import { PostShortlistComponent } from './includes/post/post-shortlist/post-shortlist.component';
 import { ReplyShortlistComponent } from './includes/reply/reply-shortlist/reply-shortlist.component';
-import { PostOverviewComponent } from './includes/post/post-overview/post-overview.component';
 import { PostDetailComponent } from './components/default/post/post-detail/post-detail.component';
 import { PostReplyEntryComponent } from './includes/global/post-reply-entry/post-reply-entry.component';
 import { PostFormComponent } from './components/default/post/post-form/post-form.component';
@@ -24,6 +23,8 @@ import { ForumDetailComponent } from './components/default/forum/forum-detail/fo
 import { ForumOverviewComponent } from './includes/forum/forum-overview/forum-overview.component';
 import { PostOwnerComponent } from './includes/post/post-owner/post-owner.component';
 import { PostListComponent } from './includes/post/post-list/post-list.component';
+import { PostReplyOverviewComponent } from './includes/global/post-reply-overview/post-reply-overview.component';
+import { UserDetailComponent } from './components/default/user/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,6 @@ import { PostListComponent } from './includes/post/post-list/post-list.component
     SummaryPipe,
     PostShortlistComponent,
     ReplyShortlistComponent,
-    PostOverviewComponent,
     PostDetailComponent,
     PostReplyEntryComponent,
     PostFormComponent,
@@ -46,7 +46,9 @@ import { PostListComponent } from './includes/post/post-list/post-list.component
     ForumDetailComponent,
     ForumOverviewComponent,
     PostOwnerComponent,
-    PostListComponent
+    PostListComponent,
+    PostReplyOverviewComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,

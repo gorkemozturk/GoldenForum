@@ -1,0 +1,25 @@
+<div class="media">
+  <!-- Author Image (+) -->
+  <img src="{{ entry.author.imageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
+  <!-- Author Image (-) -->
+  
+  <!-- Entry Body (+) -->
+  <div class="media-body">
+    <a *ngIf="type === 'post'" class="d-block" [routerLink]="['/post/' + entry.slug + '/' + entry.id]">
+      {{ entry.title.length > limit ? limit ? (entry.title | summary:limit) : entry.title : entry.title }}
+    </a>
+    <a *ngIf="type === 'reply'" class="d-block" [routerLink]="['/post/' + entry.postSlug + '/' + entry.postId]">
+      {{ entry.title.length > limit ? limit ? (entry.title | summary:limit) : entry.title : entry.title }}
+    </a>
+    
+    <div class="text-secondary d-flex justify-content-between">
+      <small>
+        <a [routerLink]="['/user/' + entry.author.id]" class="text-secondary">{{ entry.author.userName }}</a>
+      </small>
+      <small>
+        {{ type === 'post' ? (entry.postedAt | date:'dd.MM.yyyy, HH:mm:ss') : (entry.repliedAt | date:'dd.MM.yyyy, HH:mm:ss') }}
+      </small>
+    </div>
+  </div>
+  <!-- Entry Body (-) -->
+</div>

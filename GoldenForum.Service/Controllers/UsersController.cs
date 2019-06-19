@@ -32,7 +32,7 @@ namespace GoldenForum.Service.Controllers
                 Id = u.Id,
                 UserName = u.UserName,
                 Rating = u.Rating,
-                PostsCount = u.Posts.Count() + u.Replies.Count(),
+                PostsAndRepliesCount = u.Posts.Count() + u.Replies.Count(),
                 ImageUrl = u.ImageUrl,
                 RegisteredAt = u.RegisteredAt,
                 Posts = u.Posts.Select(p => new PostSummaryViewModel
@@ -51,7 +51,7 @@ namespace GoldenForum.Service.Controllers
                     RepliedAt = p.RepliedAt,
                     Author = GetAuthor(p.User)
                 })
-            }).FirstOrDefaultAsync(u => u.Id == id);
+            }).FirstOrDefaultAsync(u => u.UserName == id);
 
             if (user == null)
             {

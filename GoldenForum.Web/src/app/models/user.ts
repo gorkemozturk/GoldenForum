@@ -1,3 +1,5 @@
+import { Post } from './post';
+
 export class User {
     id: string;
     userName: string;
@@ -5,4 +7,6 @@ export class User {
     rating: number;
     registeredAt: Date;
     postsAndRepliesCount: number;
+
+    posts: Post[] = [];
 }
