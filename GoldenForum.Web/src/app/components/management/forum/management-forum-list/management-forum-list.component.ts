@@ -3,11 +3,11 @@ import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
-  selector: 'app-management-forums',
-  templateUrl: './management-forums.component.html',
-  styleUrls: ['./management-forums.component.css']
+  selector: 'app-management-forum-list',
+  templateUrl: './management-forum-list.component.html',
+  styleUrls: ['./management-forum-list.component.css']
 })
-export class ManagementForumsComponent implements OnInit {
+export class ManagementForumListComponent implements OnInit {
   title: string = 'Forumlar';
   categories: Category[] = [];
 
@@ -20,4 +20,5 @@ export class ManagementForumsComponent implements OnInit {
   getCategoriesWithForums(): void {
     this.categoryService.getResources().subscribe(response => this.categories = response);
   }
+
 }

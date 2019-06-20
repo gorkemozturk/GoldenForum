@@ -9,7 +9,7 @@ import { ForumDetailComponent } from './components/default/forum/forum-detail/fo
 import { PostFormComponent } from './components/default/post/post-form/post-form.component';
 import { UserDetailComponent } from './components/default/user/user-detail/user-detail.component';
 import { ManagementComponent } from './layouts/management/management.component';
-import { ManagementForumsComponent } from './components/management/forum/management-forums/management-forums.component';
+import { ManagementForumListComponent } from './components/management/forum/management-forum-list/management-forum-list.component';
 
 const routes: Routes = [
     // Default Routes
@@ -23,7 +23,7 @@ const routes: Routes = [
 
     // Management Routes
     { path: 'management', component: ManagementComponent, children: [ 
-        { path: 'forums', component: ManagementForumsComponent },
+        { path: 'forums', component: ManagementForumListComponent },
     ]},
 
     // Auth Routes

@@ -4,21 +4,24 @@
   </div>
   <div class="bg-white">
     <div class="p-3" *ngFor="let category of categories; let i = index" [class.bg-light]="(i+1) % 2 === 0">
+      <!-- The Category that Forums Belongs to (+) -->
       <div class="d-flex justify-content-between">
         <div>
           <i class="far fa-folder text-warning"></i> {{ category.categoryName }}
         </div>
         <div>
-          <i class="text-primary fas fa-plus-circle" style="cursor: pointer"></i>
+          <i class="text-primary fas fa-plus-circle" (click)="openForm()" style="cursor: pointer"></i>
           <i class="text-secondary fas fa-cog ml-2" style="cursor: pointer"></i>
           <i class="text-danger far fa-trash-alt ml-2" style="cursor: pointer"></i>
         </div>
       </div>
+      <!-- The Category that Forums Belongs to (-) -->
 
-      <div *ngFor="let forum of category.forums" class="pl-5">
+      <!-- Forum List (+) -->
+      <div *ngFor="let forum of category.forums; let i = index" class="pl-5">
         <div class="d-flex justify-content-between">
           <div class="text-secondary">
-            <i class="fas fa-long-arrow-alt-right"></i> {{ forum.title }}
+            {{ (i+1) + '. ' + forum.title }}
           </div>
           <div>
             <i class="text-secondary fas fa-cog" style="cursor: pointer"></i>
@@ -26,6 +29,7 @@
           </div>
         </div>
       </div>
+      <!-- Forum List (-) -->
     </div>
   </div>
 </div>

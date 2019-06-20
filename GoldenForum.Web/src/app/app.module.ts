@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { AppComponent } from './app.component';
 import { AuthComponent } from './layouts/auth/auth.component';
 import { DefaultComponent } from './layouts/default/default.component';
@@ -26,7 +29,8 @@ import { PostListComponent } from './includes/post/post-list/post-list.component
 import { PostReplyOverviewComponent } from './includes/global/post-reply-overview/post-reply-overview.component';
 import { UserDetailComponent } from './components/default/user/user-detail/user-detail.component';
 import { ManagementComponent } from './layouts/management/management.component';
-import { ManagementForumsComponent } from './components/management/forum/management-forums/management-forums.component';
+import { ManagementForumFormComponent } from './components/management/forum/management-forum-form/management-forum-form.component';
+import { ManagementForumListComponent } from './components/management/forum/management-forum-list/management-forum-list.component';
 
 @NgModule({
   declarations: [
@@ -52,16 +56,22 @@ import { ManagementForumsComponent } from './components/management/forum/managem
     PostReplyOverviewComponent,
     UserDetailComponent,
     ManagementComponent,
-    ManagementForumsComponent
+    ManagementForumFormComponent,
+    ManagementForumListComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    ApplicationRoutes
+    ApplicationRoutes,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    ManagementForumFormComponent
+  ]
 })
 export class AppModule { }
