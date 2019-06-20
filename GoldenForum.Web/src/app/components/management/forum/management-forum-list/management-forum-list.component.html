@@ -14,29 +14,37 @@
   <div class="bg-white">
     <div class="p-3" *ngFor="let category of categories; let i = index" [class.bg-light]="(i+1) % 2 === 0">
       <!-- The Category that Forums Belongs to (+) -->
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between pb-3">
         <div>
-          <i class="far fa-folder text-warning"></i> {{ category.categoryName }}
+          <i class="fas fa-folder text-warning"></i> {{  category.categoryName + ' (Sıra: ' + category.priority + ')' }}
         </div>
+
+        <!-- Category Actions (+) -->
         <div>
-          <i class="text-primary fas fa-plus-circle" (click)="openForumForm(category.id)" style="cursor: pointer"></i>
-          <i class="text-secondary fas fa-cog ml-2" (click)="openCategoryForm(category)" style="cursor: pointer"></i>
-          <i class="text-danger far fa-trash-alt ml-2" (click)="onDelete(category, 'category')" style="cursor: pointer"></i>
+          <i [hidden]="category.priority === 1" class="text-success far fa-caret-square-up" (click)="up(category)" style="cursor: pointer" [class.mr-1]="category.priority !== 1"></i>
+          <i [hidden]="category.priority === categories.length" class="text-danger far fa-caret-square-down" (click)="down(category)" style="cursor: pointer"></i>
+
+          <i class="text-secondary fas fa-ellipsis-v mx-3"></i>
+
+          <i class="text-primary fas fa-plus-square" (click)="openForumForm(category.id)" style="cursor: pointer"></i>
+          <i class="text-secondary fas fa-pen-square ml-1" (click)="openCategoryForm(category)" style="cursor: pointer"></i>
+          <i class="text-danger fas fa-minus-square ml-1" (click)="onDelete(category, 'category')" style="cursor: pointer"></i>
         </div>
+        <!-- Category Actions (-) -->
       </div>
       <!-- The Category that Forums Belongs to (-) -->
 
       <!-- Forum List (+) -->
-      <div *ngFor="let forum of category.forums; let i = index" class="pl-5">
+      <div *ngFor="let forum of category.forums" class="pl-5">
         <div class="d-flex justify-content-between">
           <div class="text-secondary">
-            {{ (i+1) + '. ' + forum.title }}
+            <i class="far fa-folder text-warning"></i> {{ forum.title }}
           </div>
 
           <!-- Forum Actions (+) -->
           <div>
-            <i class="text-secondary fas fa-cog" (click)="openForumForm(category.id, forum)" style="cursor: pointer"></i>
-            <i class="text-danger far fa-trash-alt ml-2" (click)="onDelete(forum, 'forum')" style="cursor: pointer"></i>
+            <i class="text-secondary fas fa-pen-square" (click)="openForumForm(category.id, forum)" style="cursor: pointer"></i>
+            <i class="text-danger fas fa-minus-square ml-1" (click)="onDelete(forum, 'forum')" style="cursor: pointer"></i>
           </div>
           <!-- Forum Actions (-) -->
         </div>

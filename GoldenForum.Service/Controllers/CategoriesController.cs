@@ -33,6 +33,7 @@ namespace GoldenForum.Service.Controllers
             {
                 Id = c.Id,
                 CategoryName = c.CategoryName,
+                Priority = c.Priority,
                 Forums = c.Forums.Select(f => new ForumListViewModel
                 {
                     Id = f.Id,

@@ -29,7 +29,8 @@ export class ManagementCategoryFormComponent implements OnInit {
 
   categoryInsertingForm(): void {
     this.form = this.formBuilder.group({
-      categoryName: [null, Validators.required]
+      categoryName: [null, Validators.required],
+      priority: [this.data.priority, Validators.required]
     });
   }
 
@@ -37,7 +38,8 @@ export class ManagementCategoryFormComponent implements OnInit {
     this.form.addControl('id', new FormControl(this.data.category.id));
     
     this.form.patchValue({
-      categoryName: this.data.category.categoryName
+      categoryName: this.data.category.categoryName,
+      priority: this.data.category.priority
     });
   }
 

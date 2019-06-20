@@ -32,6 +32,7 @@ namespace GoldenForum.Service.Controllers
             {
                 Id = c.Id,
                 CategoryName = c.CategoryName,
+                Priority = c.Priority,
                 Forums = c.Forums.Select(f => new ForumListViewModel
                 {
                     Id = f.Id,
@@ -49,7 +50,7 @@ namespace GoldenForum.Service.Controllers
                         Author = GetAuthor(p.User)
                     }).OrderByDescending(p => p.PostedAt).Take(1).FirstOrDefault()
                 })
-            }).ToListAsync();
+            }).OrderBy(c => c.Priority).ToListAsync();
 
             var latestPosts = await _context.Posts.Include(p => p.Forum).Select(p => new PostSummaryViewModel
             {

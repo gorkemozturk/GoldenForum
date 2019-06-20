@@ -10,6 +10,7 @@ namespace GoldenForum.Service.Models.ViewModels.Category
     {
         public int Id { get; set; }
         public string CategoryName { get; set; }
+        public int Priority { get; set; }
 
         public IEnumerable<ForumListViewModel> Forums { get; set; }
     }
