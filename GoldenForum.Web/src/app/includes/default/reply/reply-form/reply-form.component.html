@@ -1,9 +1,9 @@
     
-<div class="shadow-lg bg-white rounded" [hidden]="!authService.isAuthanticated">
-  <div class="rounded bg-light font-weight-bold text-uppercase p-3">
+<div class="shadow-lg overflow-hidden rounded" [hidden]="!authService.isAuthanticated">
+  <div class="bg-light border-bottom p-3">
     {{ title }}
   </div>
-  <div class="rounded bg-white p-3">
+  <div class="bg-white p-3">
     <form [formGroup]="form" autocomplete="off">
       <div class="form-group">
         <textarea class="form-control" formControlName="body" rows="5"></textarea>

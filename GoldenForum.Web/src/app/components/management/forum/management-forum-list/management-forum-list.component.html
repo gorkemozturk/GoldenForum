@@ -1,8 +1,8 @@
 <div class="shadow-lg rounded overflow-hidden">
-  <div class="bg-light p-3">
+  <div class="bg-light border-bottom p-3">
     <div class="row d-flex align-items-center">
-      <div class="col-md font-weight-bold">
-        {{ title | uppercase }}
+      <div class="col-md">
+        {{ title }}
       </div>
 
       <div class="col-md text-right">
@@ -10,13 +10,18 @@
       </div>
     </div>
   </div>
+  
+  <div class="bg-light border-top border-white text-secondary d-flex justify-content-between p-3">
+    <small>Kategori Adı</small>
+    <small>İşlemler</small>
+  </div>
 
   <div class="bg-white">
     <div class="p-3" *ngFor="let category of categories; let i = index" [class.bg-light]="(i+1) % 2 === 0">
       <!-- The Category that Forums Belongs to (+) -->
       <div class="d-flex justify-content-between pb-3">
         <div>
-          <i class="fas fa-folder text-warning"></i> {{  category.categoryName + ' (Sıra: ' + category.priority + ')' }}
+          <i class="fas fa-folder text-warning"></i> {{  category.categoryName }} <small class="text-secondary">Sıralama: {{ category.priority }}</small>
         </div>
 
         <!-- Category Actions (+) -->

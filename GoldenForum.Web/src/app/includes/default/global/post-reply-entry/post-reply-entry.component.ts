@@ -70,4 +70,18 @@ export class PostReplyEntryComponent implements OnInit {
     }
   }
 
+  OnChangeType(entry: any, type: number) {
+    const temp = entry.postType;
+
+    if (type === 1) { entry.postType = 1; }
+    else if (type === 2) { entry.postType = 2; }
+    else if (type === 3) { entry.postType = 3; }
+
+    this.postService.putPostType(entry).subscribe(response => {
+      if (type === 1) { entry.postType = 'Opened'; }
+      else if (type === 2) { entry.postType = 'Attached'; }
+      else if (type === 3) { entry.postType = 'Closed'; }
+    });
+  }
+
 }

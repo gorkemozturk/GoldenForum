@@ -1,6 +1,6 @@
 <div class="shadow-lg bg-light rounded overflow-hidden">
   <!-- Forum Header (+) -->
-  <div class="bg-light p-3">
+  <div class="bg-light border-bottom p-3">
     <div class="row d-flex align-items-center">
       <div class="col-md">
         <app-forum-overview [forum]="forum"></app-forum-overview>
@@ -13,7 +13,7 @@
   </div>
   <!-- Forum Header (-) -->
 
-  <div *ngIf="!forum.posts.length && !forum.attachedPosts.length && !forum.closedPosts.length" class="text-secondary text-center m-3" role="alert">
+  <div *ngIf="!forum.posts.length && !forum.attachedPosts.length && !forum.closedPosts.length" class="text-secondary text-center border-top border-white p-3" role="alert">
     <i class="fas fa-info-circle fa-2x d-block"></i> Bu foruma ait harhangi bir gönderi bulunmuyor. İlk gönderiyi paylaşan siz olabilirsiniz.
   </div>
   

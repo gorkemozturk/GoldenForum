@@ -48,7 +48,7 @@ export class ManagementForumListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => this.getCategoriesWithForums());
   }
 
-  onDelete(entry: any, type: string) {
+  onDelete(entry: any, type: string): void {
     if (type === 'category') {
       if (entry.forums.length) {
         alert(entry.categoryName + ' adlı kategoriye forum veya forumlara sahip olduğundan dolayı silemezsiniz.');
@@ -70,38 +70,36 @@ export class ManagementForumListComponent implements OnInit {
     }
   }
 
-  down(category: Category) {
-    const c: Category = this.categories.find(c => c.priority === category.priority + 1);
+  down(category: Category): void {
+    const belowCategory: Category = this.categories.find(c => c.priority === category.priority + 1);
 
     category.priority += 1;
-    c.priority -= 1;
+    belowCategory.priority -= 1;
 
-    this.categories.sort((a,b) => a.priority - b.priority);
+    this.shortCategories();
+    this.putCategory(category);
+    this.putCategory(belowCategory);
+  }
 
+  up(category: Category): void {
+    const aboveCategory: Category = this.categories.find(c => c.priority === category.priority - 1);
+
+    category.priority -= 1;
+    aboveCategory.priority += 1;
+
+    this.shortCategories();
+    this.putCategory(category);
+    this.putCategory(aboveCategory);
+  }
+
+  putCategory(category: Category): void {
     this.categoryService.putResource(category.id, category).subscribe(response => {
       console.log(category.categoryName + ' kategorisine ait sıralama değiştirildi: ' + category.priority)
-    });
-
-    this.categoryService.putResource(c.id, c).subscribe(response => {
-      console.log(c.categoryName + ' kategorisine ait sıralama değiştirildi: ' + category.priority)
     });
   }
 
-  up(category: Category) {
-    const c: Category = this.categories.find(c => c.priority === category.priority - 1);
-
-    category.priority -= 1;
-    c.priority += 1;
-
+  shortCategories(): void {
     this.categories.sort((a,b) => a.priority - b.priority);
-
-    this.categoryService.putResource(category.id, category).subscribe(response => {
-      console.log(category.categoryName + ' kategorisine ait sıralama değiştirildi: ' + category.priority)
-    });
-
-    this.categoryService.putResource(c.id, c).subscribe(response => {
-      console.log(c.categoryName + ' kategorisine ait sıralama değiştirildi: ' + category.priority)
-    });
   }
 
 }

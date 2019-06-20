@@ -47,6 +47,7 @@ namespace GoldenForum.Service.Controllers
                 Title = p.Title,
                 Slug = p.Slug,
                 Body = p.Body,
+                PostType = p.PostType.ToString(),
                 PostedAt = p.PostedAt,
                 ModifiedAt = p.ModifiedAt,
                 IsDeleted = p.IsDeleted,
@@ -94,6 +95,37 @@ namespace GoldenForum.Service.Controllers
 
             post.ModifiedAt = DateTime.Now;
             _context.Entry(post).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PostExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+        // PUT: api/Posts/5/Type
+        [HttpPut("{id}/type")]
+        public async Task<IActionResult> PutPostType(int id, Post post)
+        {
+            if (id != post.Id)
+            {
+                return BadRequest();
+            }
+
+            var post_ = await _context.Posts.FindAsync(id);
+            post_.PostType = post.PostType;
 
             try
             {

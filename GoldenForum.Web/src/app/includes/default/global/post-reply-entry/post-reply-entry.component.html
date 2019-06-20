@@ -1,7 +1,7 @@
 <div class="row no-gutters d-flex align-items-stretch">
     <!-- User Overview (+) -->
     <div class="col-md-2 bg-light">
-      <div class="h-100 p-3">
+      <div class="h-100 border-right p-3">
         <!-- Author Image (+) -->
         <section class="text-center">
           <img src="{{ entry.author?.imageUrl }}" alt="{{ entry.author?.userName }}" class="img-fluid rounded w-50">
@@ -85,9 +85,27 @@
             <small *ngIf="type === 'post'" class="text-success" style="cursor: pointer">
               <i class="far fa-thumbs-up"></i> Beğen
             </small>
+
+            <div class="btn-group dropup ml-3" [hidden]="type !== 'post'">
+              <small class="text-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
+                <i class="far fa-file-alt"></i> Gönderi Tipi
+              </small>
+  
+              <div class="dropdown-menu bg-light shadow-sm border">
+                <div [hidden]="entry.postType === 'Opened'" class="dropdown-item" style="cursor: pointer" (click)="OnChangeType(entry, 1)">
+                  <small><i class="far fa-check-square"></i> Açık Gönderi</small>
+                </div>
+                <div [hidden]="entry.postType === 'Attached'"  class="dropdown-item" style="cursor: pointer" (click)="OnChangeType(entry, 2)">
+                  <small><i class="fas fa-paperclip"></i> Sabit Gönderi</small>
+                </div>
+                <div [hidden]="entry.postType === 'Closed'"  class="dropdown-item" style="cursor: pointer" (click)="OnChangeType(entry, 3)">
+                  <small><i class="fas fa-ban"></i> Kapalı Gönderi</small>
+                </div>
+              </div>
+            </div>
   
             <small class="ml-3" (click)="onUpdateToggle(entry)" style="cursor: pointer" 
-            *ngIf="authService.currentUser.sub === entry.author.id || authService.currentUser.typ === 'Yönetici'">
+            *ngIf="authService.currentUser.unique_name === entry.author.id || authService.currentUser.typ === 'Yönetici'">
               <i class="far fa-edit"></i> Düzenle
             </small>
   
