@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm, FormControl } from '@angular/forms';
 import { ForumService } from 'src/app/services/forum.service';
 
 @Component({
@@ -9,22 +9,40 @@ import { ForumService } from 'src/app/services/forum.service';
   styleUrls: ['./management-forum-form.component.css']
 })
 export class ManagementForumFormComponent implements OnInit {
-  title: string = 'Yeni Forum Oluştur';
+  title: string = null;
   form: FormGroup;
   submitted: boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) private data, private formBuilder: FormBuilder, private forumService: ForumService) { }
 
   ngOnInit() {
-    this.forumForm();
+    this.forumInsertingForm();
+
+    if (this.data.forum) {
+      this.title = 'Forum Düzenle: ' + this.data.forum.title;
+      this.forumUpdatingForm();
+    }
+    else {
+      this.title = 'Yeni Forum Oluştur';
+    }
   }
 
-  forumForm(): void {
+  forumInsertingForm(): void {
     this.form = this.formBuilder.group({
       categoryId: [this.data.categoryId, Validators.required],
       title: [null, Validators.required],
       description: [null, Validators.required],
       imageUrl: [null, Validators.required]
+    });
+  }
+
+  forumUpdatingForm(): void {
+    this.form.addControl('id', new FormControl(this.data.forum.id));
+    
+    this.form.patchValue({
+      title: this.data.forum.title,
+      description: this.data.forum.description,
+      imageUrl: this.data.forum.imageUrl
     });
   }
 
@@ -34,14 +52,12 @@ export class ManagementForumFormComponent implements OnInit {
     this.submitted = true;
     if (this.form.invalid) { return; }
 
-    this.forumService.postResource(form.value).subscribe(response => {
-      this.submitted = false;
-      this.form.patchValue({
-        title: null,
-        description: null,
-        imageUrl: null
-      })
-    });
+    if (this.data.forum) { 
+      this.forumService.putResource(this.data.forum.id, form.value).subscribe(response => this.submitted = false);
+    }
+    else {
+      this.forumService.postResource(form.value).subscribe(response => this.submitted = false);
+    }
   }
 
 }

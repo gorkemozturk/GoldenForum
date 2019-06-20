@@ -16,21 +16,22 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { ApplicationRoutes } from './app.route';
 import { SummaryPipe } from './pipes/summary.pipe';
-import { PostShortlistComponent } from './includes/post/post-shortlist/post-shortlist.component';
-import { ReplyShortlistComponent } from './includes/reply/reply-shortlist/reply-shortlist.component';
+import { PostShortlistComponent } from './includes/default/post/post-shortlist/post-shortlist.component';
+import { ReplyShortlistComponent } from './includes/default/reply/reply-shortlist/reply-shortlist.component';
 import { PostDetailComponent } from './components/default/post/post-detail/post-detail.component';
-import { PostReplyEntryComponent } from './includes/global/post-reply-entry/post-reply-entry.component';
+import { PostReplyEntryComponent } from './includes/default/global/post-reply-entry/post-reply-entry.component';
 import { PostFormComponent } from './components/default/post/post-form/post-form.component';
-import { ReplyFormComponent } from './includes/reply/reply-form/reply-form.component';
+import { ReplyFormComponent } from './includes/default/reply/reply-form/reply-form.component';
 import { ForumDetailComponent } from './components/default/forum/forum-detail/forum-detail.component';
-import { ForumOverviewComponent } from './includes/forum/forum-overview/forum-overview.component';
-import { PostOwnerComponent } from './includes/post/post-owner/post-owner.component';
-import { PostListComponent } from './includes/post/post-list/post-list.component';
-import { PostReplyOverviewComponent } from './includes/global/post-reply-overview/post-reply-overview.component';
+import { ForumOverviewComponent } from './includes/default/forum/forum-overview/forum-overview.component';
+import { PostOwnerComponent } from './includes/default/post/post-owner/post-owner.component';
+import { PostListComponent } from './includes/default/post/post-list/post-list.component';
+import { PostReplyOverviewComponent } from './includes/default/global/post-reply-overview/post-reply-overview.component';
 import { UserDetailComponent } from './components/default/user/user-detail/user-detail.component';
 import { ManagementComponent } from './layouts/management/management.component';
 import { ManagementForumFormComponent } from './components/management/forum/management-forum-form/management-forum-form.component';
 import { ManagementForumListComponent } from './components/management/forum/management-forum-list/management-forum-list.component';
+import { ManagementCategoryFormComponent } from './components/management/category/management-category-form/management-category-form.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ManagementForumListComponent } from './components/management/forum/mana
     UserDetailComponent,
     ManagementComponent,
     ManagementForumFormComponent,
-    ManagementForumListComponent
+    ManagementForumListComponent,
+    ManagementCategoryFormComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,8 @@ import { ManagementForumListComponent } from './components/management/forum/mana
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [
-    ManagementForumFormComponent
+    ManagementForumFormComponent,
+    ManagementCategoryFormComponent
   ]
 })
 export class AppModule { }

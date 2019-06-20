@@ -2,12 +2,12 @@
   <!-- Forum Header (+) -->
   <div class="bg-light p-3">
     <div class="row d-flex align-items-center">
-      <div class="col">
+      <div class="col-md">
         <app-forum-overview [forum]="forum"></app-forum-overview>
       </div>
 
-      <div class="col text-right">
-        <a [routerLink]="['/forum/' + forum.slug + '/' + forum.id + '/post/new']" class="btn btn-primary">Yeni Gönderi Oluştur</a>
+      <div class="col-md text-right">
+        <a [routerLink]="['/forum/' + forum.slug + '/' + forum.id + '/post/new']" class="btn btn-primary btn-sm">Yeni Gönderi Oluştur</a>
       </div>
     </div>
   </div>

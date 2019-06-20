@@ -83,6 +83,9 @@ namespace GoldenForum.Service.Controllers
                 return BadRequest();
             }
 
+            var slugHelper = new SlugHelper();
+            forum.Slug = slugHelper.GenerateSlug(forum.Title);
+
             _context.Entry(forum).State = EntityState.Modified;
 
             try
@@ -109,7 +112,6 @@ namespace GoldenForum.Service.Controllers
         public async Task<ActionResult<Forum>> PostForum(Forum forum)
         {
             var slugHelper = new SlugHelper();
-
             forum.Slug = slugHelper.GenerateSlug(forum.Title);
 
             _context.Forums.Add(forum);

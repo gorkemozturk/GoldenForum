@@ -1,6 +1,6 @@
 <div class="overflow-hidden rounded">
     <div class="bg-light p-3">
-        Yeni Forum Oluştur
+        {{ title }}
     </div>
     
     <div class="bg-white p-3">
@@ -29,7 +29,7 @@
         
             <div class="text-right">
                 <button type="submit" class="btn btn-secondary" (click)="onSubmit(form)" matDialogClose>Vazgeç</button>
-                <button type="submit" class="btn btn-primary ml-1" (click)="onSubmit(form)">Kaydet</button>
+                <button type="submit" class="btn btn-primary ml-1" (click)="onSubmit(form)" [disabled]="!form.valid" matDialogClose>Kaydet</button>
             </div>
         </form>
     </div>

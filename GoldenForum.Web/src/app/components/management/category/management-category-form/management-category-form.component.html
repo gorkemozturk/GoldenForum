@@ -1,0 +1,22 @@
+<div class="overflow-hidden rounded">
+    <div class="bg-light p-3">
+        {{ title }}
+    </div>
+    
+    <div class="bg-white p-3">
+        <form [formGroup]="form" autocomplete="off">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Kategori Adı"
+                formControlName="categoryName" [ngClass]="{ 'is-invalid': submitted && field.categoryName.errors }">
+                <div *ngIf="submitted && field.categoryName.errors" class="invalid-feedback">
+                <div *ngIf="field.categoryName.errors.required">Kategori adı alanının doldurulması zorunludur.</div>
+                </div>
+            </div>
+        
+            <div class="text-right">
+                <button type="submit" class="btn btn-secondary" (click)="onSubmit(form)" matDialogClose>Vazgeç</button>
+                <button type="submit" class="btn btn-primary ml-1" (click)="onSubmit(form)" [disabled]="!form.valid" matDialogClose>Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
