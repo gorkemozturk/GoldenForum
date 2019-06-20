@@ -47,7 +47,7 @@ namespace GoldenForum.Service.Controllers
                         Title = p.Title,
                         PostedAt = p.PostedAt,
                         Author = GetAuthor(p.User)
-                    }).Take(1).FirstOrDefault()
+                    }).OrderByDescending(p => p.PostedAt).Take(1).FirstOrDefault()
                 })
             }).ToListAsync();
 

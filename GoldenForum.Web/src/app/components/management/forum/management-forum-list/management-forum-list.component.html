@@ -21,7 +21,7 @@
         <div>
           <i class="text-primary fas fa-plus-circle" (click)="openForumForm(category.id)" style="cursor: pointer"></i>
           <i class="text-secondary fas fa-cog ml-2" (click)="openCategoryForm(category)" style="cursor: pointer"></i>
-          <i class="text-danger far fa-trash-alt ml-2" style="cursor: pointer"></i>
+          <i class="text-danger far fa-trash-alt ml-2" (click)="onDelete(category, 'category')" style="cursor: pointer"></i>
         </div>
       </div>
       <!-- The Category that Forums Belongs to (-) -->
@@ -32,10 +32,13 @@
           <div class="text-secondary">
             {{ (i+1) + '. ' + forum.title }}
           </div>
+
+          <!-- Forum Actions (+) -->
           <div>
             <i class="text-secondary fas fa-cog" (click)="openForumForm(category.id, forum)" style="cursor: pointer"></i>
-            <i class="text-danger far fa-trash-alt ml-2" style="cursor: pointer"></i>
+            <i class="text-danger far fa-trash-alt ml-2" (click)="onDelete(forum, 'forum')" style="cursor: pointer"></i>
           </div>
+          <!-- Forum Actions (-) -->
         </div>
       </div>
       <!-- Forum List (-) -->
