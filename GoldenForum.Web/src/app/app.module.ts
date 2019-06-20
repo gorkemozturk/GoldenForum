@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './layouts/auth/auth.component';
@@ -65,7 +65,7 @@ import { ManagementForumListComponent } from './components/management/forum/mana
     FormsModule,
     HttpClientModule,
     ApplicationRoutes,
-    BrowserAnimationsModule,
+    NoopAnimationsModule,
     MatDialogModule
   ],
   providers: [],

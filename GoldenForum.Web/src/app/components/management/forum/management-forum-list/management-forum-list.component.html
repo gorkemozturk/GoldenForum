@@ -10,7 +10,7 @@
           <i class="far fa-folder text-warning"></i> {{ category.categoryName }}
         </div>
         <div>
-          <i class="text-primary fas fa-plus-circle" (click)="openForm()" style="cursor: pointer"></i>
+          <i class="text-primary fas fa-plus-circle" (click)="openForumForm(category.id)" style="cursor: pointer"></i>
           <i class="text-secondary fas fa-cog ml-2" style="cursor: pointer"></i>
           <i class="text-danger far fa-trash-alt ml-2" style="cursor: pointer"></i>
         </div>
@@ -24,7 +24,7 @@
             {{ (i+1) + '. ' + forum.title }}
           </div>
           <div>
-            <i class="text-secondary fas fa-cog" style="cursor: pointer"></i>
+            <i class="text-secondary fas fa-cog" (click)="openForumForm(category.id, forum.id)" style="cursor: pointer"></i>
             <i class="text-danger far fa-trash-alt ml-2" style="cursor: pointer"></i>
           </div>
         </div>

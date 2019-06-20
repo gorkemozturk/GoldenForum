@@ -1,3 +1,36 @@
-<p>
-  management-forum-form works!
-</p>
+<div class="overflow-hidden rounded">
+    <div class="bg-light p-3">
+        Yeni Forum Oluştur
+    </div>
+    
+    <div class="bg-white p-3">
+        <form [formGroup]="form" autocomplete="off">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Başlık"
+                formControlName="title" [ngClass]="{ 'is-invalid': submitted && field.title.errors }">
+                <div *ngIf="submitted && field.title.errors" class="invalid-feedback">
+                <div *ngIf="field.title.errors.required">Başlık alanının doldurulması zorunludur.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Açıklama"
+                formControlName="description" [ngClass]="{ 'is-invalid': submitted && field.description.errors }">
+                <div *ngIf="submitted && field.description.errors" class="invalid-feedback">
+                <div *ngIf="field.description.errors.required">Açıklama alanının doldurulması zorunludur.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="Resim Bağlantısı"
+                formControlName="imageUrl" [ngClass]="{ 'is-invalid': submitted && field.imageUrl.errors }">
+                <div *ngIf="submitted && field.imageUrl.errors" class="invalid-feedback">
+                <div *ngIf="field.imageUrl.errors.required">Resim bağlantısı alanının doldurulması zorunludur.</div>
+                </div>
+            </div>
+        
+            <div class="text-right">
+                <button type="submit" class="btn btn-secondary" (click)="onSubmit(form)" matDialogClose>Vazgeç</button>
+                <button type="submit" class="btn btn-primary ml-1" (click)="onSubmit(form)">Kaydet</button>
+            </div>
+        </form>
+    </div>
+</div>
