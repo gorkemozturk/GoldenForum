@@ -2,7 +2,7 @@
   <img src="{{ author.imageUrl }}" style="width: 50px" class="mr-3 rounded" alt="...">
   
   <div class="media-body">
-    <a class="d-block" [routerLink]="['/user/' + author.id]">{{ author.userName }}</a>
+    <a class="d-block" [routerLink]="['/user/' + author.userName | lowercase]">{{ author.userName }}</a>
     <small>
       Karizma: {{ author.rating }}
     </small>

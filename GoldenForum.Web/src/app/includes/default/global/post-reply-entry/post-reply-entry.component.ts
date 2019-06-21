@@ -23,46 +23,28 @@ export class PostReplyEntryComponent implements OnInit {
   ngOnInit() {
   }
 
-  onToggle(entry?: any) {
+  onToggle(entry?: any): void {
     this.collapsed = !this.collapsed;
     if (entry) { this.selectedEntry = entry; }
   }
 
-  onUpdate() {
+  onUpdate(): void {
     if (this.type === 'reply') {
-      const reply = { 
-        id: this.selectedEntry.id, 
-        userId: this.selectedEntry.author.id, 
-        postId: this.route.snapshot.paramMap.get('id'),
-        body: this.selectedEntry.body, 
-        repliedAt: this.selectedEntry.repliedAt
-      }
+      const reply = this.selectedEntry;
+      reply.postId = this.route.snapshot.paramMap.get('id');
+      reply.userId = this.selectedEntry.author.id;
       
-      this.replyService.putResource(this.selectedEntry.id, reply).subscribe(response => {
-        this.collapsed = !this.collapsed;
-        this.selectedEntry.modifiedAt = new Date()
-      });
+      this.putReply(reply);
     }
     else if (this.type === 'post') {
-      const post = { 
-        id: this.selectedEntry.id, 
-        userId: this.selectedEntry.author.id, 
-        forumId: this.selectedEntry.forumId,
-        title: this.selectedEntry.title,
-        slug: this.selectedEntry.slug,
-        body: this.selectedEntry.body,
-        postedAt: this.selectedEntry.postedAt,
-        variety: this.selectedEntry.variety
-      }
+      const post = this.selectedEntry;
+      post.userId = this.selectedEntry.author.id;
 
-      this.postService.putResource(this.selectedEntry.id, post).subscribe(response => {
-        this.collapsed = !this.collapsed;
-        this.selectedEntry.modifiedAt = new Date()
-      });
+      this.putPost(post);
     }
   }
 
-  onDelete(entry: any) {
+  onDelete(entry: any): void {
     if (this.type === 'reply') {
       this.replyService.deleteResource(entry.id).subscribe(response => entry.isDeleted = !entry.isDeleted);
     }
@@ -71,9 +53,22 @@ export class PostReplyEntryComponent implements OnInit {
     }
   }
 
-  onChange(entry: any, type: number) {
+  onChange(entry: any, type: number): void {
     entry.variety = type;
-    this.postService.putPostVariety(entry).subscribe(response => console.log('Konu tipi başarılı bir şekilde değiştirildi.'));
+    this.postService.putPostVariety(entry).subscribe(response => console.log('Konu tipini başarılı bir şekilde değiştirildi.'));
   }
 
+  putPost(post: any): void {
+    this.postService.putResource(post.id, post).subscribe(response => {
+      this.collapsed = !this.collapsed;
+      this.selectedEntry.modifiedAt = new Date();
+    });
+  }
+
+  putReply(reply: any): void {
+    this.replyService.putResource(reply.id, reply).subscribe(response => {
+      this.collapsed = !this.collapsed;
+      this.selectedEntry.modifiedAt = new Date();
+    });
+  }
 }

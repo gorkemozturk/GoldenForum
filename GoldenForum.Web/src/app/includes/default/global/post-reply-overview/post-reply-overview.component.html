@@ -14,7 +14,7 @@
     
     <div class="text-secondary d-flex justify-content-between">
       <small>
-        <a [routerLink]="['/user/' + entry.author.id]" class="text-secondary">{{ entry.author.userName }}</a>
+        <a [routerLink]="['/user/' + entry.author.userName | lowercase]" class="text-secondary">{{ entry.author.userName }}</a>
       </small>
       <small>
         {{ type === 'post' ? (entry.postedAt | date:'dd.MM.yyyy, HH:mm:ss') : (entry.repliedAt | date:'dd.MM.yyyy, HH:mm:ss') }}

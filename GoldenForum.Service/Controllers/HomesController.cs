@@ -85,7 +85,7 @@ namespace GoldenForum.Service.Controllers
         {
             return new UserSummaryViewModel()
             {
-                Id = user.UserName.ToLower(),
+                Id = user.Id,
                 UserName = user.UserName,
                 ImageUrl = user.ImageUrl,
                 Rating = user.Rating

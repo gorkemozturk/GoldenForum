@@ -2,8 +2,8 @@
   <i class="fas fa-info-circle fa-2x d-block"></i> Listelenecek herhangi bir gönderi cevabı bulunmuyor.
 </div>
 
-<ul *ngIf="replies.length" class="list-group list-group-flush">
-  <li class="list-group-item border-0 p-3" *ngFor="let reply of replies; let i = index" [class.bg-light]="(i+1) % 2 === 0">
+<ul *ngIf="replies.length" class="list-group list-group-flush border-top border-white">
+  <li class="list-group-item border-0 p-3" *ngFor="let reply of replies; let i = index" [class.bg-light]="(i+1) % 2 !== 0">
     <app-post-reply-overview [entry]="reply" [limit]=limit [type]="'reply'"></app-post-reply-overview>
   </li>
 </ul>

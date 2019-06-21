@@ -44,7 +44,20 @@
       <div class="d-flex align-items-start flex-column h-100 p-3">
         <div class="text-secondary d-flex justify-content-between w-100">
           <small>
-            {{ type === 'post' ? 'Gönderi Tarihi: ' + (entry.postedAt | date:'dd.MM.yyyy, HH:mm:ss') : 'Cevap Tarihi: ' + (entry.repliedAt | date:'dd.MM.yyyy, HH:mm:ss') }}
+            <span *ngIf="entry.variety === 1" class="pr-3">
+              <i class="far fa-folder"></i> Açık Gönderi
+            </span>
+
+            <span *ngIf="entry.variety === 2" class="pr-3">
+              <i class="fas fa-folder"></i> Sabit Gönderi
+            </span>
+
+            <span *ngIf="entry.variety === 3" class="pr-3">
+              <i class="fas fa-lock"></i> Kapalı Gönderi
+            </span>
+            <span>
+              {{ type === 'post' ? 'Gönderi Tarihi: ' + (entry.postedAt | date:'dd.MM.yyyy, HH:mm:ss') : 'Cevap Tarihi: ' + (entry.repliedAt | date:'dd.MM.yyyy, HH:mm:ss') }}
+            </span>
           </small>
           
           <small>{{ index ? '#' + index : '#1' }}</small>
@@ -55,7 +68,7 @@
             <!-- The Deleted Message (If the body of the entry is deleted.) (+) -->
             <div [hidden]="collapsed">
               <span [hidden]="entry.isDeleted">{{ entry.body }}</span>
-              <i [hidden]="!entry.isDeleted" class="text-secondary">Bu mesaj yönetici veya moderatör tarafından silinmiştir.</i>
+              <i [hidden]="!entry.isDeleted" class="text-secondary">Bu gönderi cevabı yönetici veya moderatör tarafından silinmiştir.</i>
             </div>
             <!-- The Deleted Message (-) -->
   
@@ -99,15 +112,15 @@
                 <i class="far fa-file-alt"></i> Gönderi Tipi
               </small>
   
-              <div class="dropdown-menu bg-light shadow-sm border">
+              <div class="dropdown-menu bg-light border">
                 <div [hidden]="entry.variety === 1" class="dropdown-item" style="cursor: pointer" (click)="onChange(entry, 1)">
-                  <small><i class="far fa-check-square"></i> Açık Gönderi</small>
+                  <small>Açık Gönderi</small>
                 </div>
                 <div [hidden]="entry.variety === 2"  class="dropdown-item" style="cursor: pointer" (click)="onChange(entry, 2)">
-                  <small><i class="fas fa-paperclip"></i> Sabit Gönderi</small>
+                  <small>Sabit Gönderi</small>
                 </div>
                 <div [hidden]="entry.variety === 3"  class="dropdown-item" style="cursor: pointer" (click)="onChange(entry, 3)">
-                  <small><i class="fas fa-ban"></i> Kapalı Gönderi</small>
+                  <small>Kapalı Gönderi</small>
                 </div>
               </div>
             </div>

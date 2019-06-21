@@ -28,21 +28,7 @@ export class PostDetailComponent implements OnInit {
 
   onSubmit(form: NgForm): void {
     this.replyService.postResource(form.value).subscribe(response => {
-      const reply: any = { 
-        id: response.id, 
-        repliedAt: response.repliedAt, 
-        body: response.body, 
-        
-        author: {
-          id: response.author.id,
-          userName: response.author.userName, 
-          imageUrl: response.author.imageUrl, 
-          rating: response.author.rating, 
-          registeredAt: response.author.registeredAt,
-          postsAndRepliesCount: response.author.postsAndRepliesCount
-        }
-      }
-
+      const reply: any = { id: response.id, repliedAt: response.repliedAt, body: response.body, author: response.author }
       this.post.replies.push(reply);
     });
   }

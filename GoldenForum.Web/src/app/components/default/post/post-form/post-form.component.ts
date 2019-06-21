@@ -40,7 +40,7 @@ export class PostFormComponent implements OnInit {
       forumId: [id, Validators.required],
       title: [null, Validators.required],
       body: [null, Validators.required],
-      postType: [1, Validators.required]
+      variety: [1, Validators.required]
     });
 
     this.forumService.getResource(id).subscribe(response => this.forum = response);
