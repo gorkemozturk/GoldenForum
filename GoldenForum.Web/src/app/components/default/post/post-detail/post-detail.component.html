@@ -7,4 +7,4 @@
   <app-post-reply-entry [entry]="reply" [index]="i+2" [type]="'reply'"></app-post-reply-entry>
 </div>
 
-<app-reply-form (submission)="onSubmit($event)" *ngIf="authService.isAuthanticated"></app-reply-form>
+<app-reply-form (submission)="onSubmit($event)" *ngIf="authService.isAuthanticated && post.variety !== 3"></app-reply-form>

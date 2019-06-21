@@ -8,8 +8,8 @@ namespace GoldenForum.Service.Models.ViewModels.Post
         public int Id { get; set; }
         public string Title { get; set; }
         public string Slug { get; set; }
+        public int Variety { get; set; }
         public int RepliesCount { get; set; }
-        public string Type { get; set; }
         public DateTime PostedAt { get; set; }
 
         public UserSummaryViewModel Author { get; set; }

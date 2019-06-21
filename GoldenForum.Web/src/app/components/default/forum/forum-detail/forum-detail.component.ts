@@ -26,8 +26,8 @@ export class ForumDetailComponent implements OnInit {
       this.forum.imageUrl = response.imageUrl;
       this.forum.description = response.description;
 
-      this.forum.posts = response.posts.filter(p => p.type === 'Opened' || p.type === 'Closed');
-      this.forum.attachedPosts = response.posts.filter(p => p.type === 'Attached');
+      this.forum.posts = response.posts.filter(p => p.variety === 1 || p.variety === 3);
+      this.forum.attachedPosts = response.posts.filter(p => p.variety === 2);
     });
   }
 }

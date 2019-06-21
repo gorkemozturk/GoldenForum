@@ -47,6 +47,7 @@ namespace GoldenForum.Service.Controllers
                 {
                     Id = p.Id,
                     PostId = p.Post.Id,
+                    PostSlug = p.Post.Slug,
                     Title = p.Post.Title,
                     RepliedAt = p.RepliedAt,
                     Author = GetAuthor(p.User)

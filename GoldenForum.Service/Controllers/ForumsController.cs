@@ -49,7 +49,7 @@ namespace GoldenForum.Service.Controllers
                     Title = p.Title,
                     Slug = p.Slug,
                     PostedAt = p.PostedAt,
-                    Type = p.PostType.ToString(),
+                    Variety = p.Variety,
                     RepliesCount = p.Replies.Count(),
                     Author = GetAuthor(p.User)
                 })

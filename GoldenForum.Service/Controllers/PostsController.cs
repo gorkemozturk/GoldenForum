@@ -47,7 +47,7 @@ namespace GoldenForum.Service.Controllers
                 Title = p.Title,
                 Slug = p.Slug,
                 Body = p.Body,
-                PostType = p.PostType.ToString(),
+                Variety = p.Variety,
                 PostedAt = p.PostedAt,
                 ModifiedAt = p.ModifiedAt,
                 IsDeleted = p.IsDeleted,
@@ -75,7 +75,7 @@ namespace GoldenForum.Service.Controllers
         {
             return new UserDetailViewModel()
             {
-                Id = user.UserName.ToLower(),
+                Id = user.Id,
                 UserName = user.UserName,
                 Rating = user.Rating,
                 PostsAndRepliesCount = count,
@@ -116,8 +116,8 @@ namespace GoldenForum.Service.Controllers
         }
 
         // PUT: api/Posts/5/Type
-        [HttpPut("{id}/type")]
-        public async Task<IActionResult> PutPostType(int id, Post post)
+        [HttpPut("{id}/variety")]
+        public async Task<IActionResult> PutPostVariety(int id, Post post)
         {
             if (id != post.Id)
             {
@@ -125,7 +125,7 @@ namespace GoldenForum.Service.Controllers
             }
 
             var post_ = await _context.Posts.FindAsync(id);
-            post_.PostType = post.PostType;
+            post_.Variety = post.Variety;
 
             try
             {

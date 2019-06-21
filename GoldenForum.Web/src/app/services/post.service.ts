@@ -20,7 +20,7 @@ export class PostService extends BaseService {
     super(environment.url + '/posts', http);
   }
 
-  putPostType(entry: any): Observable<any> {
-    return this.httpClient.put<any>(environment.url + '/posts/' + entry.id + '/type', entry);
+  putPostVariety(entry: any): Observable<any> {
+    return this.httpClient.put<any>(environment.url + '/posts/' + entry.id + '/variety', entry);
   }
 }

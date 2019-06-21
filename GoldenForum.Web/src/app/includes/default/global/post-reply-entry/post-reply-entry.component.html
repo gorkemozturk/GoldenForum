@@ -10,7 +10,7 @@
   
         <!-- Author Username (+) -->
         <section class="text-center my-3">
-          <a [routerLink]="['/user/' + entry.author.id]" class="d-block text-decoration-none font-weight-bold text-warning px-3">{{ entry.author?.userName }}</a>
+          <a [routerLink]="['/user/' + entry.author.userName | lowercase ]" class="d-block text-decoration-none font-weight-bold text-warning px-3">{{ entry.author?.userName }}</a>
           <span class="badge badge-warning text-uppercase rounded-0 p-1">Yönetici</span>
         </section>
         <!-- Author Username (-) -->
@@ -52,25 +52,31 @@
   
         <div class="w-100 py-3">
           <div>
+            <!-- The Deleted Message (If the body of the entry is deleted.) (+) -->
             <div [hidden]="collapsed">
               <span [hidden]="entry.isDeleted">{{ entry.body }}</span>
-              <i [hidden]="!entry.isDeleted" class="text-secondary">Bu mesaj yönetici tarafından silinmiştir.</i>
+              <i [hidden]="!entry.isDeleted" class="text-secondary">Bu mesaj yönetici veya moderatör tarafından silinmiştir.</i>
             </div>
+            <!-- The Deleted Message (-) -->
   
-            <div [hidden]="!entry.modifiedAt" class="text-secondary text-right"> 
+            <!-- Modified Date (+) -->
+            <div [hidden]="!entry.modifiedAt || entry.isDeleted" class="text-secondary text-right"> 
               <small><i>Son Düzenlenme Tarihi: {{ entry.modifiedAt | date:'dd.MM.yyyy, HH:mm:ss' }}</i></small>
             </div>
+            <!-- Modified Date (-) -->
           </div>
   
+          <!-- Toggle Edit Form (+) -->
           <div [hidden]="!collapsed">
             <div class="form-group">
               <textarea [(ngModel)]="entry.body" class="form-control" rows="5"></textarea>
             </div>
             <div class="text-right">
-              <button class="btn btn-secondary btn-sm" (click)="onUpdateToggle()">Vazgeç</button>
+              <button class="btn btn-secondary btn-sm" (click)="onToggle()">Vazgeç</button>
               <button class="btn btn-primary btn-sm ml-1" (click)="onUpdate()">Hızlı Kaydet</button>
             </div>
           </div>
+          <!-- Toggle Edit Form (-) -->
         </div>
   
         <!-- Entry Actions (+) -->
@@ -82,9 +88,11 @@
           </div>
   
           <div class="text-secondary" *ngIf="authService.isAuthanticated">
+            <!-- Like Button (+) -->
             <small *ngIf="type === 'post'" class="text-success" style="cursor: pointer">
               <i class="far fa-thumbs-up"></i> Beğen
             </small>
+            <!-- Like Button (-) -->
 
             <div class="btn-group dropup ml-3" [hidden]="type !== 'post'">
               <small class="text-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="cursor: pointer">
@@ -92,24 +100,24 @@
               </small>
   
               <div class="dropdown-menu bg-light shadow-sm border">
-                <div [hidden]="entry.postType === 'Opened'" class="dropdown-item" style="cursor: pointer" (click)="OnChangeType(entry, 1)">
+                <div [hidden]="entry.variety === 1" class="dropdown-item" style="cursor: pointer" (click)="onChange(entry, 1)">
                   <small><i class="far fa-check-square"></i> Açık Gönderi</small>
                 </div>
-                <div [hidden]="entry.postType === 'Attached'"  class="dropdown-item" style="cursor: pointer" (click)="OnChangeType(entry, 2)">
+                <div [hidden]="entry.variety === 2"  class="dropdown-item" style="cursor: pointer" (click)="onChange(entry, 2)">
                   <small><i class="fas fa-paperclip"></i> Sabit Gönderi</small>
                 </div>
-                <div [hidden]="entry.postType === 'Closed'"  class="dropdown-item" style="cursor: pointer" (click)="OnChangeType(entry, 3)">
+                <div [hidden]="entry.variety === 3"  class="dropdown-item" style="cursor: pointer" (click)="onChange(entry, 3)">
                   <small><i class="fas fa-ban"></i> Kapalı Gönderi</small>
                 </div>
               </div>
             </div>
   
-            <small class="ml-3" (click)="onUpdateToggle(entry)" style="cursor: pointer" 
+            <small class="ml-3" (click)="onToggle(entry)" style="cursor: pointer" 
             *ngIf="authService.currentUser.unique_name === entry.author.id || authService.currentUser.typ === 'Yönetici'">
               <i class="far fa-edit"></i> Düzenle
             </small>
   
-            <small class="ml-3" (click)="onDeleteToggle(entry)" style="cursor: pointer" *ngIf="authService.currentUser.typ === 'Yönetici'">
+            <small class="ml-3" (click)="onDelete(entry)" style="cursor: pointer" *ngIf="authService.currentUser.typ === 'Yönetici'">
               <i class="far fa-trash-alt"></i> {{ entry.isDeleted ? 'Geri Al' : 'Sil' }}
             </small>
   

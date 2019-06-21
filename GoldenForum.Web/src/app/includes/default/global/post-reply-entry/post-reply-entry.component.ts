@@ -23,14 +23,14 @@ export class PostReplyEntryComponent implements OnInit {
   ngOnInit() {
   }
 
-  onUpdateToggle(entry?: any) {
+  onToggle(entry?: any) {
     this.collapsed = !this.collapsed;
     if (entry) { this.selectedEntry = entry; }
   }
 
   onUpdate() {
     if (this.type === 'reply') {
-      const newEntry = { 
+      const reply = { 
         id: this.selectedEntry.id, 
         userId: this.selectedEntry.author.id, 
         postId: this.route.snapshot.paramMap.get('id'),
@@ -38,30 +38,31 @@ export class PostReplyEntryComponent implements OnInit {
         repliedAt: this.selectedEntry.repliedAt
       }
       
-      this.replyService.putResource(this.selectedEntry.id, newEntry).subscribe(response => {
+      this.replyService.putResource(this.selectedEntry.id, reply).subscribe(response => {
         this.collapsed = !this.collapsed;
         this.selectedEntry.modifiedAt = new Date()
       });
     }
     else if (this.type === 'post') {
-      const newEntry = { 
+      const post = { 
         id: this.selectedEntry.id, 
         userId: this.selectedEntry.author.id, 
         forumId: this.selectedEntry.forumId,
         title: this.selectedEntry.title,
         slug: this.selectedEntry.slug,
         body: this.selectedEntry.body,
-        postedAt: this.selectedEntry.postedAt
+        postedAt: this.selectedEntry.postedAt,
+        variety: this.selectedEntry.variety
       }
 
-      this.postService.putResource(this.selectedEntry.id, newEntry).subscribe(response => {
+      this.postService.putResource(this.selectedEntry.id, post).subscribe(response => {
         this.collapsed = !this.collapsed;
         this.selectedEntry.modifiedAt = new Date()
       });
     }
   }
 
-  onDeleteToggle(entry: any) {
+  onDelete(entry: any) {
     if (this.type === 'reply') {
       this.replyService.deleteResource(entry.id).subscribe(response => entry.isDeleted = !entry.isDeleted);
     }
@@ -70,18 +71,9 @@ export class PostReplyEntryComponent implements OnInit {
     }
   }
 
-  OnChangeType(entry: any, type: number) {
-    const temp = entry.postType;
-
-    if (type === 1) { entry.postType = 1; }
-    else if (type === 2) { entry.postType = 2; }
-    else if (type === 3) { entry.postType = 3; }
-
-    this.postService.putPostType(entry).subscribe(response => {
-      if (type === 1) { entry.postType = 'Opened'; }
-      else if (type === 2) { entry.postType = 'Attached'; }
-      else if (type === 3) { entry.postType = 'Closed'; }
-    });
+  onChange(entry: any, type: number) {
+    entry.variety = type;
+    this.postService.putPostVariety(entry).subscribe(response => console.log('Konu tipi başarılı bir şekilde değiştirildi.'));
   }
 
 }
