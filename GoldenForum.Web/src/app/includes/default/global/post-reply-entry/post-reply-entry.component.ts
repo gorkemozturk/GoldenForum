@@ -4,6 +4,8 @@ import { ReplyService } from 'src/app/services/reply.service';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { Acclaim } from 'src/app/models/acclaim';
+import { AcclaimService } from 'src/app/services/acclaim.service';
 
 @Component({
   selector: 'app-post-reply-entry',
@@ -16,9 +18,15 @@ export class PostReplyEntryComponent implements OnInit {
   @Input() type: string = null;
 
   collapsed: boolean = false;
+  liked: boolean = false;
   selectedEntry: any = new Object();
 
-  constructor(private replyService: ReplyService, private postService: PostService, private route: ActivatedRoute, private authService: AuthService) { }
+  constructor(
+    private replyService: ReplyService, 
+    private postService: PostService, 
+    private route: ActivatedRoute, 
+    private authService: AuthService, 
+    private acclaimService: AcclaimService) { }
 
   ngOnInit() {
   }
@@ -55,7 +63,7 @@ export class PostReplyEntryComponent implements OnInit {
 
   onChange(entry: any, type: number): void {
     entry.variety = type;
-    this.postService.putPostVariety(entry).subscribe(response => console.log('Konu tipini başarılı bir şekilde değiştirildi.'));
+    this.postService.putPostVariety(entry).subscribe(response => console.log('Konu tipi başarılı bir şekilde değiştirildi.'));
   }
 
   putPost(post: any): void {
@@ -70,5 +78,28 @@ export class PostReplyEntryComponent implements OnInit {
       this.collapsed = !this.collapsed;
       this.selectedEntry.modifiedAt = new Date();
     });
+  }
+
+  acclaim(): void {
+    const acclaim: Acclaim = {
+      userId: this.authService.currentUser.sub,
+      postId: this.route.snapshot.paramMap.get('id'),
+      authorId: this.entry.author.id
+    }
+
+    this.acclaimService.postResource(acclaim).subscribe(response => {
+      this.entry.acclaims.push(response);
+      this.liked = true;
+      this.entry.author.rating += 1;
+    });
+  }
+
+  get isInAcclaims(): boolean {
+    const acclaims = [];
+    for (var item in this.entry.acclaims) {
+      acclaims.push(this.entry.acclaims[item].userName);
+    }
+
+    return acclaims.find(a => a === this.authService.currentUser.unique_name) ? true : false;
   }
 }

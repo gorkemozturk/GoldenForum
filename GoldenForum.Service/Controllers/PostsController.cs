@@ -13,6 +13,7 @@ using GoldenForum.Service.Helpers;
 using Microsoft.AspNetCore.Identity;
 using GoldenForum.Service.Models.ViewModels;
 using GoldenForum.Service.Models.ViewModels.User;
+using GoldenForum.Service.Models.ViewModels.Acclaim;
 
 namespace GoldenForum.Service.Controllers
 {
@@ -51,6 +52,10 @@ namespace GoldenForum.Service.Controllers
                 PostedAt = p.PostedAt,
                 ModifiedAt = p.ModifiedAt,
                 IsDeleted = p.IsDeleted,
+                Acclaims = p.Acclaims.Select(a => new AcclaimListViewModel
+                {
+                    UserName = a.User.UserName
+                }),
                 Author = GetAuthor(p.User, p.User.Posts.Count() + p.User.Replies.Count()),
                 Replies = p.Replies.Select(r => new ReplyListViewModel
                 {

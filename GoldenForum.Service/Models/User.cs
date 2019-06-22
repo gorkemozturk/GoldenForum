@@ -15,5 +15,7 @@ namespace GoldenForum.Service.Models
 
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Reply> Replies { get; set; }
+        public virtual ICollection<Acclaim> Acclaims { get; set; }
+
     }
 }

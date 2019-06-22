@@ -26,5 +26,6 @@ namespace GoldenForum.Service.Models
         [ForeignKey("ForumId")]
         public virtual Forum Forum { get; set; }
         public virtual ICollection<Reply> Replies { get; set; }
+        public virtual ICollection<Acclaim> Acclaims { get; set; }
     }
 }

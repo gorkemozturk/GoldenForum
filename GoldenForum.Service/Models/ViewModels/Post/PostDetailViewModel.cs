@@ -1,4 +1,5 @@
-﻿using GoldenForum.Service.Models.ViewModels.Reply;
+﻿using GoldenForum.Service.Models.ViewModels.Acclaim;
+using GoldenForum.Service.Models.ViewModels.Reply;
 using GoldenForum.Service.Models.ViewModels.User;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace GoldenForum.Service.Models.ViewModels.Post
         public string Slug { get; set; }
         public string Body { get; set; }
         public int Variety { get; set; }
+        public IEnumerable<AcclaimListViewModel> Acclaims { get; set; }
         public bool IsDeleted { get; set; }
 
         public DateTime PostedAt { get; set; }

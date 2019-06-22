@@ -102,8 +102,10 @@
   
           <div class="text-secondary" *ngIf="authService.isAuthanticated">
             <!-- Like Button (+) -->
-            <small *ngIf="type === 'post'" class="text-success" style="cursor: pointer">
-              <i class="far fa-thumbs-up"></i> Beğen
+            <small *ngIf="type === 'post'" class="text-success">
+              <i class="far fa-thumbs-up"></i> 
+              <span style="cursor: pointer"  (click)="acclaim()" *ngIf="!isInAcclaims && !liked && authService.currentUser.sub !== entry.author.id"> Beğen </span> 
+              {{ entry.acclaims?.length }}
             </small>
             <!-- Like Button (-) -->
 
@@ -126,7 +128,7 @@
             </div>
   
             <small class="ml-3" (click)="onToggle(entry)" style="cursor: pointer" 
-            *ngIf="authService.currentUser.unique_name === entry.author.id || authService.currentUser.typ === 'Yönetici'">
+            *ngIf="authService.currentUser.sub === entry.author.id || authService.currentUser.typ === 'Yönetici'">
               <i class="far fa-edit"></i> Düzenle
             </small>
   
