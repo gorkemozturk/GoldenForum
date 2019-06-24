@@ -95,7 +95,7 @@
         <!-- Entry Actions (+) -->
         <div class="mt-auto d-flex justify-content-between w-100">
           <div *ngIf="authService.isAuthanticated">
-            <small class="text-danger" style="cursor: pointer">
+            <small class="text-danger" style="cursor: pointer" (click)="openReportForm(entry)">
               <i class="fas fa-flag"></i> Gönderiyi Şikayet Et
             </small>
           </div>

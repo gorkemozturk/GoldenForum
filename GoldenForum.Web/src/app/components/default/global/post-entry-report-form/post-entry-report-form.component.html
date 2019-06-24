@@ -1,0 +1,57 @@
+<div class="overflow-hidden rounded">
+  <div class="bg-light p-3">
+    Gönderiyi Şikayet Et: {{ data.entry.author.userName }}
+  </div>
+
+  <div class="bg-white p-3">
+    <!-- Post Report Form (+) -->
+    <form *ngIf="data.entry.replies" [formGroup]="postForm" autocomplete="off">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Başlık"
+        formControlName="title" [ngClass]="{ 'is-invalid': submitted && postField.title.errors }">
+        <div *ngIf="submitted && postField.title.errors" class="invalid-feedback">
+          <div *ngIf="postField.title.errors.required">Başlık alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="body" class="form-control" placeholder="Açıklama"
+        formControlName="body" [ngClass]="{ 'is-invalid': submitted && postField.body.errors }">
+        <div *ngIf="submitted && postField.body.errors" class="invalid-feedback">
+          <div *ngIf="postField.body.errors.required">Açıklama alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+    
+      <div class="text-right">
+        <button class="btn btn-secondary mr-1" matDialogClose>Vazgeç</button>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit(postForm)" [disabled]="!postForm.valid" matDialogClose>Gönder</button>
+      </div>
+    </form>
+    <!-- Post Report Form (-) -->
+
+    <!-- Reply Report Form (+) -->
+    <form *ngIf="!data.entry.replies" [formGroup]="postForm" autocomplete="off">
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="Başlık"
+        formControlName="title" [ngClass]="{ 'is-invalid': submitted && replyField.title.errors }">
+        <div *ngIf="submitted && replyField.title.errors" class="invalid-feedback">
+          <div *ngIf="replyField.title.errors.required">Başlık alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="body" class="form-control" placeholder="Açıklama"
+        formControlName="body" [ngClass]="{ 'is-invalid': submitted && replyField.body.errors }">
+        <div *ngIf="submitted && replyField.body.errors" class="invalid-feedback">
+          <div *ngIf="replyField.body.errors.required">Açıklama alanının doldurulması zorunludur.</div>
+        </div>
+      </div>
+    
+      <div class="text-right">
+        <button class="btn btn-secondary mr-1" matDialogClose>Vazgeç</button>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit(postForm)" [disabled]="!postForm.valid" matDialogClose>Gönder</button>
+      </div>
+    </form>
+    <!-- Reply Report Form (-) -->
+  </div>
+</div>
+
+{{ postForm.value | json }}

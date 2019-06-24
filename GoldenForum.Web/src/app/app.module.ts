@@ -32,6 +32,7 @@ import { ManagementComponent } from './layouts/management/management.component';
 import { ManagementForumFormComponent } from './components/management/forum/management-forum-form/management-forum-form.component';
 import { ManagementForumListComponent } from './components/management/forum/management-forum-list/management-forum-list.component';
 import { ManagementCategoryFormComponent } from './components/management/category/management-category-form/management-category-form.component';
+import { PostEntryReportFormComponent } from './components/default/global/post-entry-report-form/post-entry-report-form.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ManagementCategoryFormComponent } from './components/management/categor
     ManagementComponent,
     ManagementForumFormComponent,
     ManagementForumListComponent,
-    ManagementCategoryFormComponent
+    ManagementCategoryFormComponent,
+    PostEntryReportFormComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +76,8 @@ import { ManagementCategoryFormComponent } from './components/management/categor
   bootstrap: [AppComponent],
   entryComponents: [
     ManagementForumFormComponent,
-    ManagementCategoryFormComponent
+    ManagementCategoryFormComponent,
+    PostEntryReportFormComponent
   ]
 })
 export class AppModule { }

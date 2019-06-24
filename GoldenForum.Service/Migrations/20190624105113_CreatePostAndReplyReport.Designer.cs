@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GoldenForum.Service.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190624095523_CreateReport")]
-    partial class CreateReport
+    [Migration("20190624105113_CreatePostAndReplyReport")]
+    partial class CreatePostAndReplyReport
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,6 +111,25 @@ namespace GoldenForum.Service.Migrations
                     b.ToTable("Posts");
                 });
 
+            modelBuilder.Entity("GoldenForum.Service.Models.PostReport", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Body");
+
+                    b.Property<int>("PostId");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostReports");
+                });
+
             modelBuilder.Entity("GoldenForum.Service.Models.Reply", b =>
                 {
                     b.Property<int>("Id")
@@ -138,7 +157,7 @@ namespace GoldenForum.Service.Migrations
                     b.ToTable("Replies");
                 });
 
-            modelBuilder.Entity("GoldenForum.Service.Models.Report", b =>
+            modelBuilder.Entity("GoldenForum.Service.Models.ReplyReport", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,19 +165,15 @@ namespace GoldenForum.Service.Migrations
 
                     b.Property<string>("Body");
 
-                    b.Property<int>("PostId");
+                    b.Property<int>("ReplyId");
 
                     b.Property<string>("Title");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId");
+                    b.HasIndex("ReplyId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Reports");
+                    b.ToTable("ReplyReports");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -372,6 +387,14 @@ namespace GoldenForum.Service.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("GoldenForum.Service.Models.PostReport", b =>
+                {
+                    b.HasOne("GoldenForum.Service.Models.Post", "Post")
+                        .WithMany()
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("GoldenForum.Service.Models.Reply", b =>
                 {
                     b.HasOne("GoldenForum.Service.Models.Post", "Post")
@@ -384,16 +407,12 @@ namespace GoldenForum.Service.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("GoldenForum.Service.Models.Report", b =>
+            modelBuilder.Entity("GoldenForum.Service.Models.ReplyReport", b =>
                 {
-                    b.HasOne("GoldenForum.Service.Models.Post", "Post")
+                    b.HasOne("GoldenForum.Service.Models.Reply", "Reply")
                         .WithMany()
-                        .HasForeignKey("PostId")
+                        .HasForeignKey("ReplyId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("GoldenForum.Service.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

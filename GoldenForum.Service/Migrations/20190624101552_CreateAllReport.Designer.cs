@@ -4,14 +4,16 @@ using GoldenForum.Service.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GoldenForum.Service.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190624101552_CreateAllReport")]
+    partial class CreateAllReport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,9 +123,13 @@ namespace GoldenForum.Service.Migrations
 
                     b.Property<string>("Title");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("PostId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("PostReports");
                 });
@@ -167,9 +173,13 @@ namespace GoldenForum.Service.Migrations
 
                     b.Property<string>("Title");
 
+                    b.Property<string>("UserId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ReplyId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ReplyReports");
                 });
@@ -391,6 +401,10 @@ namespace GoldenForum.Service.Migrations
                         .WithMany()
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GoldenForum.Service.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("GoldenForum.Service.Models.Reply", b =>
@@ -411,6 +425,10 @@ namespace GoldenForum.Service.Migrations
                         .WithMany()
                         .HasForeignKey("ReplyId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GoldenForum.Service.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
