@@ -10,5 +10,6 @@ export class User {
     postsAndRepliesCount: number;
 
     posts: Post[] = [];
+    acclaimedPosts: Post[] = [];
     replies: Reply[] = [];
 }

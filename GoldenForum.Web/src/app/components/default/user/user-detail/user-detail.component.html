@@ -44,6 +44,9 @@
           <li class="nav-item">
             <a class="nav-link" id="reply-tab" data-toggle="tab" href="#reply" role="tab" aria-controls="reply" aria-selected="false">Gönderi Cevapları</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" id="acclaim-tab" data-toggle="tab" href="#acclaim" role="tab" aria-controls="acclaim" aria-selected="false">Beğenilen Gönderiler</a>
+          </li>
         </ul>
       </div>
       <!-- Tab Menu (-) -->
@@ -61,6 +64,10 @@
           <app-reply-shortlist [replies]="user.replies"></app-reply-shortlist>
         </div>
         <!-- User's Replies (-) -->
+
+        <div class="tab-pane" id="acclaim" role="tabpanel" aria-labelledby="acclaim-tab">
+          <app-post-shortlist [posts]="user.acclaimedPosts"></app-post-shortlist>
+        </div>
       </div>
       <!-- Tab Content (-) -->
     </div>

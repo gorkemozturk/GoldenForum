@@ -103,8 +103,8 @@
           <div class="text-secondary" *ngIf="authService.isAuthanticated">
             <!-- Like Button (+) -->
             <small *ngIf="type === 'post'" class="text-success">
-              <i class="far fa-thumbs-up"></i> 
-              <span style="cursor: pointer"  (click)="acclaim()" *ngIf="!isInAcclaims && !liked && authService.currentUser.sub !== entry.author.id"> Beğen </span> 
+              <i class="far fa-thumbs-up"></i>
+              <span style="cursor: pointer"  (click)="acclaim()" *ngIf="!isInAcclaims && !liked && authService.currentUser.sub !== entry.author.id"> Beğen </span>
               {{ entry.acclaims?.length }}
             </small>
             <!-- Like Button (-) -->
@@ -134,14 +134,6 @@
   
             <small class="ml-3" (click)="onDelete(entry)" style="cursor: pointer" *ngIf="authService.currentUser.typ === 'Yönetici'">
               <i class="far fa-trash-alt"></i> {{ entry.isDeleted ? 'Geri Al' : 'Sil' }}
-            </small>
-  
-            <small class="ml-3" style="cursor: pointer">
-              <i class="fas fa-quote-right"></i> Alıntı Yap
-            </small>
-  
-            <small class="ml-3" [hidden]="type !== 'post'" style="cursor: pointer">
-              <i class="fas fa-reply"></i> Cevapla
             </small>
           </div>
         </div>

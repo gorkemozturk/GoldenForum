@@ -43,6 +43,14 @@ namespace GoldenForum.Service.Controllers
                     PostedAt = p.PostedAt,
                     Author = GetAuthor(p.User)
                 }),
+                AcclaimedPosts = u.Acclaims.Select(a => new PostSummaryViewModel
+                {
+                    Id = a.Post.Id,
+                    Slug = a.Post.Slug,
+                    Title = a.Post.Title,
+                    PostedAt = a.Post.PostedAt,
+                    Author = GetAuthor(a.Post.User)
+                }),
                 Replies = u.Replies.Select(p => new ReplySummaryViewModel
                 {
                     Id = p.Id,

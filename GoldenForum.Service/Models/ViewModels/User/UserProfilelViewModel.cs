@@ -17,6 +17,7 @@ namespace GoldenForum.Service.Models.ViewModels.User
         public DateTime RegisteredAt { get; set; }
 
         public IEnumerable<PostSummaryViewModel> Posts { get; set; }
+        public IEnumerable<PostSummaryViewModel> AcclaimedPosts { get; set; }
         public IEnumerable<ReplySummaryViewModel> Replies { get; set; }
     }
 }

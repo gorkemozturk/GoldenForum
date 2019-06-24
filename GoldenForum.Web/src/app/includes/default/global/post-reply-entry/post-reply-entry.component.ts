@@ -88,7 +88,9 @@ export class PostReplyEntryComponent implements OnInit {
     }
 
     this.acclaimService.postResource(acclaim).subscribe(response => {
-      this.entry.acclaims.push(response);
+      const user = { userName: this.authService.currentUser.userName }
+
+      this.entry.acclaims.push(user);
       this.liked = true;
       this.entry.author.rating += 1;
     });
