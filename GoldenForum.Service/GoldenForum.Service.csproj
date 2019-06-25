@@ -14,6 +14,8 @@
     <Compile Remove="Migrations\20190618134731_CreateAppRoles.Designer.cs" />
     <Compile Remove="Migrations\20190624104910_CreatePostAndReplyReport.cs" />
     <Compile Remove="Migrations\20190624104910_CreatePostAndReplyReport.Designer.cs" />
+    <Compile Remove="Migrations\20190625101425_CreateReport.cs" />
+    <Compile Remove="Migrations\20190625101425_CreateReport.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

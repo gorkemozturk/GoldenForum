@@ -76,6 +76,8 @@ namespace GoldenForum.Service.Controllers
         [HttpPost]
         public async Task<ActionResult<ReplyReport>> PostReplyReport(ReplyReport replyReport)
         {
+            replyReport.ReportedAt = DateTime.Now;
+
             _context.ReplyReports.Add(replyReport);
             await _context.SaveChangesAsync();
 

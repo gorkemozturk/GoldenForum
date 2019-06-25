@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class ReplyReportServic extends BaseService {
+export class ReplyReportService extends BaseService {
 
   constructor(http: HttpClient) {
     super(environment.url + '/replyreports', http);

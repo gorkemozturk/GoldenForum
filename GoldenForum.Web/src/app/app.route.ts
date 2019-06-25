@@ -10,6 +10,9 @@ import { PostFormComponent } from './components/default/post/post-form/post-form
 import { UserDetailComponent } from './components/default/user/user-detail/user-detail.component';
 import { ManagementComponent } from './layouts/management/management.component';
 import { ManagementForumListComponent } from './components/management/forum/management-forum-list/management-forum-list.component';
+import { ManagementReportListComponent } from './components/management/report/management-report-list/management-report-list.component';
+import { DashboardComponent } from './components/management/dashboard/dashboard.component';
+import { ManagementUserListComponent } from './components/management/user/management-user-list/management-user-list.component';
 
 const routes: Routes = [
     // Default Routes
@@ -23,7 +26,10 @@ const routes: Routes = [
 
     // Management Routes
     { path: 'management', component: ManagementComponent, children: [ 
+        { path: 'dashboard', component: DashboardComponent },
         { path: 'forums', component: ManagementForumListComponent },
+        { path: 'reports', component: ManagementReportListComponent },
+        { path: 'users', component: ManagementUserListComponent },
     ]},
 
     // Auth Routes

@@ -5,57 +5,57 @@
 
   <div class="bg-white p-3">
     <!-- Post Report Form (+) -->
-    <form *ngIf="data.entry.replies" [formGroup]="form" autocomplete="off">
+    <form *ngIf="data.entry.replies" [formGroup]="postForm" autocomplete="off">
       <div class="form-group">
-        <select class="form-control" formControlName="title" [ngClass]="{ 'is-invalid': submitted && field.title.errors }">
+        <select class="form-control" formControlName="title" [ngClass]="{ 'is-invalid': submitted && postReportField.title.errors }">
           <option [value]="t" *ngFor="let t of titles">{{ t }}</option>
         </select>
-        <div *ngIf="submitted && field.title.errors" class="invalid-feedback">
-          <div *ngIf="field.title.errors.required">Başlık alanının doldurulması zorunludur.</div>
+        <div *ngIf="submitted && postReportField.title.errors" class="invalid-feedback">
+          <div *ngIf="postReportField.title.errors.required">Başlık alanının doldurulması zorunludur.</div>
         </div>
       </div>
       <div class="form-group">
         <textarea class="form-control" placeholder="Açıklama"
-        formControlName="body" [ngClass]="{ 'is-invalid': submitted && field.body.errors }">
+        formControlName="body" [ngClass]="{ 'is-invalid': submitted && postReportField.body.errors }">
         </textarea>
-        <div *ngIf="submitted && field.body.errors" class="invalid-feedback">
-          <div *ngIf="field.body.errors.required">Açıklama alanının doldurulması zorunludur.</div>
+        <div *ngIf="submitted && postReportField.body.errors" class="invalid-feedback">
+          <div *ngIf="postReportField.body.errors.required">Açıklama alanının doldurulması zorunludur.</div>
         </div>
       </div>
     
       <div class="text-right">
         <button class="btn btn-secondary mr-1" matDialogClose>Vazgeç</button>
-        <button type="submit" class="btn btn-primary" (click)="onSubmit(form)" [disabled]="!form.valid" matDialogClose>Gönder</button>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit(postForm)" [disabled]="!postForm.valid" matDialogClose>Gönder</button>
       </div>
+      {{ postForm.value | json }}
     </form>
     <!-- Post Report Form (-) -->
 
     <!-- Reply Report Form (+) -->
-    <form *ngIf="!data.entry.replies" [formGroup]="form" autocomplete="off">
+    <form *ngIf="!data.entry.replies" [formGroup]="replyForm" autocomplete="off">
       <div class="form-group">
-        <select class="form-control" formControlName="title" [ngClass]="{ 'is-invalid': submitted && field.title.errors }">
+        <select class="form-control" formControlName="title" [ngClass]="{ 'is-invalid': submitted && replyReportField.title.errors }">
           <option [value]="t" *ngFor="let t of titles">{{ t }}</option>
         </select>
-        <div *ngIf="submitted && field.title.errors" class="invalid-feedback">
-          <div *ngIf="field.title.errors.required">Başlık alanının doldurulması zorunludur.</div>
+        <div *ngIf="submitted && replyReportField.title.errors" class="invalid-feedback">
+          <div *ngIf="replyReportField.title.errors.required">Başlık alanının doldurulması zorunludur.</div>
         </div>
       </div>
       <div class="form-group">
         <textarea class="form-control" placeholder="Açıklama"
-        formControlName="body" [ngClass]="{ 'is-invalid': submitted && field.body.errors }">
+        formControlName="body" [ngClass]="{ 'is-invalid': submitted && replyReportField.body.errors }">
         </textarea>
-        <div *ngIf="submitted && field.body.errors" class="invalid-feedback">
-          <div *ngIf="field.body.errors.required">Açıklama alanının doldurulması zorunludur.</div>
+        <div *ngIf="submitted && replyReportField.body.errors" class="invalid-feedback">
+          <div *ngIf="replyReportField.body.errors.required">Açıklama alanının doldurulması zorunludur.</div>
         </div>
       </div>
     
       <div class="text-right">
         <button class="btn btn-secondary mr-1" matDialogClose>Vazgeç</button>
-        <button type="submit" class="btn btn-primary" (click)="onSubmit(form)" [disabled]="!form.valid" matDialogClose>Gönder</button>
+        <button type="submit" class="btn btn-primary" (click)="onSubmit(replyForm)" [disabled]="!replyForm.valid" matDialogClose>Gönder</button>
       </div>
+      {{ replyForm.value | json }}
     </form>
     <!-- Reply Report Form (-) -->
   </div>
 </div>
-
-{{ form.value | json }}

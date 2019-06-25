@@ -33,6 +33,9 @@ import { ManagementForumFormComponent } from './components/management/forum/mana
 import { ManagementForumListComponent } from './components/management/forum/management-forum-list/management-forum-list.component';
 import { ManagementCategoryFormComponent } from './components/management/category/management-category-form/management-category-form.component';
 import { PostEntryReportFormComponent } from './components/default/global/post-entry-report-form/post-entry-report-form.component';
+import { ManagementReportListComponent } from './components/management/report/management-report-list/management-report-list.component';
+import { DashboardComponent } from './components/management/dashboard/dashboard.component';
+import { ManagementUserListComponent } from './components/management/user/management-user-list/management-user-list.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +64,10 @@ import { PostEntryReportFormComponent } from './components/default/global/post-e
     ManagementForumFormComponent,
     ManagementForumListComponent,
     ManagementCategoryFormComponent,
-    PostEntryReportFormComponent
+    PostEntryReportFormComponent,
+    ManagementReportListComponent,
+    DashboardComponent,
+    ManagementUserListComponent
   ],
   imports: [
     BrowserModule,

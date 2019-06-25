@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace GoldenForum.Service.Models
 {
-    public class ReplyReport
+    public class ReplyReport : Report
     {
-        public int Id { get; set; }
-        public int ReplyId { get; set; }
-        public string Title { get; set; }
-        public string Body { get; set; }
-
+        public int? ReplyId { get; set; }
 
         [ForeignKey("ReplyId")]
         public virtual Reply Reply { get; set; }

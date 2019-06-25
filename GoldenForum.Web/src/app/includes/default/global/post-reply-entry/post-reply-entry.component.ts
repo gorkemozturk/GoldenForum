@@ -6,7 +6,6 @@ import { PostService } from 'src/app/services/post.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Acclaim } from 'src/app/models/acclaim';
 import { AcclaimService } from 'src/app/services/acclaim.service';
-import { PostReportFormComponent } from 'src/app/components/default/post/post-report-form/post-report-form.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PostEntryReportFormComponent } from 'src/app/components/default/global/post-entry-report-form/post-entry-report-form.component';
 
