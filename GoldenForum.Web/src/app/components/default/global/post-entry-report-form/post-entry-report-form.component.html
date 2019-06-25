@@ -27,7 +27,6 @@
         <button class="btn btn-secondary mr-1" matDialogClose>Vazgeç</button>
         <button type="submit" class="btn btn-primary" (click)="onSubmit(postForm)" [disabled]="!postForm.valid" matDialogClose>Gönder</button>
       </div>
-      {{ postForm.value | json }}
     </form>
     <!-- Post Report Form (-) -->
 
@@ -54,7 +53,6 @@
         <button class="btn btn-secondary mr-1" matDialogClose>Vazgeç</button>
         <button type="submit" class="btn btn-primary" (click)="onSubmit(replyForm)" [disabled]="!replyForm.valid" matDialogClose>Gönder</button>
       </div>
-      {{ replyForm.value | json }}
     </form>
     <!-- Reply Report Form (-) -->
   </div>
